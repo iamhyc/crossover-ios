@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html style="height:100%">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+	<title>Register2</title>
+	<script src="javascripts/jquery-1.11.2.js"></script>
+	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
+	<link rel='stylesheet' href='stylesheets/style.css' />
+	<script type="text/javascript">
+		function pwdCheck () {
+			var t1 = $('#pwd1'), tr1 = $('#pwdr1'),
+				t2 = $('#pwd2'), tr2 = $('#pwdr2');
+			if (t1.val()==""||t2.val()==""){
+				alert("密码不能为空");
+				
+			}
+			else if (t1.val()!=tr1.val()) {
+				alert("管理员密码不符");
+				t1.val("");	tr1.val("");
+				}
+			else if (t2.val()!=tr2.val()){
+				alert("队员密码不符");
+				t2.val("");	tr2.val("");
+				}
+			else if (t1.val()==t2.val()) alert("管理员密码和队员密码不能相同")
+			else {
+				// body...
+				window.location.href = "homepage.html"
+			}
+		}
+	</script>
+</head>
+
+<body background="images/bg.jpg" style="height:100%">
+	<nav class="navbar navbar-fixed-top">
+    			<div class="nav-header">
+    				<a class="navbar-brand">
+    					<span class="glyphicon glyphicon glyphicon-circle-arrow-left" style="font-size:2.5em" onclick="history.back()"></span>
+    				</a>
+    			</div>
+		</nav>
+
+		<div class="spc" style="height:20%"></div>
+		<div class="container content text-left" style="height:80%;color:#ffffff" >
+			<div class="form-group input-group-lg" style="width:80%">
+        		<input type="password" class="form-control" autofocus id="pwd1" placeholder="管理密码">
+      		</div>
+
+      		<div class="form-group input-group-lg" style="width:80%">
+        		<input type="password" class="form-control" id="pwdr1" placeholder="确认管理密码">
+      		</div>
+
+      		<div class="form-group input-group-lg" style="width:80%">
+        		<input type="password" class="form-control" id="pwd2" placeholder="队员密码">
+      		</div>
+
+      		<div class="form-group input-group-lg" style="width:80%">
+        		<input type="password" class="form-control" id="pwdr2" placeholder="确认队员密码">
+      		</div>
+
+			<div class="col-xs-offset-1" >
+				<button class="btn btn-lg btn-block" style="width:60%" onclick="pwdCheck()">注册</button>
+			</div>
+		</div>
+
+</body>
+</html>

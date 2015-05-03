@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html style="height:100%">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+	<title>Register2</title>
+	<script src="javascripts/jquery-1.11.2.js"></script>
+	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
+	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+	<script type="text/javascript">
+		function imgCheck () {
+			// body...
+			window.location.href = "register3.html"
+		}
+	</script>
+</head>
+
+<body background="images/bg.jpg" style="height:100%">
+
+	<nav class="navbar navbar-fixed-top">
+    			<div class="nav-header">
+    				<a class="navbar-brand">
+    					<span class="glyphicon glyphicon glyphicon-circle-arrow-left" style="font-size:2.5em" onclick="history.back()"></span>
+    				</a>
+    			</div>
+		</nav>
+		
+		<div class="spc" style="height:20%"></div>
+		<div class="container content" style="height:80%;color:#ffffff" >
+			<div class="form-group input-group-lg" style="height:10%;width:100%">
+				<input type="text" class="form-control" autofocus placeholder="球队名称">
+			</div>
+			<div style="height:80%">
+				<h4>上传战队对标</h4>
+				<ul class="nav">
+         			<li><a href="#"><span class="glyphicon glyphicon-plus" style="font-size:2em"></span></a></li>
+      			</ul>
+				<div class="col-xs-offset-4 text-center" >
+					<button class="btn btn-lg btn-block" style="width:50%" onclick="imgCheck()">下一步</button>
+				</div>
+			</div>
+		</div>
+
+</body>
+</html>
