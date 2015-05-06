@@ -5,11 +5,34 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 	<script src="javascripts/jquery-1.11.2.js"></script>
+	<script type="text/javascript" src="javascripts/jquery.base64.js"></script>
+	<script type="text/javascript" src="javascripts/jquery.json.min.js"></script>
 	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
 	<script type="text/javascript">
 		function userCheck () {
-			// body...
+			var user = $('#usr_name').val(),
+				pwd = $('#usr_pwd').val();
+				if (!user||!pwd) alert("请输入用户名密码")
+				else if (user.length < 11) alert("请输入11位手机号码")
+				else{
+					pwd = $.base64.btoa($('#usr_pwd').val());
+					var json = $.toJSON({'Phone':user, 'Password':pwd});
+					$.ajax({
+						type:'post',
+						url: 'http://120.24.223.82:8080/Crossover/Api/user/login',
+						contentType: 'application/json',
+						dataType:'json',
+						data:json,
+						success:function(data){
+							alert('success');
+							console.log(data);
+						}
+					})
+					$.post('http://120.24.223.82:8080/Crossover/Api/user/login',json,function(data){
+							alert(data);
+					})
+				}
 		}
 		function viriCheck () {
 			// body...
@@ -38,11 +61,11 @@
 				<br />
 
 				<div class="form-group input-group-lg" style="width:80%">
-        			<input class="form-control" name="user" style="IME-MODE:disabled" onkeypress="return event.keyCode >= 49 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" autofocus maxlength="11" type="text" placeholder="电话"/>
+        			<input class="form-control" name="user" id="usr_name" style="IME-MODE:disabled" onkeypress="return event.keyCode >= 49 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" autofocus maxlength="11" type="text" placeholder="电话"/>
       			</div>
       			
 				<div class="form-group input-group-lg" style="width:80%">
-        			<input type="password" class="form-control" name="pwd" placeholder="密码">
+        			<input type="password" class="form-control" name="pwd" id="usr_pwd" placeholder="密码">
       			</div>
 				<br />	<br />
 				<a href="reset.html" style="color:#ffffff;font-size:1.5em">忘记密码？</a>
@@ -51,7 +74,7 @@
 
 		<div class="text-center" style="height:20%">
 			<div class="spc" style="height:35%"></div>
-			<div class="inline-btn" style="display:inline-block;width:35%;">
+			<div class="inline-btn" style="display:inline-block;width:35%">
 				<button class="btn btn-lg btn-block" onclick="userCheck()">登陆</button>
 			</div>	
 		</div>
