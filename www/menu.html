@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html style="height:100%" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+	<script src="javascripts/jquery-1.11.2.js"></script>
+    <script type="text/javascript" >
+	$(document).ready(function(){
+		var isHiden = true,
+			hasOne = false;
+			$(".menu-open").click(function(){
+      			if(isHiden){
+ 	 				$(".menu").animate({right:""});//菜单块向右移动
+ 	 				$(".body").animate({right:"+50%"});//菜单块向右移动	
+ 	 				isHiden=!isHiden;	hasOne = true;
+    			}
+    		});
+		   	$(".body").click(function(){
+    			if(!isHiden&&!hasOne){
+    				$(".menu").animate({right:"-50%"}); //菜单块向左移动
+      				$(".body").animate({right:"0"});//菜单块向右移动
+      				isHiden=!isHiden;		
+      			}	
+      			hasOne = false;
+    		});
+		   	/* var changeColor =  function(x){
+		   		x.style.color:#2828FF;
+		   	}
+		   	 var normalColor =  function(x){
+		   		x.style.color:#FCFCFC；
+		   	}*/
+
+    	
+
+ 	})
+	</script>
+
+	<title>CrossOver</title>
+	<link rel='stylesheet' href='stylesheets/bootstrap.css'/>
+	<link rel='stylesheet' href="stylesheets/menu.css">
+</head>
+<body background="images/bg.png" style="height:100%">
+	<div class="menu">
+		<div class="home" style="height:90%">
+		<div class="img-circle circle" style="margin: 5% 0% 3% 30%;"></div>
+		<p>干</p>
+		<button type="button" style="width: 60%;height15%;margin: 0% 0% 8%; background-color:#F0F0F0" class="btn btn-default" onclick="location.href='detail_page.html'">战队主页</button>
+		<button type="button" style="width: 60%;height15%; background-color:#F0F0F0 " class="btn btn-default">
+ 		  <span class="glyphicon glyphicon-list-alt " aria-hidden="true"></span>
+		</button>
+	</div>
+	<div class="logout" style="height:10%">
+		<button type="button" class="btn btn-danger" style="width: 60%;">登出</button>
+	</div>
+	</div>
+<div class="body">
+	<nav class="navbar navbar-static-top" style="height:7%">
+		<div class="row" style="background-color:rgba(0,0,0,0);">
+			<div class="col-sm-8 col-xs-8 text-left" style="padding:4% 0 0 6%">
+    			<span class="menu-open"><img src="images/cs.png" width="80%"></span>	
+    		</div>
+    		<div class="col-sm-4 col-xs-4 menu-open text-right" style="padding:3% 8% 0 0">
+  				<span class="glyphicon glyphicon-menu-hamburger" style="font-size:2em;color:#ffffff"></span>
+			</div>
+		</div>	
+	</nav>
+       
+      <!-- Menu -->
+      	<div class="spc" style="height:1.5%"></div>
+		<div  style="height:12%;background:url()">
+		  <div class="row" style="height:100%">
+
+			<div class="col-xs-2"> 
+				<div class="img-circle circle" style="margin:20% 0% 20% 25%"></div>
+			</div>
+			<div class="col-xs-6">
+				
+				<p style="margin: 16% 0% 0% 13%;">白黄绿豆</p>
+			</div>
+			<div class="col-xs-4">
+			    <span class="glyphicon glyphicon-star" style="margin-top:28%" aria-hidden="true"></span> 1050
+      	    </div>    
+      	  </div>
+
+		</div>
+
+		<div class="spc" style="height:1.5%"></div>
+		<div style="height:13%" background="img">
+		  <div class="row" id="row" style="height:100%">
+			<div class="col-xs-2"> 
+				<div class="img-circle circle" style="margin:20% 0% 20% 25% "></div>
+			</div>
+			<div class="col-xs-6">
+				
+				<p style="margin: 16% 0% 0% 13%;">自由疯队</p>
+			</div>
+			<div class="col-xs-4">
+			    <span class="glyphicon glyphicon-star" style="margin-top:28%" aria-hidden="true"></span> 1000
+      	    </div>    
+      	  </div>
+
+		</div>
+		<div class="spc" style="height:1.5%"></div>
+		<div style="height:13%" background="img">
+		  <div class="row" id="row" style="height:100%">
+			<div class="col-xs-2"> 
+				<div class="img-circle circle" style="margin:20% 0% 20% 25% " ></div>
+			</div>
+			<div class="col-xs-6">
+				
+				<p style="margin: 16% 0% 0% 13%;">萌死你</p>
+			</div>
+			<div class="col-xs-4">
+			    <span class="glyphicon glyphicon-star" style="margin-top:28%" aria-hidden="true"></span> 1000
+      	    </div>    
+      	  </div>
+
+		</div>
+		<div class="spc" style="height:1.5%"></div>
+		<div style="height:12%" background="img">
+		  <div class="row" id="row" style="height:100%">
+			<div class="col-xs-2" > 
+				<div class="img-circle circle" style="margin:20% 0% 20% 25% " ></div>
+			</div>
+			<div class="col-xs-6">
+				
+				<p style="margin: 16% 0% 0% 13%;">干</p>
+			</div>
+			<div class="col-xs-4">
+			    <span class="glyphicon glyphicon-star" style="margin-top:28%" aria-hidden="true"></span> 1050
+      	    </div>    
+      	  </div>
+
+		</div>
+		<div class="spc" style="height:1.5%"></div>
+		<div style="height:12%" background="img">
+		  <div class="row" id="row" style="height:100%">
+			<div class="col-xs-2"> 
+				<div class="img-circle circle" style="margin:20% 0% 20% 25% " ></div>
+			</div>
+			<div class="col-xs-6">
+				
+				<p style="margin: 16% 0% 0% 13%;">天空蓝</p>
+			</div>
+			<div class="col-xs-4">
+			    <span class="glyphicon glyphicon-star" style="margin-top:28%" aria-hidden="true"></span> 1000
+      	    </div>    
+      	  </div>
+
+		</div>
+		<div class="spc" style="height:1.5%"></div>
+		<div style="height:12%" background="img">
+		  <div class="row" id="row" style="height:100%">
+			<div class="col-xs-2" > 
+				<div class="img-circle circle" style="margin:20% 0% 20% 25% "></div>
+			</div>
+			<div class="col-xs-6">
+				
+				<p style="margin: 16% 0% 0% 13%;">干</p>
+			</div>
+			<div class="col-xs-4">
+			    <span class="glyphicon glyphicon-star" style="margin-top:28%" aria-hidden="true"></span> 1050
+      	    </div>    
+      	  </div>
+
+		</div>
+		<div class="spc" style="height:1.5%"></div>
+		<div style="height:12%" background="img">
+		  <div class="row"  id="row" style="height:100%" >
+			<div class="col-xs-2" > 
+				<div class="img-circle circle" style="margin:20% 0% 20% 25% "></div>
+			</div>
+			<div class="col-xs-6">
+				
+				<p style="margin: 16% 0% 0% 13%;">呵呵哒</p>
+			</div>
+			<div class="col-xs-4">
+			    <span class="glyphicon glyphicon-star" style="margin-top:28%" aria-hidden="true"></span> 1050
+      	    </div>    
+      	  </div>
+
+		</div>
+
+		</div>
+			
+</div>	    
+	
+</body>
