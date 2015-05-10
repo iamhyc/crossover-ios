@@ -15,6 +15,13 @@ body {
 }
 
 .btn {
+  border-radius: 12px;
+  color: #0C417E;
+  background-color: #DBDDDD;
+}
+
+.spc-btn{
+  color: #ffffff;
   background: url(../images/button.png) no-repeat;
  -moz-background-size: 100% 100%;
  -o-background-size: 100% 100%;
