@@ -41,34 +41,29 @@
 </head>
 
 <body background="images/bg.png" style="height:100%">
+	<nav class="navbar navbar-fixed-top text-left">
+    		<span onclick="history.back()"><img src="images/back.png" width="14%"></span>		
+	</nav>
+
 	<div class="text-center" style="height:100%;color:#ffffff">
-	
-		<nav class="navbar navbar-fixed-top text-left">
-    			<div class="nav-header">
-    				<a class="navbar-brand">
-    					<span onclick="history.back()"><img src="images/back.png" width="17%"></span>
-    				</a>
-    			</div>
-		</nav>
 		<div class="hasBg" style="height:80%;background-image:url('images/vcsbg.png')">
 			<div class="spc" style="height:15%"></div>
 			<div class="container content text-left" >
 				<div class="text-center">
-					<img src="images/logo.png" title="image"/ width="60%">
+					<img src="images/cs.png" title="image"/ width="60%">
 				</div>
 				<br /><br />
 				<h3>登陆</h3>
 				<br /><br />
 
-				<div class="form-group input-group-lg" style="width:80%">
+				<div class="form-group input-group-lg" style="width:90%">
         			<input class="form-control" name="user" id="usr_name" style="IME-MODE:disabled" onkeypress="return event.keyCode >= 49 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" autofocus maxlength="11" type="text" placeholder="电话"/>
       			</div>
       			
-				<div class="form-group input-group-lg" style="width:80%">
+				<div class="form-group input-group-lg" style="width:90%">
         			<input type="password" class="form-control" name="pwd" id="usr_pwd" placeholder="密码">
       			</div>
-				<br />	<br />
-				<a href="reset.html" style="color:#ffffff;font-size:1.3em">忘记密码？</a>
+				<p style="padding:5% 0 0 0"><a href="reset.html" style="color:#ffffff;font-size:1.3em">忘记密码？</a></p>
 			</div>
 		</div>
 
