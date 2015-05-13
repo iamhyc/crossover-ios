@@ -1,7 +1,7 @@
 .menu {
   background: #202024 url('') repeat right top;
  
-        /*左侧弹出窗口的长宽、圆角、背景颜色*/
+        /*左侧弹出窗口的长宽、背景颜色*/
         height: 100%;
         width: 50%;
         background-color: #FFFFFF;
@@ -9,7 +9,7 @@
 
         /*布局排版*/
         position:absolute;/*关键处*/
-        z-index:99; /*页面Z轴坐标，位于第二层*/
+        z-index:1;
         right:-50%;
 
         /*字体设置*/
@@ -19,8 +19,8 @@
 .body {
     height:100%;
     width:100%;
-        position:absolute;/*关键处*/
-        right:0;
+    position:absolute;/*关键处*/
+    right:0;
 }
 .menu .circle{
   width: 5em;

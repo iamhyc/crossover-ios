@@ -11,7 +11,19 @@
 	<script type="text/javascript">
 		function userCheck(){
 			//verify process
-			window.location.href="register2.html"
+			var user = $('#usr_name').val(),
+				ver = $('#ver').val();
+				if (user.length < 11) alert("请输入11位手机号码")
+				else if (ver.length == 0) alert("请输入验证码");
+			//window.location.href="register2.html"
+		}
+		function veriCheck(){
+			var phone = $('#usr_name').val();
+			if (phone.length == 0) alert("请输入手机号");
+			else if (phone.length < 11) alert("手机号为11位");
+			else {
+				
+			}
 		}
 	</script>
 </head>
@@ -29,12 +41,12 @@
 				<h3>注册</h3>
 				<br /><br />
 				<div class="form-group input-group-lg" style="width:80%">
-        			<input class="form-control" name="user" style="IME-MODE:disabled" onkeypress="return event.keyCode >= 49 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" autofocus maxlength="11" type="text" placeholder="电话(约战时公开)"/>
+        			<input class="form-control" id="usr_name" style="IME-MODE:disabled" onkeypress="return event.keyCode >= 48 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" autofocus maxlength="11" type="text" placeholder="电话(约战时公开)"/>
       			</div>
       			
       			<div class="row">
   					<div class="col-xs-5 col-sm-5 input-group-lg">
-  						<input class="form-control" name="veri" style="IME-MODE:disabled" onkeypress="return event.keyCode >= 49 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="6" type="text" placeholder="验证码"/>
+  						<input class="form-control" id="ver" style="IME-MODE:disabled" onkeypress="return event.keyCode >= 48 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="4" type="text" placeholder="验证码"/>
   					</div>
   					<div class="col-xs-7 col-sm-7">
   						<button class="btn btn-lg" onclick="veriCheck()" >获取验证码</button>

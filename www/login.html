@@ -27,13 +27,12 @@
 						success:function(data){
 							alert('success');
 							console.log(data);
+							localStorage.user = data;
 						}
 					})
-					$.post('http://120.24.223.82:8080/Crossover/Api/user/login',json,function(data){
-							alert(data);
-					})
 				}
-			window.location.href = "menu.html";
+			alert(localStorage.user);
+			//window.location.href = "menu.html";
 		}
 		function viriCheck () {
 			// body...
@@ -58,7 +57,7 @@
 				<br /><br />
 
 				<div class="form-group input-group-lg" style="width:90%">
-        			<input class="form-control" name="user" id="usr_name" style="IME-MODE:disabled" onkeypress="return event.keyCode >= 49 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" autofocus maxlength="11" type="text" placeholder="电话"/>
+        			<input class="form-control" name="user" id="usr_name" style="IME-MODE:disabled" onkeypress="return event.keyCode >= 48 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" autofocus maxlength="11" type="text" placeholder="电话"/>
       			</div>
       			
 				<div class="form-group input-group-lg" style="width:90%">
