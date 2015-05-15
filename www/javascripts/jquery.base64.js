@@ -1,5 +1,5 @@
 /*!
- * jquery.base64.js 0.1 - https://github.com/yckart/jquery.base64.js
+ * jquery.base64.js 0.0.3 - https://github.com/yckart/jquery.base64.js
  * Makes Base64 en & -decoding simpler as it is.
  *
  * Based upon: https://gist.github.com/Yaffle/1284012
@@ -10,7 +10,7 @@
  **/
 ;(function($) {
 
-    var b64 = "isalways",
+    var b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
         a256 = '',
         r64 = [256],
         r256 = [256],

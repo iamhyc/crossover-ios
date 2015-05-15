@@ -7,6 +7,7 @@
 	<script src="javascripts/jquery-1.11.2.js"></script>
 	<script type="text/javascript" src="javascripts/jquery.base64.js"></script>
 	<script type="text/javascript" src="javascripts/jquery.json.min.js"></script>
+	<script type="text/javascript" src="javascripts/DES.js"></script>
 	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
 	<script type="text/javascript">
@@ -16,8 +17,11 @@
 				if (!user||!pwd) alert("请输入用户名密码")
 				else if (user.length < 11) alert("请输入11位手机号码")
 				else{
-					pwd = $.base64.btoa($('#usr_pwd').val());
-					var json = $.toJSON({'Phone':user, 'Password':pwd});
+					//一小时半才搞定DES的我无悲无喜···
+					//console.log(des("isalways", pwd, 1, 0, "", 1));
+					pwd = $.base64.btoa(des("isalways", pwd, 1, 0, "", 1));
+					json = $.toJSON({'Phone':user, 'Password':pwd});
+					//console.log(json);
 					$.ajax({
 						type:'post',
 						url: 'http://120.24.223.82:8080/Crossover/Api/user/login',
@@ -25,13 +29,11 @@
 						dataType:'json',
 						data:json,
 						success:function(data){
-							alert('success');
-							console.log(data);
+							//console.log(data);
 							localStorage.user = data;
 						}
 					})
 				}
-			alert(localStorage.user);
 			//window.location.href = "menu.html";
 		}
 		function viriCheck () {
