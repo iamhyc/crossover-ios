@@ -9,6 +9,11 @@
 	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#upload').click(function(){
+				$('#imgFile').click();
+			})
+		})
 		function imgCheck () {
 			// body...
 			window.location.href = "register3.html"
@@ -23,16 +28,18 @@
 	</nav>
 		
 		<div class="spc" style="height:20%"></div>
-		<div class="container content" style="height:80%;color:#ffffff" >
-			<div class="form-group input-group-lg" style="height:10%;width:100%">
+		<div class="container col-xs-offset-1" style="height:80%;color:#ffffff" >
+			<div class="form-group input-group-lg" style="height:20%;width:90%">
 				<input type="text" class="form-control" autofocus placeholder="球队名称">
+				<br />
+				<input type="text" class="form-control" autofocus placeholder="城市">
 			</div>
-			<div style="height:80%">
-				<h4>上传战队对标</h4>
-				<ul class="nav">
-         			<li id="uploadImg"><a href="#"><span class="glyphicon glyphicon-plus" style="font-size:2em"></span></a></li>
-      			</ul>
-				<div class="col-xs-offset-4 text-center" >
+			<div style="">
+				<h4>上传战队队标</h4>
+				<img src="images/plus.jpg" class="img-circle col-xs-offset-1" id="upload" width="75%">
+				<input type="file" class="hidden" name="imgFile" id="imgFile" />
+				<div class="col-xs-offset-3 text-center" >
+					<br />
 					<button class="btn btn-lg btn-block" style="width:50%" onclick="imgCheck()">下一步</button>
 				</div>
 			</div>
