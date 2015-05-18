@@ -9,14 +9,44 @@
 	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 	<script type="text/javascript">
+		var readingFlag = true;
 		$(document).ready(function(){
+			document.getElementById("imgFile").addEventListener( 'change',preview,false );
 			$('#upload').click(function(){
 				$('#imgFile').click();
 			})
 		})
+		
+		function preview(){
+			//var patn = /\.jpg$|\.jpeg$|\.png$|\.gif$/i;
+
+				var file = this.files[0]; 
+				var reader = new FileReader(); 
+				reader.readAsDataURL(file);
+				/* */ 
+				reader.onload = function(e) {
+					$('#upload').attr('src', this.result);
+					localStorage.reg_PhotoBase64 = this.result;
+					console.log(this.result);
+				}
+				reader.onloadend = function() {
+					readingFlag = false;
+				}
+		}
+
 		function imgCheck () {
-			// body...
-			window.location.href = "register3.html"
+			var cityName = $('#cityName').val(),
+				teamName = $('#teamName').val();
+			if (!teamName) alert('请输入战队名称')
+			else if (!cityName) alert('请输入城市')//to 加特技
+			else if (!document.getElementById('imgFile').value) alert("请上传战队队标")
+			else {
+				localStorage.reg_cityName = cityName;
+				localStorage.reg_teamName = teamName;
+				console.log(localStorage.reg_PhotoBase64);
+				window.location.href = "register3.html"
+			}
+			
 		}
 	</script>
 </head>
@@ -27,23 +57,22 @@
     		<span onclick="history.back()"><img src="images/back.png" width="14%"></span>		
 	</nav>
 		
-		<div class="spc" style="height:20%"></div>
-		<div class="container col-xs-offset-1" style="height:80%;color:#ffffff" >
-			<div class="form-group input-group-lg" style="height:20%;width:90%">
-				<input type="text" class="form-control" autofocus placeholder="球队名称">
+		<div class="spc" style="height:15%"></div>
+		<div class="container col-xs-offset-1" style="height:85%;color:#ffffff" >
+			<div class="form-group input-group-lg" style="width:90%">
+				<input type="text" id="teamName"class="form-control" autofocus placeholder="球队名称">
 				<br />
-				<input type="text" class="form-control" autofocus placeholder="城市">
+				<input type="text" id="cityName" class="form-control" autofocus placeholder="城市">
+				<h4>上传战队队标</h4>
 			</div>
 			<div style="">
-				<h4>上传战队队标</h4>
-				<img src="images/plus.jpg" class="img-circle col-xs-offset-1" id="upload" width="75%">
-				<input type="file" class="hidden" name="imgFile" id="imgFile" />
+				<img src="images/plus.jpg" class="img-circle col-xs-offset-1" id="upload" width="250em" height="250em">
+				<input type="file" class="hidden" name="imgFile" id="imgFile"  />
 				<div class="col-xs-offset-3 text-center" >
 					<br />
 					<button class="btn btn-lg btn-block" style="width:50%" onclick="imgCheck()">下一步</button>
 				</div>
 			</div>
 		</div>
-
 </body>
 </html>

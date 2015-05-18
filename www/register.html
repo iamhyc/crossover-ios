@@ -27,17 +27,10 @@
 				if (user.length < 11) alert("请输入11位手机号码")
 				else if (ver.length == 0) alert("请输入验证码");
 				else if (ver) {
-					localStorage.reg = null;
-					localStorage.reg = {
-						'Phone':user,
-						'AdminPwd':"",
-						'CommonPwd':"",
-						'TeamName':"",
-						'City':"",
-						'PhotoBase64':""
-					}
+					localStorage.reg_phone = user;
+					window.location.href="register2.html"
 				}
-			//window.location.href="register2.html"
+			//
 		}
 		function veriCheck(){
 			var phone = $('#usr_name').val();

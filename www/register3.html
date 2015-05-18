@@ -6,6 +6,8 @@
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 	<title>Register2</title>
 	<script src="javascripts/jquery-1.11.2.js"></script>
+	<script type="text/javascript" src="javascripts/jquery.base64.js"></script>
+	<script type="text/javascript" src="javascripts/DES.js"></script>
 	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
 	<link rel='stylesheet' href='stylesheets/style.css' />
 	<script type="text/javascript">
@@ -14,7 +16,6 @@
 				t2 = $('#pwd2'), tr2 = $('#pwdr2');
 			if (t1.val()==""||t2.val()==""){
 				alert("密码不能为空");
-				
 			}
 			else if (t1.val()!=tr1.val()) {
 				alert("管理员密码不符");
@@ -27,7 +28,42 @@
 			else if (t1.val()==t2.val()) alert("管理员密码和队员密码不能相同")
 			else {
 				// body...
-				window.location.href = "homepage.html"
+				var Adpwd = $.base64.btoa(des("isalways", t1.val(), 1, 0, "", 1));
+				var pwd = $.base64.btoa(des("isalways", t2.val(), 1, 0, "", 1));
+				json = JSON.stringify(
+					{'Phone':localStorage.reg_phone,
+					'AdminPwd':Adpwd,
+					'CommonPwd':pwd,
+					'TeamName':localStorage.reg_teamName,
+					'City':localStorage.reg_cityName,
+					'PhotoBase64':localStorage.reg_PhotoBase64
+					});
+				console.log(json);
+					$.ajax({
+						type:'post',
+						url: 'http://120.24.223.82:8080/Crossover/Api/user/register',
+						contentType: 'application/json',
+						dataType:'json',
+						data:json,
+						success:function(data){
+							console.log(data);
+							if (data.success){
+								alert("成功！");
+								window.location.href = "index.html"
+							}
+							else if (data.success == false){
+								if (data.reason == "TeamNameExist"){
+									alert("队名已存在");
+									window.location.href = "register2.html"
+								}
+								if (data.reason == "PhoneExist"){
+									alert("手机已注册");
+									window.location.href = "register.html"
+								}
+							}
+							
+						}
+					})
 			}
 		}
 	</script>
