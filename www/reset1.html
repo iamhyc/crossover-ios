@@ -9,15 +9,40 @@
 	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
 	<link rel='stylesheet' href='stylesheets/style.css' />
 	<script type="text/javascript">
-		function resetCheck(){
+		var time = 0;
+		function setVerBtn(){
+			if (time == 0) {
+				$('#verBtn').html('再次发送');
+			}
+			else{
+				$('#verBtn').html('再次发送(' + time +')');
+				time--;
+				setTimeout("setVerBtn()" , 1000);
+			}
+		}
+		function userCheck(){
 			//verify process
-			
+			var user = $('#usr_name').val(),
+				ver = $('#ver').val();
+				if (user.length < 11) alert("请输入11位手机号码")
+				else if (ver.length == 0) alert("请输入验证码");
+				else if (ver) {
+					localStorage.reset_phone = user;
+					window.location.href="reset2.html"
+				}
+			//
 		}
 		function veriCheck(){
 			var phone = $('#usr_name').val();
+			if (time != 0) return;
 			if (phone.length == 0) alert("请输入手机号");
 			else if (phone.length < 11) alert("手机号为11位");
 			else {
+				//send verify code...
+				if (true) {
+					time = 60;
+					setTimeout("setVerBtn()" , 1000)
+				}
 				
 			}
 		}
@@ -28,7 +53,7 @@
 	<div class="text-center" style="height:100%">
 	
 		<nav class="navbar navbar-fixed-top text-left">
-    		<span onclick="history.back()"><img src="images/back.png" width="14%"></span>		
+    		<span onclick="location.href='index.html'"><img src="images/back.png" width="14%"></span>		
 		</nav>
 
 		<div style="height:80%;color:#ffffff">
@@ -41,15 +66,15 @@
       			
       			<div class="row">
   					<div class="col-xs-5 col-sm-5 input-group-lg">
-  						<input class="form-control" id="ver" style="IME-MODE:disabled" onkeypress="return event.keyCode >= 49 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="4" type="text" placeholder="验证码"/>
+  						<input class="form-control" id="ver" style="IME-MODE:disabled" onkeypress="return event.keyCode >= 48 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="4" type="text" placeholder="验证码"/>
   					</div>
   					<div class="col-xs-7 col-sm-7">
-  						<button class="btn btn-lg" onclick="veriCheck()" >获取验证码</button>
+  						<button id="verBtn" class="btn btn-lg" onclick="veriCheck()" >获取验证码</button>
   					</div>
 				</div>
 				<br />
       			<div class="col-xs-offset-2" style="height:20%">
-					<button class="btn btn-lg btn-block" style="width:60%" onclick="resetCheck()">下一步</button>
+					<button class="btn btn-lg btn-block" style="width:60%" onclick="userCheck()">下一步</button>
 				</div>
 			</div>
 		</div>

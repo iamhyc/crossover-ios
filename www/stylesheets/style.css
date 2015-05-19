@@ -104,3 +104,11 @@ body {
 .form-control::-webkit-input-placeholder {
   color: #ffffff;
 }
+
+#alert_flash {
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    border-radius:2px;
+    font:1.2em black;
+    position: absolute;
+    background: #ffffff;
+    }

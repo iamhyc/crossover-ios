@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html style="height:100%">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+	<title>Reset</title>
+	<script src="javascripts/jquery-1.11.2.js"></script>
+	<script type="text/javascript" src="javascripts/jquery.base64.js"></script>
+	<script type="text/javascript" src="javascripts/DES.js"></script>
+	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
+	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
+	<link rel='stylesheet' href='stylesheets/style.css' />
+	<script type="text/javascript">
+		function pwdCheck () {
+			var pwd = $('#pwd'), pwdr = $('#pwdr');
+			if (pwd.val()==""){
+				alert_flash("密码不能为空");
+			}
+			else if (pwd.val()!=pwdr.val()) {
+				alert("密码不符");
+				pwd.val("");	pwdr.val("");
+				}
+			else {
+				var pwd = $.base64.btoa(des("isalways", pwd.val(), 1, 0, "", 1));
+				json = JSON.stringify(
+					{'Phone':localStorage.reset_phone,
+					'Password':pwd,
+					'type': localStorage.reset_type
+					});
+				console.log(json);
+					$.ajax({
+						type:'post',
+						url: 'http://120.24.223.82:8080/Crossover/Api/changePwd',
+						contentType: 'application/json',
+						dataType:'json',
+						data:json,
+						success:function(data){
+							console.log(data);
+							if (data.success){
+								alert("修改成功");
+								window.location.href = "index.html"
+							}
+							else {
+								alert("修改失败");
+								location.href = "reset.html";
+							}
+							
+						}
+					})
+			}
+		}
+	</script>
+</head>
+
+<body background="images/bg.jpg" style="height:100%">
+	<nav class="navbar navbar-fixed-top text-left">
+    		<span onclick="location.href='register2.html'"><img src="images/back.png" width="14%"></span>		
+	</nav>
+
+		<div class="spc" style="height:35%"></div>
+		<div class="container content text-left" style="height:65%;color:#ffffff" >
+			<div class="form-group input-group-lg" style="width:80%">
+        		<input type="password" class="form-control" autofocus id="pwd" placeholder="新密码">
+      		</div>
+
+      		<div class="form-group input-group-lg" style="width:80%">
+        		<input type="password" class="form-control" id="pwdr" placeholder="确认新密码">
+      		</div>
+
+			<div class="col-xs-offset-1" >
+				<button class="btn btn-lg btn-block" style="width:60%" onclick="pwdCheck()">修改</button>
+			</div>
+		</div>
+
+</body>
+</html>
