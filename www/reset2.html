@@ -18,7 +18,7 @@
 				alert_flash("密码不能为空");
 			}
 			else if (pwd.val()!=pwdr.val()) {
-				alert("密码不符");
+				alert_flash("密码不符");
 				pwd.val("");	pwdr.val("");
 				}
 			else {
@@ -38,11 +38,11 @@
 						success:function(data){
 							console.log(data);
 							if (data.success){
-								alert("修改成功");
+								alert_flash("修改成功");
 								window.location.href = "index.html"
 							}
 							else {
-								alert("修改失败");
+								alert_flash("修改失败");
 								location.href = "reset.html";
 							}
 							

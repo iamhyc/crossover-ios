@@ -6,6 +6,7 @@
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 	<title>Reset</title>
 	<script src="javascripts/jquery-1.11.2.js"></script>
+	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
 	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
 	<link rel='stylesheet' href='stylesheets/style.css' />
 	<script type="text/javascript">
@@ -24,8 +25,8 @@
 			//verify process
 			var user = $('#usr_name').val(),
 				ver = $('#ver').val();
-				if (user.length < 11) alert("请输入11位手机号码")
-				else if (ver.length == 0) alert("请输入验证码");
+				if (user.length < 11) alert_flash("请输入11位手机号码")
+				else if (ver.length == 0) alert_flash("请输入验证码");
 				else if (ver) {
 					localStorage.reset_phone = user;
 					window.location.href="reset2.html"
@@ -35,8 +36,8 @@
 		function veriCheck(){
 			var phone = $('#usr_name').val();
 			if (time != 0) return;
-			if (phone.length == 0) alert("请输入手机号");
-			else if (phone.length < 11) alert("手机号为11位");
+			if (phone.length == 0) alert_flash("请输入手机号");
+			else if (phone.length < 11) alert_flash("手机号为11位");
 			else {
 				//send verify code...
 				if (true) {

@@ -6,15 +6,28 @@
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 	<title>Personal</title>
 	<script src="javascripts/jquery-1.11.2.js"></script>
+  <script type="text/javascript" src="javascripts/styleFunc.js"></script>
 	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
 	<script type="text/javascript">
+  var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
+  var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
+
   $(document).ready(function(){
+    //INITIALIZE ON
+      var myObj = JSON.parse(localStorage.current_user);
+      $('.back').css("background-image", "url("+imgAddress+myObj.TeamHomePhoto+")")
+    //INITIALIZE OFF
       $(".score").click(function(){
-      $(".against").animate({bottom:"10%"});
-       });
+          if ($('.against').hasClass('hidden')){
+            $(".against").removeClass('hidden').animate({bottom:"10%"});
+          } 
+          else {
+            $(".against").animate({bottom:"-80%"}, function(){$(".against").addClass('hidden')});
+          }
+      });
       $(".back").click(function(){
-      $(".against").animate({bottom:"-80%"});
+          $(".against").animate({bottom:"-80%"}, function(){$(".against").addClass('hidden')});
       });
   });
   function dynamic(obj){
@@ -118,9 +131,9 @@
   			</div>
 		</div>
 	</div>
-  <div class="against" style="position:absolute;">
+  <div class="against hidden" style="position:absolute;">
 
-    <div class="record" style="background:#FFFFFF;height:90%; width:100%; padding-left:2%;padding-right:2%;padding-top:2%">
+    <div class="record" style="background:#FFFFFF;height:90%; width:100%; padding-left:2%;padding-right:2%;padding-top:2%;overflow:scroll">
       <div class="heheda" style="background: #F0F0F0;padding-left:2%;padding-right:2%;padding-top:2%;padding-bottom:2%" onmousedown="mDown(this)"  onmouseup="mUp(this)">
       <div class="vs" style="background:#E0E0E0;height:19em">
           <div class="row" style="height:30%">
