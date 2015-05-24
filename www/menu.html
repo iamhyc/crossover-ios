@@ -33,7 +33,7 @@
 			}
 		});
 		$('#myHead').attr('src', imgAddress + "TeamLogo/" +myObj.TeamLogo);
-		$('#myName').val(myObj.TeamName);
+		$('#myName').text(myObj.TeamName);
 		//End: Initial part
 
 	//Start: Menu-slide part
@@ -59,6 +59,12 @@
     	
 
  	})
+
+ 	function Logout(){
+ 		localStorage.current_user = null;
+ 		window.location.href = "index.html";
+ 	}
+
 	</script>
 
 	<title>CrossOver</title>
@@ -70,15 +76,15 @@
 	<div class="menu hidden" style="height:100%">
 		<div class="home" style="height:85%">
 			<img id="myHead" class="img-circle circle" style="margin: 5% 0% 0% 00%;">
-			<div id="myName">HEHE~</div>
+			<p id="myName">HEHE~</p>
 			<button type="button" style="width: 60%;height15%;margin: 0% 0% 8%; background-color:#F0F0F0" class="btn btn-default" onclick="location.href='personal.html'">战队主页</button>
-			<button type="button" style="width: 60%;height15%; background-color:#F0F0F0 " class="btn btn-default" onclick="location.href='notify.html'">
- 		  		<span class="glyphicon glyphicon-list-alt " aria-hidden="true"></span>
+			<button type="button" style="width: 60%;background-color:#F0F0F0 " class="btn btn-default" onclick="location.href='notify.html'">
+ 		  		<span class="glyphicon glyphicon-list-alt"></span>
 			</button>
 		</div>
 
 		<div class="logout" style="">
-			<button type="button" class="btn btn-danger" style="width: 60%;">登出</button>
+			<button type="button" class="btn btn-danger" style="width: 60%;" onclick="Logout()">登出</button>
 		</div>
 	</div>
 

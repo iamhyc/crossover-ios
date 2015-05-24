@@ -16,8 +16,38 @@
   		var myObj = JSON.parse(localStorage.current_user);
 
   		$(document).ready(function(){
-  			
+  			document.getElementById("imgFile").addEventListener( 'change',preview,false );
   		})
+
+  		function preview(){
+			//var patn = /\.jpg$|\.jpeg$|\.png$|\.gif$/i;
+			var file = this.files[0]; 
+			var reader = new FileReader(); 
+			reader.readAsDataURL(file);
+			/* */ 
+			reader.onloadend = function(e) {
+				$('#upload').attr('src', this.result);
+				}
+		}
+
+		function saveCheck(){
+			var name = $("#mem_name").val(),
+				site = $("#mem_site").val(),
+				height = $("#mem_height").val(),
+				weight = $('#mem_weight').val(),
+				info = $('#mem_info').val(),
+				image = $('#upload').val();
+			if (!name||!site||!height||!weight||!info)
+				alert_flash("请输入队员名称和队员资料");
+			else if(!image) {
+				alert_flash("请选择一张头像");
+			}
+			else {
+				var data = JSON.stringify({
+							
+				})
+			}
+		}
 	</script>
 </head>
 
@@ -58,8 +88,8 @@
 
 		<div class="text-center" style="height:25%">
 			<div class="container">
-  				
-  				<img src="images/plus.jpg" class="img-circle" width="120px" height="120px">
+  				<input type="file" class="hidden" name="imgFile" id="imgFile"  />
+  				<img src="images/plus.jpg" id="upload" class="img-circle" width="120px" height="120px">
   			</div>
   			<br />
 			<div class="inline-btn" style="display:inline-block;width:35%;">
