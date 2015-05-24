@@ -12,12 +12,37 @@
 	<script type="text/javascript">
   var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
   var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
+  var myObj = JSON.parse(localStorage.current_user);
+  var myList;
+  var myPlayer;
 
   $(document).ready(function(){
     //INITIALIZE ON
-      var myObj = JSON.parse(localStorage.current_user);
-      $('.back').css("background-image", "url("+imgAddress+myObj.TeamHomePhoto+")")
+
+      if (myObj.TeamHomePhoto == "")
+        $('.back').css("background", "url(images/plus.jpg) no-repeat");
+      else $('.back').css("background-image", "url("+imgAddress+"TeamHome/"+myObj.TeamHomePhoto+")");
+
+      $.get(apiAddress + "team/teammate/user/"+myObj.UserID+"/team/"+myObj.TeamID, function(data){
+        //console.log(data);
+        myList = data.scoreList;
+        myPlayer = data.players;
+        for (var i = 0; i < myPlayer.length; i++){
+          var img='<div class="col-xs-3 col-sm-3 col-md-3" style="padding-top:5%"><img src="'+imgAddress+'Teammate/'+myPlayer[i].HeadIcon+'" id='+i+' class="img-circle isMem" width="100%" height="100%" onclick="showMsg(i)"></div>';
+          $(".portrait").append(img);
+        }
+        var img='<div class="col-xs-3 col-sm-3 col-md-3" style="padding-top:5%"><img src="images/plus.jpg" id="addMem" class="img-circle" width="100%" height="100%"></div>';
+        $(".portrait").append(img);
+        $(".isMem").on('click', function(){
+          showMsg(this.id);
+        })
+        $("#addMem").on('click', function(){
+          location.href = "member_add.html";
+        })
+      })
+
     //INITIALIZE OFF
+
       $(".score").click(function(){
           if ($('.against').hasClass('hidden')){
             $(".against").removeClass('hidden').animate({bottom:"10%"});
@@ -26,16 +51,26 @@
             $(".against").animate({bottom:"-80%"}, function(){$(".against").addClass('hidden')});
           }
       });
+
       $(".back").click(function(){
           $(".against").animate({bottom:"-80%"}, function(){$(".against").addClass('hidden')});
       });
+
   });
+
+  function addMem(){
+    window.location.href = "member_add.html";
+  }
+
   function dynamic(obj){
     var number = parseInt(obj.innerHTML);
 
     if(number<9){
     
        obj.innerHTML=number+1;
+     }
+     else{
+        obj.innerHTML = 0;
      }
    }
 
@@ -46,19 +81,20 @@
       obj.style.backgroundColor="#F0F0F0";
      
     }
-
-
+  //UPLOAD TEAMHOMEPHOTO
+    $()
+  //UPLOAD TEAMHOMEPHOTO
 	</script>
 </head>
 
 <body background="images/bg.jpg" style="height:100%">
-  <div class="back" style="height:40%;background-image:url('images/背景4.png')">
+  <div class="back" style="height:40%">
 	 <div class="navbar" style="height:7%;display:inline-flex;">	
     <div class="navbar  text-left" style="margin-top: -3%">
       <span onclick="history.back()"><img src="images/back.png" width="25%"></span>   </a>
     </div>
     <div class="navbar text-right" style="margin-top: -3%;">
-      <span onclick="history.back()"><img src="images/c.png" width="25%"></span>
+      <span onclick="location.href='detail_edit.html'"><img src="images/edit.png" width="25%"></span>
     </div>
 	</div>
 
@@ -70,8 +106,8 @@
   				<h4 style="text-align:left">广东深圳</h4>
   			</div>
   			<div class="col-xs-4 col-sm-4 col-md-4" style="margin-top:-10%;text-align:center">
-  				<img src="abc.jpg" class="img-circle" width="80%" height="80%">
-  				<p style="text-align:center">干</p>
+  				<img id="myHead" src="abc.jpg" class="img-circle" width="80%" height="80%">
+  				<p id="myName" style="text-align:center">干</p>
   			</div>
   			<div class="col-xs-4 col-sm-4 col-md-4" style="padding:3% 3% 0 0;text-align:right">
   				<button class="btn btn-lg" style="padding:0; width:80%; height:2em;text-align:center; background:#E0E0E0">相册</button>
@@ -83,38 +119,7 @@
 	<div class="container-fluid" style="height:38%;background:#ffffff">
 		<h4 style="text-align:center">队员</h4>
 		<div class="row portrait">
-			<div class="col-xs-2 col-sm-2 col-md-2" style="padding-top:5%;">
-  				<img src="abc.jpg" class="img-circle" width="100%" height="100%" >
-  			</div>
-  			<div class="col-xs-2 col-sm-2 col-md-2" style="padding-top:5%">
-  				<img src="abc.jpg" class="img-circle" width="100%" height="100%">
-  			</div>
-  			<div class="col-xs-2 col-sm-2 col-md-2" style="padding-top:5%">
-  				<img src="abc.jpg" class="img-circle" width="100%" height="100%">
-  			</div>
-  			<div class="col-xs-2 col-sm-2 col-md-2" style="padding-top:5%">
-  				<img src="abc.jpg" class="img-circle" width="100%" height="100%">
-  			</div>
-        <div class="col-xs-2 col-sm-2 col-md-2" style="padding-top:5%">
-          <img src="abc.jpg" class="img-circle" width="100%" height="100%">
-        </div>
-        <div class="col-xs-2 col-sm-2 col-md-2" style="padding-top:5%">
-          <img src="abc.jpg" class="img-circle" width="100%" height="100%">
-        </div>
-		</div>
-		<div class="row portrait">
-			<div class="col-xs-3 col-sm-3 col-md-3" style="padding-top:5%">
-  				<img src="abc.jpg" class="img-circle" width="100%" height="100%">
-  			</div>
-  			<div class="col-xs-3 col-sm-3 col-md-3" style="padding-top:5%">
-  				<img src="abc.jpg" class="img-circle" width="100%" height="100%">
-  			</div>
-  			<div class="col-xs-3 col-sm-3 col-md-3" style="padding-top:5%">
-  				<img src="abc.jpg" class="img-circle" width ="100%" height="100%">
-  			</div>
-  			<div class="col-xs-3 col-sm-3 col-md-3" style="padding-top:5%">
-  				<img src="abc.jpg" class="img-circle" width="100%" height="100%">
-  			</div>
+
 		</div>
 	</div>
 		

@@ -10,7 +10,21 @@
 	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
 	<script type="text/javascript">
+		var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
+  		var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
+  		var myObj = JSON.parse(localStorage.current_user);
 
+		$(document).ready(function(){
+
+			//INITIALIZATION ON
+
+			//INITIALIZATION DOWN
+		})
+
+		function saveCheck(){
+			$('#team_name')
+			$()
+		}
 	</script>
 </head>
 
@@ -25,10 +39,10 @@
 			<div class="row">
   				<div class="col-xs-5 col-sm-5">
   					&nbsp;&nbsp;&nbsp;&nbsp;
-  					<img src="abc.jpg" class="img-circle" width="72px" height="72px">
+  					<img id="myHead" src="abc.jpg" class="img-circle" width="72px" height="72px">
   				</div>
   				<br />
-  				<div class="col-xs-7 col-sm-7">
+  				<div class="col-xs-6 col-sm-6">
   					<button type="button" class="btn btn-lg btn-block">更换队标</button>
   				</div>
 			</div>
@@ -36,22 +50,22 @@
 		</div>
 		<div class="container text-left" style="height:60%">
 			<h3>完善战队资料</h3><br />
-			<form class="form-horizontal" style="width:90%">
+			<form class="form-horizontal" style="width:100%">
 				<div class="col-xs-offset-1">
   					<div class="form-group">
-    					<input type="text" class="form-control input-lg" id="team_name" placeholder="队名">
+    					<input type="text" class="net-control input-lg" id="team_name" placeholder="队名" style="width:90%">
   					</div>
   				</div>
   				
   				<div class="col-xs-offset-1">
   					<div class="form-group">
-      					<textarea class="form-control input-lg" id="team_intro" rows="5" placeholder="战队简介"></textarea>
+      					<textarea class="net-control input-lg" id="team_intro" rows="5" placeholder="战队简介" style="width:90%"></textarea>
     				</div>
     			</div>
 
     			<div class="col-xs-offset-1">
   					<div class="form-group">
-      					<input type="text" class="form-control input-lg" id="team_city" placeholder="城市">
+      					<input type="text" class="net-control input-lg" id="team_city" placeholder="城市" style="width:90%">
     				</div>
     			</div>
 			</form>
