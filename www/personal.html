@@ -19,6 +19,11 @@
   $(document).ready(function(){
     //INITIALIZE ON
       $('#myHead').attr("src", imgAddress + "TeamLogo/" +myObj.TeamLogo);
+      $('#myName').text(myObj.TeamName);
+      $('.back').click(function(){
+        $('#imgHome').click();
+      })
+      document.getElementById("imgHome").addEventListener( 'change',preview,false );
 
       if (myObj.TeamHomePhoto == "")
         $('.back').css("background", "url(images/plus.jpg) no-repeat");
@@ -46,14 +51,17 @@
 
       $(".score").click(function(){
           if ($('.against').hasClass('hidden')){
+            $("#block-bg").css("display", "block");
             $(".against").removeClass('hidden').animate({bottom:"10%"});
           } 
           else {
+            $("#block-bg").css("display", "none");
             $(".against").animate({bottom:"-80%"}, function(){$(".against").addClass('hidden')});
           }
       });
 
-      $(".back").click(function(){
+      $("#block-bg").click(function(){
+          $("#block-bg").css("display", "none");
           $(".against").animate({bottom:"-80%"}, function(){$(".against").addClass('hidden')});
       });
 
@@ -93,25 +101,45 @@
     $('#black-bg').css('display', 'none');
     $('#show').remove();
   }
-  //UPLOAD TEAMHOMEPHOTO
-    $()
-  //UPLOAD TEAMHOMEPHOTO
+
+  function preview(){
+      //var patn = /\.jpg$|\.jpeg$|\.png$|\.gif$/i;
+        var file = this.files[0]; 
+        var reader = new FileReader(); 
+        reader.readAsDataURL(file);
+        /* */ 
+        reader.onloadend = function(e) {
+          var data = JSON.stringify({
+                  "TeamID":myObj.TeamID,
+                  "PhotoBase64": this.result
+          })
+          $.post(apiAddress+"team/photo/home", data, function(result){
+            if (!result){
+              alert_flash("上传失败")
+            }
+            else{
+              $('#back').attr('src', this.result);
+            }
+          })
+          $('#back').attr('src', this.result);
+        }
+  }
+
 	</script>
 </head>
 
 <body background="images/bg.jpg" style="height:100%">
-  <div id="black-bg"></div>
-  <div class="back" style="height:40%">
-	 <div class="navbar" style="height:7%;display:inline-flex;">	
-    <div class="navbar  text-left" style="margin-top: -3%">
-      <span onclick="history.back()"><img src="images/back.png" width="25%"></span>   </a>
-    </div>
-    <div class="navbar text-right" style="margin-top: -3%;">
-      <span onclick="location.href='detail_edit.html'"><img src="images/edit.png" width="25%"></span>
-    </div>
-	</div>
+  <div id="block-bg"></div><div id="black-bg"></div>
 
+  <nav class="navbar navbar-fixed-top">
+      <span class="text-left" onclick="history.back()"><img src="images/back.png" width="14%"></span>
+      <span style="margin:0 0 0 70%" onclick="location.href='detail_edit.html'"><img src="images/edit.png" width="14%"></span>
+  </nav>
+
+  <div class="back" style="height:40%;width:100%">
+    <img src="" id="back" width="100%" height="100%">
 	</div>
+  <input type="file" class="hidden" name="imgHome" id="imgHome"  />
 
 	<div class="container-fluid" style="height:10%;background:#ffffff">
 		<div class="row">
@@ -131,7 +159,7 @@
   <div class="spa" style="height:0.3%"></div>
 	<div class="container-fluid" style="height:38%;background:#ffffff">
 		<h4 style="text-align:center">队员</h4>
-		<div class="row portrait">
+		<div class="row portrait" style="overflow:scroll">
 
 		</div>
 	</div>

@@ -16,17 +16,17 @@
 			var t1 = $('#pwd1'), tr1 = $('#pwdr1'),
 				t2 = $('#pwd2'), tr2 = $('#pwdr2');
 			if (t1.val()==""||t2.val()==""){
-				alert("密码不能为空");
+				alert_flash("密码不能为空");
 			}
 			else if (t1.val()!=tr1.val()) {
-				alert("管理员密码不符");
+				alert_flash("管理员密码不符");
 				t1.val("");	tr1.val("");
 				}
 			else if (t2.val()!=tr2.val()){
-				alert("队员密码不符");
+				alert_flash("队员密码不符");
 				t2.val("");	tr2.val("");
 				}
-			else if (t1.val()==t2.val()) alert("管理员密码和队员密码不能相同")
+			else if (t1.val()==t2.val()) alert_flash("管理员密码和队员密码不能相同")
 			else {
 				// body...
 				var Adpwd = $.base64.btoa(des("isalways", t1.val(), 1, 0, "", 1));
@@ -49,16 +49,16 @@
 						success:function(data){
 							console.log(data);
 							if (data.success){
-								alert("成功！");
+								alert_flash("成功！");
 								window.location.href = "index.html"
 							}
 							else if (data.success == false){
 								if (data.reason == "TeamNameExist"){
-									alert("队名已存在");
+									alert_flash("队名已存在");
 									window.location.href = "register2.html"
 								}
 								if (data.reason == "PhoneExist"){
-									alert("手机已注册");
+									alert_flash("手机已注册");
 									window.location.href = "register.html"
 								}
 							}
