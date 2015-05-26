@@ -38,12 +38,25 @@
 							'TeamID': myObj.TeamID,
 							'PhotoBase64': this.result
 					});
-					$.post(apiAddress+"team/photo/logo", data, function(result){
-						if(!result) alert_flash("上传失败")
-						else {
-							$('#myHead').attr('src', this.result);
-							alert_flash("头像上传成功");
-						}
+					console.log(1);
+					$.ajax({
+						type:'post',
+						url: apiAddress+"team/photo/logo",
+						contentType: 'application/json',
+						dataType:'json',
+						data:data,
+						success: 
+							function(result){
+								if(!result) {
+									alert_flash("上传失败");
+									console.log("fail");
+								}
+								else {
+									$('#myHead').attr('src', this.result);
+									alert_flash("头像上传成功");
+									console.log(result)
+								}
+							}
 					})
 				}		
 		}
@@ -61,14 +74,22 @@
 						'Intro': intro,
 						'City': city
 				});
-				$.post(apiAddress+'team/update', data, function(result){
-					if (result.success){
-						alert_flash("保存成功");
-						window.location.href = "personal.html";
-					}
-					else{
-						alert_flash("失败");
-					}
+				$.ajax({
+						type:'post',
+						url: apiAddress+'team/update',
+						contentType: 'application/json',
+						dataType:'json',
+						data:data,
+						success: 
+							function(result){
+								if (result.success){
+									alert_flash("保存成功");
+									window.location.href = "personal.html";
+								}
+								else{
+									alert_flash("失败");
+								}
+							}
 				})
 			}
 		}
