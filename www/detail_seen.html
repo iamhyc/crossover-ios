@@ -11,10 +11,10 @@
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
 	<script type="text/javascript">
 		var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
-  		var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
-  		console.log(JSON.parse(localStorage.userShow).pageNow);
-  		var show_user = JSON.parse(localStorage.userShow);
-  		var content = JSON.parse(localStorage["myList"+show_user.pageNow])[show_user.order];
+  		//var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
+  		//console.log(JSON.parse(localStorage.userShow).pageNow);
+  		var temp = JSON.parse(localStorage.userShow);
+  		var content = JSON.parse(localStorage["myList"+temp.pageNow])[temp.order];
   		console.log(content);
   		//INITIALIZATION ON
   		$(document).ready(function () {

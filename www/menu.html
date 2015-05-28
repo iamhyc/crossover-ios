@@ -12,41 +12,45 @@
     	var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
 
 	$(document).ready(function(){
+
 		//Start: Initial part
 		var myObj = JSON.parse(localStorage.current_user);
 		var lstAddress = apiAddress + "team/user/"+ myObj.UserID + "/list/" + pageNow;
+
+		$('#myHead').attr('src', imgAddress + "TeamLogo/" +myObj.TeamLogo);
+		$('#myName').text(myObj.TeamName);
 
 		$.get(lstAddress, function(data){
 			//console.log(data);
 			var myList = data.scoreList;
 			localStorage["myList"+pageNow] = JSON.stringify(myList);
-
 			for (var i = 0; i < myList.length; i++){
-				var spc='<div class="spc" style="height:1.5%"></div><div class="block" id='+myList[i].TeamID+'_'+myList[i].UserID+'@'+pageNow+'*'+i+' style="height:15%"><div class="row" style="height:100%;width:104%">',
+				var spc='<div class="spc" style="height:1.5%;width:100%"></div><div class="block" id='+pageNow+'@'+i+' style="height:15%"><div class="row" style="height:100%;width:103.6%">',
 				    col_top='<div class="col-xs-2"><img class="img-circle circle" src='+imgAddress+"TeamLogo/"+myList[i].TeamLogo+' style="margin:50% 0% 20% 25%" /></div>',
 				    col_mid='<div class="col-xs-6"><p style="margin: 16% 0% 0% 13%;">'+myList[i].TeamName+'</p></div>',
 				    col_end='<div class="col-xs-4"><span class="glyphicon glyphicon-star" style="margin-top:28%" aria-hidden="true"></span>'+myList[i].lntegral+'</div></div>';
 
 				$('.homePage').append(spc+col_top+col_mid+col_end);
-				$(".block").on("click", function(){
-					var s1 = this.id.indexOf('_'),
-						s2 = this.id.indexOf('@'),
-						s3 = this.id.indexOf('*');
-    				localStorage.userShow = JSON.stringify({
-    					TeamID:this.id.substr(0, s1),
-    					UserID:this.id.substr(s1+1, s2-s1-1),
-    					pageNow:this.id.substr(s2+1, s3-s2-1),
-    					order:this.id.substr(s3+1, this.id.length-s3-1)
-    				})
-    				window.location.href = "detail_page.html";
-    			})
 			}
-		});
-		$('#myHead').attr('src', imgAddress + "TeamLogo/" +myObj.TeamLogo);
-		$('#myName').text(myObj.TeamName);
+			$(".block").on({
+				click:function(){
+					var s1 = this.id.indexOf('@');
+    				localStorage.userShow = JSON.stringify({
+    					pageNow:this.id.substr(0, s1),
+    					order:this.id.substr(s1+1, this.id.length-s1-1)
+    				});
+    				window.location.href = "detail_page.html";
+    			},
+    			touchstart:function(){
+    				$(this).css("backgroundColor", "#004B97");
+    				},
+    			touchend:function(){
+    				$(this).css("backgroundColor", "#FCFCFC");
+    				}
+			});
+		});	
 		//End: Initial part
-
-	//Start: Menu-slide part
+		//Start: Menu-slide part
 			$(".menu-open").click(function(){
 					$("#block-bg").css("display" ,"block");
  	 				$(".menu").removeClass('hidden').animate({right:""});
@@ -58,17 +62,8 @@
       				$(".body").animate({right:"0"});
       				$("#block-bg").css("display" ,"none");
     		});
-    //
-		   	/* var changeColor =  function(x){
-		   		x.style.color:#2828FF;
-		   	}
-		   	 var normalColor =  function(x){
-		   		x.style.color:#FCFCFC；
-		   	}*/
-	//End: Menu-slide part
-    	
-
- 	})
+		//End: Menu-slide part
+	})
 
  	function Logout(){
  		localStorage.current_user = null;
@@ -100,7 +95,7 @@
 
 <div class="body" style="height:100%">
 	<div id="block-bg"></div>
-	<nav class="navbar navbar-static-top" style="height:0%;overflow:hidden">
+	<nav class="navbar navbar-static-top" style="overflow:hidden;margin-bottom:0">
 		<div class="row" style="background-color:rgba(0,0,0,0);">
 			<div class="col-sm-8 col-xs-8 text-left" style="padding:4% 0 0 6%">
     			<img src="images/cs.png" width="80%">
@@ -112,7 +107,7 @@
 	</nav>
        
       <!-- Menu -->
-    <div class="homePage" style="height:89.5%;max-width:100%;overflow:scroll">
+    <div class="homePage" style="height:91.5%;max-width:100%;overflow:scroll">
     </div>  	
 			
 </div>	    
