@@ -4,100 +4,113 @@
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 	<title>Notification</title>
 	<script src="javascripts/jquery-1.11.2.js"></script>
+	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
 	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
 	
 	<script type="text/javascript">
+		var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
+    	var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
+    	var myObj = JSON.parse(localStorage.current_user);
+    	var userID = myObj.TeamID;
 
+    	function toggle(id){
+    		//console.log($("#"+id))
+    		$("#"+id+"> div").toggleClass("hidden");
+    	}
+    	function sendMsg (id, sign) {
+    		var tmp;
+    		if (sign == 1) tmp= "accepted"; else tmp = "refaused";
+    		$.get(apiAddress+"arrange/receive/"+id+"/"+tmp, function(result){
+    			if (result) {
+    				alert_flash("应战成功", function(){
+    					window.location.reload(true);
+    				})
+    			}
+    			else {
+    				alert_flash("回复失败！")
+    			}
+    		})
+    	}
+    	function addBlue (item, img, msg) {
+    		var content = '<div class="'+item.Status+'" id="'+item.ArrangeID+'"><div class="blue_up" style="height:15%;background:#0072E3;margin-top:3%;margin-left: 3%;margin-right:4%;margin-bottom:2%"><div class="row" style="height:100%;width:100%"><div class="col-xs-2"> <img src="'+img+'" class="img-circle circle" style="margin:30% 0% 20% 25%;width:250%;height:76%;background:#d0d0d0"></div><div class="col-xs-6"><p style="margin:23% 0% 0% 18%;"><font color="#FFFFFF" size="3em">'+msg+'</font></p></div><div class="col-xs-4 col-sm-4 col-md-4" style="padding:6% 0% 0 0;text-align:right"><button class="btn btn-lg" style="padding:0; width:90%; height:45%;text-align:center;background:#E0E0E0" onclick="toggle('+item.ArrangeID+')"><font color="#000093">查看</font></button></div></div></div><div class="blue_down hidden" style="height:25%;background:#0072E3;margin-top:3%;margin-left:3%;margin-right:4%;margin-bottom:2%"><div class="row" style="height:60% ;width:100%" ><div class="col-xs-2"> <img class="img-circle circle" src="'+img+'" style="margin:30% 0% 20% 25%;width:250%;height:76%" /></div><div class="col-xs-10 "style="margin-left:8%;width:60%;height:100%;margin-top:6%"><div class="team" style="height:25%;width:100%"><font color="#FFFFFF" size="3em">'+msg+'</font></div><div class="team" style="height:60%;width:100%"><button class="btn btn-lg" style="padding:0; height:60%;text-align:center; background:#E0E0E0"><font color="#000093" size="3%">'+item.Phone+'</font></button></div></div></div><div class="row" style="height:40% ;width:100%;text-align:right"><button class="btn btn-lg" style="padding:0; width:30%; height:70%;text-align:center;background:#E0E0E0;margin-top:-6%" onclick="toggle('+item.ArrangeID+')"><font color="#000093">收起</font></button></div></div></div>';
+    		$(".message").append(content);
+    	}
+
+
+    	function addPend (item) {
+    		var img = imgAddress+ 'TeamLogo/'+ item.TeamLogo;
+    		var msg;
+    		if (item.ActiveID == userID) addBlue(item, img, "等待对方应战")
+    		else{
+    			msg = item.TeamName+" 向你约战";
+
+    			var up = '<div id="'+item.ArrangeID+'"><div class="grey_up" style="height:15%;background:#F0F0F0;margin-top:3%;margin-left:3%;margin-right:4%;margin-bottom:2%;"><div class="row" style="height:100% ;width:100%" ><div class="col-xs-2"><img class="img-circle circle" src="'+img+'" style="margin:30% 0% 20% 25%;width:250%;height:76%" /></div><div class="col-xs-6 col-sm-6 col-md-6"><p style="margin:23% 0% 0% 18%;"><font color="#000079" size="3em">'+msg+'</font></p></div><div class="col-xs-4 col-sm-4 col-md-4" style="padding:6% 0% 0 0;text-align:right"><button class="btn btn-lg" style="padding:0;width:90%;height:45%;text-align:center;background:#E0E0E0" onclick="toggle('+item.ArrangeID+')"><font color="#000093">查看</font></button></div></div></div>';
+
+    			var down = '<div class="grey_down hidden" style="height:30%;background:#F0F0F0;margin-top:3%;margin-left:3%;margin-right:4%;margin-bottom:2%;"><div class="row" style="height:50%;width:100%"><div class="col-xs-2"><img src="'+img+'" class="img-circle circle" style="margin:30% 0% 20% 25%;width:250%;height:76%;background:#d0d0d0"></div><div class="col-xs-10 "style="margin-left:8%;width:60%;height:100%;margin-top:6%"><div class="team" style="height:25%;width:100%"><font color="#000079" size="3em">'+msg+'</font></div><div class="team" style="height:60%;width:100%"><button class="btn btn-lg" style="padding:0;height:60%;text-align:center;background:#E0E0E0"><font color="#000093" size="3%">'+item.Phone+'</font></button></div></div></div><div class="row" style="height:50%;width:100%;margin-left:3%"><div class="col-xs-6" style="text-align:right"><button class="btn btn-danger btn-lg" style="padding:0;width:90%;height:45%;text-align:center;background:#CE0000;border-radius:1em;margin-left:3%" onclick="sendMsg('+item.ActiveID+', 0)"><font color="#000093">拒绝</font></button></div><div class="col-xs-6" style="width:47%;margin-left:-3%"><button class="btn btn-lg" style="padding:0;width:96%;height:45%;text-align:center;background:#E0E0E0;border-radius:1em" onclick="sendMsg('+item.ActiveID+', 1)"><font color="#000093">接受</font></button></div></div></div>';
+    			$('.message').append(up+down);
+    		}
+    		
+    	}
+    	function addAccepted (item) {
+    		var img = imgAddress+ 'TeamLogo/'+ item.TeamLogo;
+    		var msg;
+    		if (item.ActiveID == userID)
+    			msg = item.TeamName + " 接受你的约战";
+    		else msg = "已接受 "+ item.TeamName +" 的约战";
+
+    		addBlue(item, img, msg)
+    	}
+    	function addDone (item) {
+    		var img = imgAddress+ 'TeamLogo/'+ item.TeamLogo;
+    		var msg = "比赛已结束";
+    		addBlue(item, img, msg);
+    	}
+
+
+    	function addReject (item) {
+    		var img = imgAddress+ 'TeamLogo/'+ item.TeamLogo;
+    		var msg;
+    		if (item.ActiveID == userID)
+    			msg = item.TeamName + " 拒绝你的约战";
+    		else msg = "已拒绝"+ item.TeamName +" 的约战";
+    		
+    		var reject = '<div class="'+item.Status+'" id="'+item.ArrangeID+'"" style="height:15%;background:#CE0000;margin-top:3%;margin-left:3%;margin-right:4%;margin-bottom:2%;"><div class="row" style="height:100%;width:100%" ><div class="col-xs-2"><img class="img-circle circle" src="'+img+'" style="margin:30% 0% 20% 25%;width:250%;height:76%" /></div><div class="col-xs-10 "><p style="margin: 13% 0% 0% 10%"><font color="#FFFFFF" size="3em">'+msg+'</font></p></div></div></div>';
+    		$(".message").append(reject);
+    	}
+
+
+    	$.get(apiAddress+"arrange/list/"+myObj.TeamID, function(data){
+    		var list = data.arrangeList;
+    		list.forEach(function(item){
+    			if (item.Status == "pending") addPend(item);
+    			else if (item.Status == "accepted") addAccepted(item);
+    			else if (item.Status == "done") addDone(item);
+    			else if (item.Status == "refaused") addReject(item);
+    		})
+    	})
+
+    	
+    	$(".refaused").on("click", function(){
+    		if (prompt("是否删除此信息"))
+    			$.get(apiAddress+"/arrange/delete/"+this.id, function(data){
+    				alert_flash("删除成功！");
+    				window.location.reload(true);
+    			})
+    	})
 	</script>
 </head>
+
 <body background="images/bg.png" style="height:100%">
+
 	<nav class="navbar navbar-fixed-top">
     	<div class="navbar  text-left" style="">
           <span onclick="history.back()"><img src="images/back.png" width="12%"></span>
         </div>	
 	</nav>
 	<div class="space" style="height:7%"></div>
-    <div  style="height:93%;max-width:100%;overflow:scroll ; background:#FFFFFF">
-    	<div class="reject" style="height:15%;background:#CE0000;margin-top: 3%;margin-left: 3%;margin-right: 4%;margin-bottom: 2%;">
-		  <div class="row" style="height:100% ;width:100%" >
 
-			<div class="col-xs-2 col-sm-2 col-md-2"> 
-				<div class="img-circle circle" style="margin:30% 0% 20% 25%;width:250%;height:76%;background:#d0d0d0"></div>
-			</div>
-			<div class="col-xs-10 col-sm-10 col-md-10">
-				
-				<p style="margin: 13% 0% 0% 10%;"><font color="#FFFFFF" size="3em">白黄绿豆 拒绝了你的约战</font></p>
-			</div>
-			    
-      	  </div>
+    <div class="message" style="height:93%;max-width:100%;overflow:scroll;background:#FFFFFF">
 
-		</div>
-		
-		<div class="accept" style="height:15%;background:	#0072E3;margin-top: 3%;margin-left: 3%;margin-right: 4%;margin-bottom: 2%;">
-		  <div class="row" style="height:100% ;width:100%" >
+    </div>
 
-			<div class="col-xs-2 col-sm-2 col-md-2"> 
-				<div class="img-circle circle" style="margin:30% 0% 20% 25%;width:250%;height:76%;background:#d0d0d0"></div>
-			</div>
-			<div class="col-xs-6 col-sm-6 col-md-6">
-				
-				<p style="margin:23% 0% 0% 18%;"><font color="#FFFFFF" size="3em">等待对方应战</font></p>
-			</div>
-			<div class="col-xs-4 col-sm-4 col-md-4" style="padding:6% 0% 0 0;text-align:right">
-  				<button class="btn btn-lg" style="padding:0; width:90%; height:45%;text-align:center; background:#E0E0E0"><font color="#000093">查看</font></button>
-  			</div>
-			    
-      	  </div>
-		</div>
-
-		<div class="challenge" style="height:30%;background:#F0F0F0;margin-top: 3%;margin-left: 3%;margin-right: 4%;margin-bottom: 2%;">
-		  <div class="row" style="height:50% ;width:100%" >
-
-			<div class="col-xs-2 col-sm-2 col-md-2"> 
-				<div class="img-circle circle" style="margin:30% 0% 20% 25%;width:250%;height:76%;background:#d0d0d0"></div>
-			</div>
-
-			<div class="col-xs-10 col-sm-10 col-md-10"style="margin-left:8%;width:60%;height:100%;margin-top:6%">
-				<div class="team" style="height:25%;width:100%">
-  					<font color="#000079" size="3em">hello! 向你约战</font>
-  				</div>
-  				<div class="team" style="height:60%;width:100%">
-  				<button class="btn btn-lg" style="padding:0;  height:60%;text-align:center; background:#E0E0E0"><font color="#000093" size="3%" >15811823462</font></button>
-  				</div>
-			</div>
-			    
-      	  </div>
-      	  <div class="row" style="height:50%;width:100%;margin-left:3%">
-      	  	<div class="col-xs-6 col-sm-6 col-md-6" style="text-align:right">
-      	  		<button class="btn btn-danger btn-lg" style="padding:0; width:90%; height:45%;text-align:center; background:#CE0000 ;border-radius: 1em;
-      	  		  margin-left: 3%;
-      	  		"><font color="#000093">拒绝</font></button>
-      	  	</div>
-      	  	<div class="col-xs-6 col-sm-6 col-md-6" style="width:47%;margin-left: -3%">
-      	  		<button class="btn btn-lg" style="padding:0; width:96%; height:45%;text-align:center; background:#E0E0E0;border-radius: 1em;"><font color="#000093">接受</font></button>
-      	  	</div>
-
-
-		  </div>
-		
-      </div>
-    <div class="accept" style="height:25%;background:	#0072E3;margin-top: 3%;margin-left: 3%;margin-right: 4%;margin-bottom: 2%;">
-		  <div class="row" style="height:60% ;width:100%" >
-
-			<div class="col-xs-2 col-sm-2 col-md-2"> 
-				<div class="img-circle circle" style="margin:30% 0% 20% 25%;width:250%;height:76%;background:#d0d0d0"></div>
-			</div>
-			<div class="col-xs-10 col-sm-10 col-md-10"style="margin-left:8%;width:60%;height:100%;margin-top:6%">
-				<div class="team" style="height:25%;width:100%">
-  					<font color="#FFFFFF" size="3em">比赛已结束</font>
-  				</div>
-  				<div class="team" style="height:60%;width:100%">
-  				<button class="btn btn-lg" style="padding:0; height:60%;text-align:center; background:#E0E0E0"><font color="#000093" size="3%">15811823462</font></button>
-  				</div>
-			</div>
-		</div>
-		<div class="row" style="height:40% ;width:100%;text-align:right" >
-			<button class="btn btn-lg" style="padding:0; width:30%; height:70%;text-align:center; background:#E0E0E0;margin-top:-6%"><font color="#000093">收起</font></button>
-		</div>
-	</div>
 </body>

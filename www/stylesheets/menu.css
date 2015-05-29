@@ -1,12 +1,10 @@
 .menu {
-  background: #202024 url('') repeat right top;
+    background: #202024 url('') repeat right top;
  
-        /*左侧弹出窗口的长宽、背景颜色*/
-        height: 100%;
-        width: 50%;
-        background-color: #FFFFFF;
-
-
+      /*左侧弹出窗口的长宽、背景颜色*/
+      height: 100%;
+      width: 51%;
+      background-color: #FFFFFF;
         /*布局排版*/
         position:absolute;/*关键处*/
         z-index:1;
@@ -24,18 +22,16 @@
 .menu .circle{
   width: 5em;
   height: 5em;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7), to(#e7e7e7));
 }
 .spc{
-  background-color: #F0F0F0;
+  background-color: #FCFCFC;
 }
 .block{
-  background-color: #FCFCFC;
+  background-color: #F0F0F0;
 }
 .circle{
   width: 2.5em;
   height: 2.5em;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7), to(#e7e7e7));
 }
 .btn-danger {
   color: #fff;

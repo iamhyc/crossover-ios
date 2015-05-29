@@ -21,8 +21,8 @@
 		$('#myName').text(myObj.TeamName);
 
 		$.get(lstAddress, function(data){
-			//console.log(data);
 			var myList = data.scoreList;
+			console.log(myObj.TeamID)
 			localStorage["myList"+pageNow] = JSON.stringify(myList);
 			for (var i = 0; i < myList.length; i++){
 				var spc='<div class="spc" style="height:1.5%;width:100%"></div><div class="block" id='+pageNow+'@'+i+' style="height:15%"><div class="row" style="height:100%;width:103.6%">',
@@ -45,7 +45,7 @@
     				$(this).css("backgroundColor", "#004B97");
     				},
     			touchend:function(){
-    				$(this).css("backgroundColor", "#FCFCFC");
+    				$(this).css("backgroundColor", "#F0F0F0");
     				}
 			});
 		});	
@@ -107,7 +107,7 @@
 	</nav>
        
       <!-- Menu -->
-    <div class="homePage" style="height:91.5%;max-width:100%;overflow:scroll">
+    <div class="homePage" style="height:90.9%;max-width:100%;overflow:scroll">
     </div>  	
 			
 </div>	    
