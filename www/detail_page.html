@@ -12,12 +12,29 @@
 	<script type="text/javascript">
     var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
     var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
+    var myObj = JSON.parse(localStorage.current_user);
     var hisData, hisList, hisPlayer;
     var userShow = JSON.parse(localStorage.userShow);
         userShow = JSON.parse(localStorage['myList'+userShow.pageNow])[userShow.order];
       //UserID: userShow
 
       $(document).ready(function(){
+
+        $(".score").click(function(){
+          if ($('.record').hasClass('hidden')){
+            $("#block-bg").css("display", "block");
+            $(".record").removeClass('hidden').animate({bottom:"10%"});
+          } 
+          else {
+            $("#block-bg").css("display", "none");
+            $(".record").animate({bottom:"-80%"}, function(){$(".record").addClass('hidden')});
+          }
+        });
+
+        $("#block-bg").click(function(){
+            $("#block-bg").css("display", "none");
+            $(".record").animate({bottom:"-80%"}, function(){$(".record").addClass('hidden')});
+        });
 
         $.get(apiAddress+'team/teammate/user/'+userShow.UserID+'/team/'+userShow.TeamID, function(data){
           hisData = data;
@@ -27,7 +44,8 @@
           $("#myHead").attr("src", imgAddress + "TeamLogo/" +userShow.TeamLogo);
           $("#myName").text(userShow.TeamName);
           $("#myAddress").text(userShow.City);
-          $('#back').css("background-image", "url("+imgAddress+"TeamHome/"+userShow.TeamHomePhoto+") ");
+          if (userShow.TeamHomePhoto)
+              $('#back').css("background-image", "url("+imgAddress+"TeamHome/"+userShow.TeamHomePhoto+") ");
           $("#myGrade").text(userShow.lntegral);
 
           for (var i = 0; i < hisPlayer.length; i++){
@@ -41,6 +59,8 @@
           //INITIALIZATION DONE
         })
       })
+
+
 
   function deal_spc (content) {
     content=content.replace(/\r\n/g,"<BR>")  
@@ -67,17 +87,28 @@
       $('#black-bg').css('display', 'none');
     });
   }
+
+  function fightVS () {
+    if (myObj.TeamID == userShow.TeamID) {
+      alert_flash("怎么可以和自己约战呢");return;
+    }
+    $.get(apiAddress+"arrange/send/"+myObj.TeamID+"/"+userShow.TeamID, function(result){
+        if (result.success) alert_flash("约战成功");
+        else {
+          alert_modal(result.message);
+        }
+    })
+  }
 	</script>
 </head>
 
 <body background="images/bg.jpg" style="height:100%">
   <div id="block-bg"></div><div id="black-bg"></div>
-
-	<nav class="navbar navbar-fixed-top">
-        <span onclick="location.href='menu.html'"><img src="images/back.png" width="14%"></span>   
+  <nav class="navbar navbar-fixed-top" style="margin-bottom:0">
+        <span onclick="history.back()"><img src="images/back.png" width="14%"></span>
   </nav>
-
-	<div id="back" style="height:37%;background-image:url('abc.jpg')"></div>
+	
+	<div id="back" style="height:37%"></div>
 
 	<div class="container-fluid" style="height:10%;background:#ffffff">
 		<div class="row">
@@ -124,16 +155,92 @@
 </div>
 
 		
-	<div class="row" style="color:#ffffff;width:102%">
-  		<div class="col-xs-4 col-sm-4 col-md-4 text-right" style="padding:4% 0  0 8%">
-  			<h3 id="myGrade">GRADE</h3>
+	<div class="score row" style="color:#ffffff;width:102%">
+  		<div class="col-xs-4 col-sm-4 col-md-4 text-right" style="padding:1.5% 0  0 4%">
+  			<h1 id="myGrade">GRADE</h1>
   		</div>
-  		<div class="col-xs-4 col-sm-4 col-md-4 text-center" style="padding-top:4%">
-  			<span class="glyphicon glyphicon-star" style="font-size:3em"></span>
+  		<div class="col-xs-4 col-sm-4 col-md-4 text-center" style="padding-top:8%">
+  			<span class="glyphicon glyphicon-star" style="font-size:2em"></span>
   		</div>
-  		<div class="col-xs-4 col-sm-4 col-md-4" style="padding:2% 4% 0 0">
+  		<div class="col-xs-4 col-sm-4 col-md-4" style="padding:6% 3% 0 0">
   			<button class="btn btn-lg btn-block" onclick="fightVS()">约战</button>
   		</div>
 	</div>
+
+
+
+
+    <div class="record hidden" style="background:#FFFFFF;height:70%;width:100%;padding-left:2% 2% 0 %2;overflow:scroll;position:absolute;z-index:1002">
+    <!--BEGINNING FOR FINISHED LIST-->
+      <div class="scoreList" height="11em" width="100%" >
+          <div style="background:#F0F0F0;height:100%;width:100%;display:inline-flex;">
+            <div class="team01" style="width:46%;height:100%;margin-top:3%;margin-bottom:2%;margin-left:2%">
+              <div class="vs" style="background:#007979;height:11em">
+
+                <div style="height:4em; width:100%; display:inline-flex;">
+                  <div style="height:4em;width:35%;">
+                    <img src="abc.jpg" class="img-circle" width="75%" height="75%" style="margin-top:13%;margin-left:13%">
+                  </div>
+                  <div style="height:100%;width:50%">
+                    <p style="margin-top:1.2em"><font size="2.5em" color=" #000093">干</font></p>
+                  </div>
+                </div>
+
+                <div class="aga" style="display:inline-flex;height:2.5em">
+                  <div class="space" style="height:2.5em;width:2.2em;display:inline"></div>
+                  <div class="he1" style="height:5em;width:2.4em;display:inline;background:#FFFFFF;margin-top:1em" >
+                    <p style="text-align:center"><font size="8em" color="#000093">0</font></p>
+                  </div>
+                  <div class="space" style="height:5em;width:0.2em;display:inline;" ></div>
+                  <div class="he2" style="height:5em;width:2.4em;display:inline;background:#FFFFFF;margin-top:1em" >
+                    <p style="text-align:center"><font size="8em" color="#000093">0</font></p>
+                  </div>
+                  <div class="space" style="height:5em;width:0.2em;display:inline;" ></div>
+                  <div class="he3" style="height:5em;width:2.4em;display:inline;background:#FFFFFF;margin-top:1em" >
+                    <p style="text-align:center"><font size="8em" color="#000093">0</font></p>
+                  </div>
+                  <div class="devider" style="height:5em;width:3em;display:inline;margin-top:1em" >
+                    <p style="text-align:right;margin-top:1em;margin-right: -1.1em;"><font size="8em" color="#000093">:</font></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="heheda2" style="width:50%;height:100%;margin-top: 3%;margin-bottom: 2%; margin-right: 2%;">
+              <div class="vs" style="background:#E0E0E0;height:11em">
+                <div style="height:4em; width:100%;display:inline-flex;">
+                
+                  <div style="height:4em;width:70%">
+                    <p style="margin-top:1.2em;text-align:right"><font size="2.5em" color=" #000093">干</font></p>
+                  </div>
+                  <div style="height:4em;width:35%;">
+                    <img src="abc.jpg" class="img-circle" width="75%" height="75%" style="text-align:right;margin-top:13%;margin-left:13%">
+                  </div>
+                </div>
+              
+                <div class="aga" style="display:inline-flex;height:2.5em">
+                  <div class="space" style="height:5em;width:3em;display:inline;margin-top: 1em;" >
+                    <p style="text-align:left;margin-top:1em;margin-left: -0.5em;"><font size="8em" color="#000093">:</font></p>
+                  </div>
+                  <div class="he1" style="height:5em;width:2.4em;display:inline;background:#FFFFFF;margin-top: 1em;" >
+                    <p style="text-align:center"><font size="8em" color="#000093">0</font></p>
+                  </div>
+                  <div class="space" style="height:5em;width:0.2em;display:inline" ></div>
+                  <div class="he2" style="height:5em;width:2.4em;display:inline;background:#FFFFFF;margin-top: 1em;" >
+                    <p style="text-align:center"><font size="8em" color="#000093">0</font></p>
+                  </div>
+                  <div class="space" style="height:5em;width:0.2em;display:inline;" ></div>
+                  <div class="he3" style="height:5em;width:2.4em;display:inline;background:#FFFFFF;margin-top: 1em;" >
+                    <p style="text-align:center"><font size="8em" color="#000093">0</font></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <!--END FOR FINISHED LIST-->
+    </div> 
+
+
 </body>
 </html>

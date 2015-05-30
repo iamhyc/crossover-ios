@@ -128,7 +128,7 @@ body {
     left:0; right:0;
     top:90%;
     margin: 0 auto;
-    box-shadow: 0px 2px #888888;
+    box-shadow: 0px 0px 10px #888888;
     padding: 0.5em 0.5em 0.5em 0.5em;
     border-radius:5px;
     font:1.2em black;
@@ -164,9 +164,4 @@ body {
   filter: alpha(opacity=70);
 }
 
-.space{
-  height:5em;
-  width:2.2em;
-  display:inline;
-}
 

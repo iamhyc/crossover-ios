@@ -22,7 +22,7 @@
 
 		$.get(lstAddress, function(data){
 			var myList = data.scoreList;
-			console.log(myObj.TeamID)
+			console.log(myObj.TeamID);
 			localStorage["myList"+pageNow] = JSON.stringify(myList);
 			for (var i = 0; i < myList.length; i++){
 				var spc='<div class="spc" style="height:1.5%;width:100%"></div><div class="block" id='+pageNow+'@'+i+' style="height:15%"><div class="row" style="height:100%;width:103.6%">',
@@ -42,10 +42,10 @@
     				window.location.href = "detail_page.html";
     			},
     			touchstart:function(){
-    				$(this).css("backgroundColor", "#004B97");
+    				$(this).css("backgroundColor", "#178ED3");
     				},
     			touchend:function(){
-    				$(this).css("backgroundColor", "#F0F0F0");
+    				$(this).css("backgroundColor", "#F6F7F7");
     				}
 			});
 		});	

@@ -6,7 +6,7 @@
 	<script src="javascripts/jquery-1.11.2.js"></script>
 	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
 	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
-	
+	<link rel="stylesheet" href="stylesheets/style.css">
 	<script type="text/javascript">
 		var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
     	var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
@@ -22,7 +22,7 @@
     		if (sign == 1) tmp= "accepted"; else tmp = "refaused";
     		$.get(apiAddress+"arrange/receive/"+id+"/"+tmp, function(result){
     			if (result) {
-    				alert_flash("应战成功", function(){
+    				alert_modal("已应战，双方自行安排比赛", function(){
     					window.location.reload(true);
     				})
     			}
@@ -102,14 +102,13 @@
 
 <body background="images/bg.png" style="height:100%">
 
-	<nav class="navbar navbar-fixed-top">
-    	<div class="navbar  text-left" style="">
-          <span onclick="history.back()"><img src="images/back.png" width="12%"></span>
-        </div>	
+	<nav class="navbar navbar-static-top" style="margin-bottom:0">
+        <span onclick="history.back()"><img src="images/back.png" width="12%"></span>
 	</nav>
-	<div class="space" style="height:7%"></div>
 
-    <div class="message" style="height:93%;max-width:100%;overflow:scroll;background:#FFFFFF">
+	
+
+    <div class="message" style="height:92%;max-width:100%;overflow:scroll;background:#FFFFFF">
 
     </div>
 

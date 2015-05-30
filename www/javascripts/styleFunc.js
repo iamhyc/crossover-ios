@@ -1,10 +1,18 @@
 function alert_flash(message, callback){
-	var ndiv = "<div id='alert_flash' style='color:#000000'>" + message + "</div>";
+	var ndiv = "<div id='alert_flash' style='color:#000000;z-index:1003'>" + message + "</div>";
 	if (!$('#alert_flash').length) {
 		$("body").append(ndiv);
 		$("#alert_flash").css("width", message.length*25+"px");
-		$("#alert_flash").show(2000);
-		setTimeout("$('#alert_flash').fadeOut(1000, function(){this.remove()})", 3000);
+		$("#alert_flash").show(1500);
+		setTimeout("$('#alert_flash').fadeOut(500, function(){this.remove()})", 2500);
 		}
 	if (callback) return callback();
+}
+
+function alert_modal (message, callback) {
+	// body...
+}
+
+function prompt_modal (type) {
+	// Type 0 : Confirming
 }
