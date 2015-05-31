@@ -1,5 +1,5 @@
 function alert_flash(message, callback){
-	var ndiv = "<div id='alert_flash' style='color:#000000;z-index:1003'>" + message + "</div>";
+	var ndiv = "<div id='alert_flash'>" + message + "</div>";
 	if (!$('#alert_flash').length) {
 		$("body").append(ndiv);
 		$("#alert_flash").css("width", message.length*25+"px");
