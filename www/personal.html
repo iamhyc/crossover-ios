@@ -28,9 +28,13 @@
       });
       document.getElementById("imgHome").addEventListener( 'change',preview,false );
 
-      if (myObj.TeamHomePhoto == "")
-        $('.back').css("background", "url(images/plus.jpg) no-repeat");
-      else $('.back').css("background-image", "url("+imgAddress+"TeamHome/"+myObj.TeamHomePhoto+")");
+      if (myObj.TeamHomePhoto == ""){
+        $('#back').attr("src", "images/white.png").css("position", "absolute").css("left", "40%").css("top", "15%");
+      }
+      else {
+        $('#back').attr("src", imgAddress+"TeamHome/"+myObj.TeamHomePhoto).attr("width", "100%").attr("height", "100%");
+
+      }
 
       $.get(apiAddress + "team/teammate/user/"+myObj.UserID+"/team/"+myObj.TeamID, function(data){
         myData = data;  //console.log(data);
@@ -43,7 +47,7 @@
           var img='<div class="col-xs-3 col-sm-3 col-md-3" style="padding-top:5%"><img src="'+imgAddress+'Teammate/'+myPlayer[i].HeadIcon+'" id='+i+' class="img-circle isMem" width="100%" height="100%"></div>';
           $(".portrait").append(img);
         }
-        var img='<div class="col-xs-3 col-sm-3 col-md-3" style="padding-top:5%"><img src="images/plus.jpg" id="addMem" class="img-circle" width="100%" height="100%"></div>';
+        var img='<div class="col-xs-3 col-sm-3 col-md-3" style="padding-top:5%"><img src="images/white-plus.png" id="addMem" class="img-circle" width="100%" height="100%"></div>';
         $(".portrait").append(img);
         $(".isMem").on('click', function(){
           showMsg(this.id);
@@ -276,8 +280,8 @@
         reader.onloadend = function(e) {
           var data = JSON.stringify({
                   "TeamID":myObj.TeamID,
-                  "PhotoBase64": this.result
-          })
+                  "PhotoBase64": this.result.slice(this.result.indexOf(',')+1)
+          });
           $.ajax({
             type:'post',
             url: apiAddress+"team/photo/home",
@@ -290,8 +294,7 @@
                   alert_flash("上传失败")
                 }
                 else{
-                  $('#back').attr('src', 
-                    this.result.substr(this.result.indexOf(',')+1,this.result.length));
+                  $('#back').attr('src', this.result);
                 }
               }
           })
@@ -310,10 +313,10 @@
       <span style="margin:0 0 0 70%" onclick="location.href='detail_edit.html'"><img src="images/edit.png" width="14%"></span>
   </nav>
 
-  <div class="back" style="height:40%;width:100%">
-    <img src="" id="back" width="100%" height="100%">
+  <div class="back" style="height:40%;width:100%;text-align:center">
+    <img src="" id="back">
 	</div>
-  <input type="file" class="hidden" name="imgHome" id="imgHome"  />
+  <input type="file" accept="image/*" class="hidden" name="imgHome" id="imgHome"  />
 
 	<div class="container-fluid" style="height:10%;background:#ffffff">
 		<div class="row">

@@ -45,7 +45,7 @@
           $("#myName").text(userShow.TeamName);
           $("#myAddress").text(userShow.City);
           if (userShow.TeamHomePhoto)
-              $('#back').css("background-image", "url("+imgAddress+"TeamHome/"+userShow.TeamHomePhoto+") ");
+              $('#back').attr("src", imgAddress+"TeamHome/"+userShow.TeamHomePhoto);
           $("#myGrade").text(userShow.lntegral);
 
           for (var i = 0; i < hisPlayer.length; i++){
@@ -153,7 +153,9 @@
         <span onclick="history.back()"><img src="images/back.png" width="14%"></span>
   </nav>
 	
-	<div id="back" style="height:37%"></div>
+	<div style="height:37%">
+    <img id="back" src="" width="100%" height="100%">
+  </div>
 
 	<div class="container-fluid" style="height:10%;background:#ffffff">
 		<div class="row">

@@ -1,0 +1,19 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<!--1.htm-->
+<script type="text/javascript">
+<!--
+var _alert = alert;
+window.alert = function(s) {
+    if (confirm("是否要弹框框，内容是\"" + s + "\"？")) {
+        _alert(s);
+    }
+}
+//-->
+</script>
+<html>
+<body>
+<input type="button" onclick="javascript: alert('Hello World!')" value="test" />
+</body>
+</html>

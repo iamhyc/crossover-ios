@@ -36,7 +36,7 @@
 				reader.onloadend = function(e) {
 					var data = JSON.stringify({
 							'TeamID': myObj.TeamID,
-							'PhotoBase64': this.result
+							'PhotoBase64': this.result.slice(this.result.indexOf(',')+1)
 					});
 					console.log(1);
 					$.ajax({
@@ -108,7 +108,7 @@
   				<div class="col-xs-5 col-sm-5">
   					&nbsp;&nbsp;&nbsp;&nbsp;
   					<img id="myHead" src="abc.jpg" class="img-circle" width="72px" height="72px">
-  					<input type="file" class="hidden" name="imgFile" id="teamLogo" />
+  					<input type="file" accept="image/*" class="hidden" name="imgFile" id="teamLogo" />
   				</div>
   				<br />
   				<div class="col-xs-6 col-sm-6">

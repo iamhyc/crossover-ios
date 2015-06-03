@@ -32,6 +32,7 @@
 			reader.onloadend = function(e) {
 				$('#upload').attr('src', this.result);
 				//upload process?
+				//this.result.slice(this.result.indexOf(',')+1)
 				}
 		}
 
@@ -53,7 +54,7 @@
 						"Detail":info,
 						"tall":height,
 						"weight":weight,
-						"position":site
+						"position":site,
 				});
 				$.ajax({
 					type:'post',
@@ -108,7 +109,7 @@
 
 		<div class="text-center" style="height:25%">
 			<div class="container">
-  				<input type="file" class="hidden" name="imgFile" id="imgFile"  />
+  				<input type="file" accept="image/*" class="hidden" name="imgFile" id="imgFile"  />
   				<img src="images/plus.jpg" id="upload" class="img-circle" width="120px" height="120px">
   			</div>
   			<br />
