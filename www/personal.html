@@ -37,8 +37,12 @@
       }
 
       $.get(apiAddress + "team/teammate/user/"+myObj.UserID+"/team/"+myObj.TeamID, function(data){
+        if (myObj.AdminID!=data.AdminID) {
+          localStorage.current_user = null;
+          window.location.href = "index.html";
+        }
         myData = data;  //console.log(data);
-        myList = data.scoreList;  console.log(myList);
+        myList = data.scoreList;  //console.log(myList);
         myTodo = data.readyList;  //console.log(myTodo)
         myPlayer = data.players;
 

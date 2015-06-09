@@ -21,6 +21,7 @@
 		$('#myName').text(myObj.TeamName);
 
 		$.get(lstAddress, function(data){
+			if (myObj.AdminID!=data.AdminID) Logout();
 			var myList = data.scoreList;
 			console.log(myObj.TeamID);
 			localStorage["myList"+pageNow] = JSON.stringify(myList);

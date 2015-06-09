@@ -49,13 +49,17 @@
 				alert_flash("请选择一张头像");
 			}
 			else {
+				var photoData = $('#upload').attr('src');
+				console.log(photoData);
 				var data = JSON.stringify({
 						"PlayerName":name,
 						"Detail":info,
-						"tall":height,
-						"weight":weight,
+						"tall":parseInt(height),
+						"weight":parseInt(weight),
 						"position":site,
+						"PhotoBase64":photoData.slice(photoData.indexOf(',')+1)
 				});
+				console.log(data);
 				$.ajax({
 					type:'post',
 					url: apiAddress+"player",
@@ -64,7 +68,11 @@
 					data:data,
 					success: 
 						function(result){
-							if (!result) window.location.href="personal.html";
+							if (result) window.location.href="personal.html";
+							else {
+									alert_flash("添加失败");
+									console.log(result);
+								}
 						}
 				})
 			}
@@ -99,9 +107,9 @@
   				</div>
   				<br />
   				<div class="row">
-  					<input type="text" id="mem_height" class="col-xs-5 net-control input-lg mem-info" placeholder="身高cm" style="margin-left:4%">
+  					<input type="text" id="mem_height" class="col-xs-5 net-control input-lg mem-info" onkeypress="return event.keyCode >= 48 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="3" placeholder="身高cm" style="margin-left:4%">
   					<div class="col-xs-1">&nbsp;</div>
-      				<input type="text" id="mem_weight" class="col-xs-5 net-control input-lg mem-info" placeholder="体重kg">
+      				<input type="text" id="mem_weight" class="col-xs-5 net-control input-lg mem-info" onkeypress="return event.keyCode >= 48 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="3" placeholder="体重kg">
   				</div>
   				<br />
       			<textarea id="mem_info" class="net-control input-lg" rows="3" style="width:100%" placeholder="球员简介"></textarea>

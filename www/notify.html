@@ -80,6 +80,10 @@
 
 
     	$.get(apiAddress+"arrange/list/"+myObj.TeamID, function(data){
+            if (myObj.AdminID!=data.AdminID) {
+                localStorage.current_user = null;
+                window.location.href = "index.html";
+            }
     		var list = data.arrangeList;
     		list.forEach(function(item){
     			if (item.Status == "pending") addPend(item);
@@ -91,7 +95,7 @@
 
     	
     	$(".refaused").on("click", function(){
-    		if (prompt("是否删除此信息"))
+    		if (confirm("是否删除此信息"))
     			$.get(apiAddress+"/arrange/delete/"+this.id, function(data){
     				alert_flash("删除成功！");
     				window.location.reload(true);
