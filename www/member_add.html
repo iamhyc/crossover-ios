@@ -52,6 +52,7 @@
 				var photoData = $('#upload').attr('src');
 				console.log(photoData);
 				var data = JSON.stringify({
+						"TeamID":myObj.TeamID,
 						"PlayerName":name,
 						"Detail":info,
 						"tall":parseInt(height),

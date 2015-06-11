@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html style="height:100%" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+	<script src="javascripts/jquery-1.11.2.js"></script>
+	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
+	<script type="text/javascript">
+		var userID, userType
+		var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
+    	var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
+
+
+		$(document).ready(function(){
+			init();
+			if (userType == "1") addUpload();
+			$.get(apiAddress+"gallery/list/"+userID, function(result){
+				//if (userID!=result.AdminID&&userType == "1") {
+				//	localStorage.current_user = null;
+          		//	window.location.href = "index.html";
+				//};
+				console.log(result);
+				result.forEach(function (pic){
+					var imgBox = '<div class="col-xs-4" style="max-height:20.37%;height:20.37%;padding:0;"><img id="'+pic.GalleryID+'" src="'+imgAddress+'Gallery/'+pic.PhotoName+'" height="100%" width="100%" onclick="magnify(this.id)"/></div>';
+					$(".gallery").append(imgBox);
+				})
+			})
+		})
+
+		function init () {
+			var tmp = localStorage.galleryShow.split('_');
+			userID = tmp[1];	userType = tmp[0];
+			document.getElementById("photoImg").addEventListener( 'change',preview,false );
+		}
+
+		function addUpload(){
+			var editIcon = '<span style="margin:0 0 0 74%" onclick="uploadImage()"><img src="images/white.png" height="55%" width="8%"></span>';
+			$("nav").append(editIcon);
+
+		}
+
+		function magnify(){
+			
+		}
+
+		function uploadImage () {
+			$('#photoImg').click();
+		}
+		function preview(){
+        	var file = this.files[0]; 
+        	var reader = new FileReader(); 
+        	reader.readAsDataURL(file);
+
+        	reader.onloadend = function(e) {
+          		var data = JSON.stringify({
+                  "TeamID":userID,
+                  "PhotoBase64": this.result.slice(this.result.indexOf(',')+1)
+          		});
+          		$.ajax({
+            		type:'post',
+            		url: apiAddress+"gallery/create",
+            		contentType: 'application/json',
+            		dataType:'json',
+            		data:data,
+            		success: 
+              			function(result){
+                			if (!result){
+                  				alert_flash("上传失败")
+                			}
+                			else{
+                					window.location.reload(false);
+                				}
+              			}
+          			})
+          
+        	}
+  		}
+
+		function backLocate () {
+			if (userID == "1")	
+				window.location.href = "personal.html";
+			else window.location.href = "detail_page.html";
+		}
+	</script>
+	<title>PhotoGallery</title>
+	<link rel='stylesheet' href='stylesheets/bootstrap.css'/>
+	<link rel='stylesheet' href="stylesheets/menu.css">
+	<link rel="stylesheet" href="stylesheets/style.css">
+</head>
+
+<body background="images/bg.png" style="height:100%">
+	<div id="block-bg"></div><div id="black-bg"></div>
+	<input type="file" accept="image/*" class="hidden" name="photoImg" id="photoImg"  />
+
+  	<nav class="navbar navbar-fixed-static" style="height:8%;margin:0">
+      <span class="text-left" onclick="backLocate()"><img src="images/back.png" width="14%"></span>
+  	</nav>
+
+  	<div class="photoGallery" style="height:92%;width:100%;overflow:scroll;background-color:#fff">
+  		<div class="row gallery" style="max-width:100%;height:100%;margin-left:0%">
+
+  		</div>
+  	</div>
+</body>

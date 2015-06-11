@@ -306,6 +306,11 @@
         }
   }
 
+  function turnToPhotos () {
+    localStorage.galleryShow = "1_"+myObj.TeamID;
+    window.location.href = 'photos.html';
+  }
+
 	</script>
 </head>
 
@@ -332,7 +337,7 @@
   				<p id="myName" style="text-align:center">干</p>
   			</div>
   			<div class="col-xs-4 col-sm-4 col-md-4" style="padding:3% 3% 0 0;text-align:right">
-  				<button class="btn btn-lg" style="padding:0; width:80%; height:2em;text-align:center; background:#E0E0E0">相册</button>
+  				<button class="btn btn-lg" style="padding:0; width:80%; height:2em;text-align:center; background:#E0E0E0" onclick="turnToPhotos()">相册</button>
   			</div>
 		</div>
 		
