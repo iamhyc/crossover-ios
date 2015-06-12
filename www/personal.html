@@ -58,7 +58,7 @@
             //console.log(id)
             confirm_modal("删除该队员?", function (){
               $.get(apiAddress+"player/delete/"+myPlayer[id].PlayerID, function(result){
-                if (!result) alert_flash("删除成功");
+                if (result) alert_flash("删除成功");
                 window.location.reload(true);
               })
             })
