@@ -1,3 +1,12 @@
+@font-face{
+  font-family: 'GillSans-Bold';
+  src: url('../fonts/GillSans-Bold') format('truetype');
+}
+@font-face{
+  font-family: 'GillSans-BoldItalic';
+  src: url('../fonts/GillSans-BoldItalic') format('truetype');
+}
+
 body {
  background: url(../images/bg.png) no-repeat;
  -moz-background-size: 100% 100%;
@@ -22,7 +31,8 @@ body {
 
 .spc-btn{
   color: #ffffff;
-  background: url(../images/button.png) no-repeat;
+  border: 3px solid #fff;
+  background:transparent;
  -moz-background-size: 100% 100%;
  -o-background-size: 100% 100%;
  -webkit-background-size: 100% 100%;

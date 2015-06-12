@@ -12,6 +12,8 @@
 	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
 	<link rel='stylesheet' href='stylesheets/style.css' />
 	<script type="text/javascript">
+		var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
+
 		function pwdCheck () {
 			var pwd = $('#pwd'), pwdr = $('#pwdr');
 			if (pwd.val()==""){
@@ -28,10 +30,10 @@
 					'Password':pwd,
 					'type': localStorage.reset_type
 					});
-				console.log(json);
+				//console.log(json);
 					$.ajax({
 						type:'post',
-						url: 'http://120.24.223.82:8080/Crossover/Api/changePwd',
+						url: apiAddress+'user/changePwd',
 						contentType: 'application/json',
 						dataType:'json',
 						data:json,
