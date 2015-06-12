@@ -183,24 +183,24 @@
           break;
         }
       case 4:
-          var pwd = prompt(myTodo[order].TeamName+"战队输入管理员密码");
-          if (!pwd) {
-            alert_flash("请输入密码");
-            stateMap[order]--;
-            break;
-          }
-          else{
-            pwd = $.base64.btoa(des("isalways", pwd, 1, 0, "", 1));
-            var data = JSON.stringify({
-                "VerifyID":myTodo[order].TeamID,
-                "Password":pwd,
-                "ActiveID":myTodo[order].ActiveID,
-                "ReceiveID":myTodo[order].ReceiveID,
-                "Score":judgeEqual(selected),
-                "ArrangeID":myTodo[order].ArrangeID
-              });
-              //console.log(data);
-              $.ajax({
+          var msg = myTodo[order].TeamName+"战队输入管理员密码";
+          prompt = prompt_modal(msg, function(pwd){
+              if (!pwd) {
+                alert_flash("请输入密码");
+                stateMap[order]--;
+              }
+              else{
+                pwd = $.base64.btoa(des("isalways", pwd, 1, 0, "", 1));
+                var data = JSON.stringify({
+                    "VerifyID":myTodo[order].TeamID,
+                    "Password":pwd,
+                    "ActiveID":myTodo[order].ActiveID,
+                    "ReceiveID":myTodo[order].ReceiveID,
+                    "Score":judgeEqual(selected),
+                    "ArrangeID":myTodo[order].ArrangeID
+                });
+                //console.log(data);
+                $.ajax({
                   type:'post',
                   url: apiAddress+"record",
                   contentType: 'application/json',
@@ -217,9 +217,10 @@
                           stateMap[order]--;
                         }
                       }
-              })
-              break;
-          }
+                })
+              }
+          });
+        break;
       default:
          stateMap[order]--;
          break;
