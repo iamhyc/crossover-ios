@@ -44,7 +44,7 @@
         myData = data;  //console.log(data);
         myList = data.scoreList;  //console.log(myList);
         myTodo = data.readyList;  //console.log(myTodo)
-        myPlayer = data.players;
+        myPlayer = data.players;  //console.log(myPlayer);
 
         //ADD PLAYER
         for (var i = 0; i < myPlayer.length; i++){
@@ -53,12 +53,22 @@
         }
         var img='<div class="col-xs-3 col-sm-3 col-md-3" style="padding-top:5%"><img src="images/white-plus.png" id="addMem" class="img-circle" width="100%" height="100%"></div>';
         $(".portrait").append(img);
+
+        longFocus($(".isMem"), function (id){
+            //console.log(id)
+            confirm_modal("删除该队员?", function (){
+              $.get(apiAddress+"player/delete/"+myPlayer[id].PlayerID, function(result){
+                if (!result) alert_flash("删除成功");
+                window.location.reload(true);
+              })
+            })
+        });
         $(".isMem").on('click', function(){
           showMsg(this.id);
-        })
+        });
         $("#addMem").on('click', function(){
           location.href = "member_add.html";
-        })
+        });
         //END FOR ADD PLAYER
 
         //BEGINNING FOR READY LIST PART
@@ -184,7 +194,7 @@
         }
       case 4:
           var msg = myTodo[order].TeamName+"战队输入管理员密码";
-          prompt = prompt_modal(msg, function(pwd){
+          prompt_modal(msg, function(pwd){
               if (!pwd) {
                 alert_flash("请输入密码");
                 stateMap[order]--;
@@ -368,7 +378,7 @@
 
 
 
-  <div class="hidden show-block" style="z-index:1091;top:40%;left:3%;width:94%;background:#003D79;border-radius:1em;color:#FFFFFF;position:absolute;">
+  <div class="hidden show-block" style="z-index:1092;top:40%;left:3%;width:94%;background:#003D79;border-radius:1em;color:#FFFFFF;position:absolute;">
     <div class="row" style="margin:0 0 0 0" >
       <div class="col-xs-4" style="padding:3% 0%  0% 3%">
         <img id="memHead" src="abc.jpg" class="img-circle" width="80em" height="80em">
