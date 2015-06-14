@@ -1,4 +1,4 @@
-ppackage always.crossover.utils;
+package always.crossover.utils;
 
 /**
  * Created by Always on 2015/3/11.

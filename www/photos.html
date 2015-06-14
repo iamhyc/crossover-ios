@@ -22,7 +22,7 @@
 				//};
 				console.log(result);
 				result.forEach(function (pic){
-					var imgBox = '<div class="col-xs-4" style="max-height:20.37%;height:20.37%;padding:0;"><img class="photo" id="'+pic.GalleryID+'" src="'+imgAddress+'Gallery/'+pic.PhotoName+'" height="100%" width="100%" onclick="magnify(this.id)"/></div>';
+					var imgBox = '<div class="col-xs-4" style="max-height:20.37%;height:20.37%;padding:1px 1px 1px 1px;"><img class="photo" id="'+pic.GalleryID+'" src="'+imgAddress+'Gallery/'+pic.PhotoName+'" height="100%" width="100%" onclick="magnify(this.id)"/></div>';
 					$(".gallery").append(imgBox);
 				});
 
@@ -91,7 +91,7 @@
   		}
 
 		function backLocate () {
-			if (userID == "1")	
+			if (userType == "1")	
 				window.location.href = "personal.html";
 			else window.location.href = "detail_page.html";
 		}
