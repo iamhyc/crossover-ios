@@ -7,6 +7,7 @@
 	<script src="javascripts/jquery-1.11.2.js"></script>
 	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
     <script type="text/javascript" >
+    	localStorage.lastView = "menu.html";
     	var pageNow = 1;
     	var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
     	var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
@@ -67,6 +68,7 @@
 	})
 
  	function Logout(){
+ 		localStorage.lastView = null;
  		localStorage.current_user = null;
  		window.location.href = "index.html";
  	}
