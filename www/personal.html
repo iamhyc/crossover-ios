@@ -39,7 +39,7 @@
 
       $.get(apiAddress + "team/teammate/user/"+myObj.UserID+"/team/"+myObj.TeamID, function(data){
         if (myObj.AdminID!=data.AdminID) {
-          localStorage.current_user = null;
+          localStorage.current_user = "";
           window.location.href = "index.html";
         }
         myData = data;  //console.log(data);
@@ -86,18 +86,18 @@
       $(".score").click(function(){
           if ($('.against').hasClass('hidden')){
             $("#block-bg").css("display", "block");
-            $(".against").removeClass('hidden').animate({bottom:"10%"});
+            $(".against").removeClass('hidden').animate({bottom:"13%"});
           } 
           else {
             $("#block-bg").css("display", "none");
-            $(".against").animate({bottom:"-80%"}, function(){$(".against").addClass('hidden')});
+            $(".against").animate({bottom:"-65%"}, function(){$(".against").addClass('hidden')});
             generateReadyList();
           }
       });
 
       $("#block-bg").click(function(){
           $("#block-bg").css("display", "none");
-          $(".against").animate({bottom:"-80%"}, function(){$(".against").addClass('hidden')});
+          $(".against").animate({bottom:"-65%"}, function(){$(".against").addClass('hidden')});
           generateReadyList();
       });
 
@@ -367,10 +367,10 @@
   			<div class="col-xs-4 text-left" style="padding:2% 0 0 10%">
   				<span class="glyphicon glyphicon-star" style="font-size:2em"></span>
   			</div>
-  			<div class="col-xs-4 text-center" id="grade" style="padding:0 auto">
+  			<div class="col-xs-4 text-center" id="grade" style="padding-right:0;">
   			   <font color="#FFFFFF" size="6">1000</font>
   			</div>
-  			<div class="col-xs-4 text-right" style="padding:2% 8% 0% 0%">
+  			<div class="col-xs-4 text-right" style="padding:2% 2% 0% 0%">
   				  <span class="glyphicon glyphicon-star" style="font-size:2em"></span>
   			</div>
 		</div>
@@ -402,11 +402,11 @@
 
 
 
-<div class="against hidden" style="height:80%;width:100%;position:absolute;z-index:1091">
-  <div class="record " style="background:#FFFFFF;height:100%;width:100%;padding:2% 0 0 2%;overflow:scroll">
+<div class="against hidden" style="height:65%;width:100%;position:absolute;z-index:1091">
+  <div class="record " style="background:#FFFFFF;height:100%;width:100%;padding:2% 0 0 0;overflow:scroll">
       <div class="fakeBox1 hidden">
       <!--BEGINNING FOR PROCESSING LIST-->
-      <div class="processItem" style="background:#F6F7F7;width:94.5%;margin:0 auto;padding:2% 2% 2% 0">
+      <div class="processItem" style="background:#F6F7F7;width:94.5%;margin:0 auto;padding:2% 2% 2% 2%">
           <div class="vs" style="background:#E0E0E0;height:19em;width:100%">
             <!--PART 1-->
             <div class="Row1 row" style="height:30%">
@@ -436,13 +436,13 @@
                 <div class="3_t1" style="height:5em;width:2.4em;background:#FFFFFF" >
                     <p style="text-align:center" ><font size="8em" color="#000093" onclick="dynamic($(this))" teamid="1">0</font></p>
                 </div>
-                <div class="space" style="height:5em;width:0.2em;display:inline"></div>
+                <div class="space" style="height:5em;width:3px;display:inline"></div>
 
 
                 <div class="2_t1" style="height:5em;width:2.4em;display:inline;background:#FFFFFF">
                     <p style="text-align:center" ><font size="8em" color="#000093" onclick="dynamic($(this))" teamid="1">0</font></p>
                 </div>
-                <div class="space" style="height:5em;width:0.2em;display:inline"></div>
+                <div class="space" style="height:5em;width:3px;display:inline"></div>
 
 
                 <div class="1_t1" style="height:5em;width:2.4em;display:inline;background:#FFFFFF">
@@ -459,13 +459,13 @@
                 <div class="3_t2" style="height:5em;width:2.4em;display:inline;background:#FFFFFF">
                     <p style="text-align:center" ><font size="8em" color="#000093" onclick="dynamic($(this))" teamid="2">0</font></p>
                 </div>
-                <div class="space" style="height:5em;width:0.2em;display:inline;" ></div>
+                <div class="space" style="height:5em;width:3px;display:inline;" ></div>
 
 
                 <div class="2_t2" style="height:5em;width:2.4em;display:inline;background:#FFFFFF">
                     <p style="text-align:center" ><font size="8em" color="#000093" onclick="dynamic($(this))" teamid="2">0</font></p>
                 </div>
-                <div class="space" style="height:5em;width:0.2em;display:inline;"></div>
+                <div class="space" style="height:5em;width:3px;display:inline;"></div>
 
 
                 <div class="1_t2" style="height:5em;width:2.4em;display:inline;background:#FFFFFF">
@@ -520,11 +520,11 @@
                 <div class="3_t1" style="height:5em;width:2.4em;display:inline;background:#FFFFFF;margin-top:1em" >
                     <p style="text-align:center"><font size="8em" color="#000093">0</font></p>
                 </div>
-                <div class="space" style="height:5em;width:0.2em;display:inline"></div>
+                <div class="space" style="height:5em;width:3px;display:inline"></div>
                 <div class="2_t1" style="height:5em;width:2.4em;display:inline;background:#FFFFFF;margin-top:1em" >
                     <p style="text-align:center"><font size="8em" color="#000093">0</font></p>
                 </div>
-                <div class="space" style="height:5em;width:0.2em;display:inline"></div>
+                <div class="space" style="height:5em;width:3px;display:inline"></div>
                 <div class="1_t1" style="height:5em;width:2.4em;display:inline;background:#FFFFFF;margin-top:1em" >
                     <p style="text-align:center"><font size="8em" color="#000093">0</font></p>
                 </div>
@@ -557,11 +557,11 @@
                 <div class="3_t2" style="height:5em;width:2.4em;display:inline;background:#FFFFFF;margin-top: 1em;" >
                     <p style="text-align:center"><font size="8em" color="#000093">0</font></p>
                 </div>
-                <div class="space" style="height:5em;width:0.2em;display:inline"></div>
+                <div class="space" style="height:5em;width:3px;display:inline"></div>
                 <div class="2_t2" style="height:5em;width:2.4em;display:inline;background:#FFFFFF;margin-top: 1em;" >
                     <p style="text-align:center"><font size="8em" color="#000093">0</font></p>
                 </div>
-                <div class="space" style="height:5em;width:0.2em;display:inline"></div>
+                <div class="space" style="height:5em;width:3px;display:inline"></div>
                 <div class="1_t2" style="height:5em;width:2.4em;display:inline;background:#FFFFFF;margin-top:1em" >
                     <p style="text-align:center"><font size="8em" color="#000093">0</font></p>
                 </div>

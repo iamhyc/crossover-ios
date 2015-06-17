@@ -30,7 +30,7 @@
 				longFocus($(".photo"), function(id){
 					confirm_modal("删除该图片？", function(){
 						$.get(apiAddress+"gallery/delete/"+id, function(result){
-							console.log(result);
+							//console.log(result);
 							if (result) {
 								alert_flash("删除成功");
 								window.location.reload(true);
@@ -103,7 +103,7 @@
 	<link rel="stylesheet" href="stylesheets/style.css">
 </head>
 
-<body background="images/bg.png" style="height:100%">
+<body background="images/bg.png" style="height:100%;overflow">
 	<div id="block-bg"></div><div id="black-bg"></div>
 	<input type="file" accept="image/*" class="hidden" name="photoImg" id="photoImg"  />
 

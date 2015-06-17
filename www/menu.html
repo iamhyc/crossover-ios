@@ -7,13 +7,12 @@
 	<script src="javascripts/jquery-1.11.2.js"></script>
 	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
     <script type="text/javascript" >
-    	localStorage.lastView = "menu.html";
     	var pageNow = 1;
     	var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
     	var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
 
 	$(document).ready(function(){
-
+		localStorage.lastView ="menu.html"
 		//Start: Initial part
 		var myObj = JSON.parse(localStorage.current_user);
 		var lstAddress = apiAddress + "team/user/"+ myObj.UserID + "/list/" + pageNow;
@@ -28,9 +27,9 @@
 			localStorage["myList"+pageNow] = JSON.stringify(myList);
 			for (var i = 0; i < myList.length; i++){
 				var spc='<div class="spc" style="height:1.5%;width:100%"></div><div class="block" id='+pageNow+'@'+i+' style="height:15%"><div class="row" style="height:100%;width:100%">',
-				    col_top='<div class="col-xs-3" style="padding:0"><img class="img-circle circle" src='+imgAddress+"TeamLogo/"+myList[i].TeamLogo+' style="margin:18% 0 0 20%;" /></div>',
-				    col_mid='<div class="col-xs-5" style="padding:0"><p style="margin:19% 0 0 10%">'+myList[i].TeamName+'</p></div>',
-				    col_end='<div class="col-xs-4" style="padding:0"><span class="glyphicon glyphicon-star" style="margin:26% 0 0 10%"></span>'+myList[i].lntegral+'</div></div>';
+				    col_top='<div class="col-xs-3" style="padding:0;padding-left:3%";padding-top:2%><img class="img-circle circle" src='+imgAddress+"TeamLogo/"+myList[i].TeamLogo+' style="margin:18% 0 0 20%;" /></div>',
+				    col_mid='<div class="col-xs-4" style="padding:0;padding-top:2%"><p style="margin:16% 0 0 0%;font-size:70%">'+myList[i].TeamName+'</p></div>',
+				    col_end='<div class="col-xs-5" style="padding:0;display: -webkit-inline-box;padding-top:6%;padding-left:6%"><span class="glyphicon glyphicon-star" style="margin:26% 0 0 10%"></span><p style="padding-left:10%;font-style:oblique; padding-top:3%">'+myList[i].lntegral+'</p></div></div>';
 
 				$('.homePage').append(spc+col_top+col_mid+col_end);
 			}
@@ -68,8 +67,8 @@
 	})
 
  	function Logout(){
- 		localStorage.lastView = null;
- 		localStorage.current_user = null;
+ 		localStorage.current_user = "";
+ 		localStorage.lastView = "";
  		window.location.href = "index.html";
  	}
 
@@ -98,19 +97,20 @@
 
 <div class="body" style="height:100%">
 	<div id="block-bg"></div>
-	<nav class="navbar navbar-static-top" style="height:8.4%;overflow:hidden;margin:0">
-		<div class="row" style="height:100%;background-color:rgba(0,0,0,0);">
-			<div class="col-sm-8 col-xs-8 text-left" style="padding:4% 0 0 6%">
+	<nav class="navbar navbar-static-top" style="overflow:hidden;margin-bottom:0">
+		<div class="row" style="background-color:rgba(0,0,0,0);">
+			<div class="col-sm-6 col-xs-6 text-left" style="padding:2% 0 0 6%">
     			<img src="images/cs.png" width="80%">
     		</div>
-    		<div class="col-sm-4 col-xs-4 text-right" style="padding:4% 8% 5% 0">
-  				<span class="menu-open glyphicon glyphicon-menu-hamburger" style="font-size:1.4em;color:#ffffff"></span>
+    		<div class="col-sm-2 col-xs-2"></div>
+    		<div class="col-sm-4 col-xs-4 text-right" style="padding:3% 6% 0 0">
+  				<span class="menu-open glyphicon glyphicon-menu-hamburger" style="font-size:1.2em;color:#ffffff"></span>
 			</div>
 		</div>	
 	</nav>
        
       <!-- Menu -->
-    <div class="homePage" style="height:91.6%;max-width:100%;overflow:scroll">
+    <div class="homePage" style="height:90.9%;max-width:100%;overflow:scroll">
     </div>  	
 			
 </div>	    

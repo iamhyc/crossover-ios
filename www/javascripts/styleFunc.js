@@ -40,6 +40,7 @@ function alert_modal (message, callback) {
 	Eliminate = function () {
 			$("#alert_modal").remove();
 			$("#black-bg").css("display", "none");
+			if (callback) return callback();
 		}
 
 	var alert_modal = '<div id="alert_modal" class="def_modal"><div style="height:30%"><p style="color:#3CB3B3;font-size:1.6em;padding-left:4%;padding-top:5%">提示</p></div><div style="height:1%;background:#3CB3B3"></div><div style="height:37%"><p style="padding-left:5%;padding-top:7%">'+message+'</p></div><div style="height:22%"><button type="button" class="modal_button" onclick="Eliminate()">确定</button></div></div>';
@@ -48,7 +49,7 @@ function alert_modal (message, callback) {
 		$("#black-bg").css("display", "block");
 		$("body").append(alert_modal);
 	}
-	if (callback) return callback();
+	
 }
 
 function confirm_modal (message, callback) {
