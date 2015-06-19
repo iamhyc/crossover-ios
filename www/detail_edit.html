@@ -39,7 +39,6 @@
 							'TeamID': myObj.TeamID,
 							'PhotoBase64': this.result.slice(this.result.indexOf(',')+1)
 					});
-					console.log(1);
 					$.ajax({
 						type:'post',
 						url: apiAddress+"team/photo/logo",
@@ -54,8 +53,10 @@
 								}
 								else {
 									$('#myHead').attr('src', this.result);
+									myObj.TeamLogo = result.FileName;
+									localStorage.current_user = JSON.stringify(myObj);
 									alert_flash("头像上传成功");
-									console.log(result)
+									window.location.reload(true);
 								}
 							}
 					})
@@ -99,7 +100,7 @@
 
 <body background="images/bg.jpg" style="height:100%">
 	<div class="container" style="height:100%;color:#ffffff">
-		<nav class="navbar navbar-fixed-top text-left">
+		<nav class="navbar navbar-fixed-top text-left" style="padding-top:3%">
     		<span onclick="history.back()"><img src="images/back.png" width="14%"></span>		
 	    </nav>
 		

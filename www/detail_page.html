@@ -46,7 +46,7 @@
           $("#myName").text(userShow.TeamName);
           $("#myAddress").text(userShow.City);
           if (userShow.TeamHomePhoto)
-              $('#back').attr("src", imgAddress+"TeamHome/"+userShow.TeamHomePhoto);
+              $('#back').attr("src", imgAddress+"TeamHome/"+userShow.TeamHomePhoto).attr("width","100%").attr("height","100%");
           $("#myGrade").text(userShow.lntegral);
           
           //ADD PLAYER
@@ -158,12 +158,12 @@
 
 <body background="images/bg.jpg" style="height:100%">
   <div id="block-bg"></div><div id="black-bg"></div>
-  <nav class="navbar navbar-fixed-top" style="margin-bottom:0">
+  <nav class="navbar navbar-fixed-top" style="margin-bottom:0; padding-top:3%">
         <span onclick="location.href='menu.html'"><img src="images/back.png" width="14%"></span>
   </nav>
 	
-	<div style="height:37%">
-    <img id="back" src="" width="100%" height="100%">
+	<div class="back" style="height:37%;width:100%;text-align:center">
+    <img src="" id="back" >
   </div>
 
 	<div class="container-fluid" style="height:10%;background:#ffffff">
@@ -211,7 +211,7 @@
 </div>
 
 		
-	<div class="score row" style="color:#ffffff;width:104%">
+	<div class="score row" style="color:#ffffff;width:104%;height:12%">
   		<div class="col-xs-4 col-sm-4 col-md-4 text-right" style="padding:1.5% 0  0 4%">
   			<p id="myGrade" style="font-size:xx-large;">GRADE</p>
   		</div>
@@ -219,9 +219,10 @@
   			<span class="glyphicon glyphicon-star" style="font-size:2em"></span>
   		</div>
   		<div class="col-xs-4 col-sm-4 col-md-4" style="padding:0% 3% 0 0;padding-top:12px">
-  			<button class="btn btn-lg btn-block" onclick="fightVS();stopBubble(event)" style = "height:39px;">约战</button>
+  			<button class="btn btn-lg btn-block" onclick="fightVS();stopBubble(event)" style = "height:39px;"><p style="margin-top:-3px">约战</p></button>
   		</div>
 	</div>
+
 
 
 
