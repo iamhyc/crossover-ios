@@ -12,13 +12,14 @@
 	<script type="text/javascript">
 		localStorage.lastView = "detail_seen.html";
 		var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
-  		//var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
+  		var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
   		//console.log(JSON.parse(localStorage.userShow).pageNow);
   		var temp = JSON.parse(localStorage.userShow);
   		var content = JSON.parse(localStorage["myList"+temp.pageNow])[temp.order];
-  		console.log(content);
+  		//console.log(content);
   		//INITIALIZATION ON
   		$(document).ready(function () {
+  			$("#Head").attr("src", imgAddress+"TeamLogo/"+content.TeamLogo);
   			$('#name').text(content.TeamName);
   			if (content.Intro) $('#intro').text(content.Intro);
   			$('#city').text(content.City);
@@ -29,12 +30,12 @@
 <body background="images/bg.jpg" style="height:100%">
 	<div class="text-center" style="height:100%;color:#ffffff">
 		<nav class="navbar navbar-fixed-top text-left" style="padding-top:3%">
-    		<span onclick="history.back()"><img src="images/back.png" width="14%"></span>		
+    		<span onclick="location.href='detail_page.html'"><img src="images/back.png" width="14%"></span>		
 		</nav>
 		
 		<div class="container" style="height:30%">
 			<div class="spc" style="height:15%"></div>
-			<img src="abc.jpg" id="Head" class="img-circle">
+			<img src="abc.jpg" id="Head" class="img-circle" width="50%" height="auto">
 		</div>
 
 		<div class="container text-left" style="height:60%;font-size:1.8em">
