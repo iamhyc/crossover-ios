@@ -61,22 +61,22 @@
 			<div class="spc" style="height:30%"></div>
 			<div class="container content text-left" >
 				<h3>注册</h3>
-				<br /><br />
-				<div class="form-group input-group-lg" style="width:80%">
+				<br />
+				<div class="form-group input-group-lg" style="width:100%">
         			<input class="form-control" id="usr_name" style="IME-MODE:disabled" onkeypress="return event.keyCode >= 48 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" autofocus maxlength="11" type="text" placeholder="电话(约战时公开)"/>
       			</div>
       			
-      			<div class="row">
-  					<div class="col-xs-5 col-sm-5 input-group-lg">
+      			<div class="row" style="width:100%">
+  					<div class="col-xs-6 input-group-lg">
   						<input class="form-control" id="ver" style="IME-MODE:disabled" onkeypress="return event.keyCode >= 48 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="4" type="text" placeholder="验证码"/>
   					</div>
-  					<div class="col-xs-7 col-sm-7">
-  						<button id="verBtn" class="btn btn-lg" onclick="veriCheck()" >获取验证码</button>
+  					<div class="col-xs-6">
+  						<button id="verBtn" class="btn btn-lg" onclick="veriCheck()">获取验证码</button>
   					</div>
 				</div>
 				<br />
-      			<div class="col-xs-offset-2" style="height:20%">
-					<button class="btn btn-lg btn-block" style="width:60%" onclick="userCheck()">下一步</button>
+      			<div style="height:20%;width:100%">
+					<button class="btn btn-lg btn-block" style="width:50%;margin:0 auto" onclick="userCheck()">下一步</button>
 				</div>
 			</div>
 		</div>
