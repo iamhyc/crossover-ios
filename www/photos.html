@@ -29,7 +29,7 @@
 				});
 
 				longFocus($(".photo"), function(id){
-					confirm_modal("删除该图片？", function(){
+					if (confirm("删除该图片？")){
 						$.get(apiAddress+"gallery/delete/"+id, function(result){
 							//console.log(result);
 							if (result) {
@@ -38,7 +38,17 @@
 							}
 							else alert_flash("删除失败");
 						})
-					})
+					}
+					/*confirm_modal("删除该图片？", function(){
+						$.get(apiAddress+"gallery/delete/"+id, function(result){
+							//console.log(result);
+							if (result) {
+								alert_flash("删除成功");
+								window.location.reload(true);
+							}
+							else alert_flash("删除失败");
+						})
+					})*/
 				})
 			})
 		})

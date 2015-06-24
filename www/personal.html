@@ -57,12 +57,18 @@
 
         longFocus($(".isMem"), function (id){
             //console.log(id)
-            confirm_modal("删除该队员?", function (){
+            if (confirm("删除该队员?")){
               $.get(apiAddress+"player/delete/"+myPlayer[id].PlayerID, function(result){
                 if (result) alert_flash("删除成功");
                 window.location.reload(true);
               })
-            })
+            }
+            /*confirm_modal("删除该队员?", function (){
+              $.get(apiAddress+"player/delete/"+myPlayer[id].PlayerID, function(result){
+                if (result) alert_flash("删除成功");
+                window.location.reload(true);
+              })
+            })*/
         });
         $(".isMem").on('click', function(){
           showMsg(this.id);
@@ -195,8 +201,8 @@
         }
       case 4:
           var msg = myTodo[order].TeamName+"战队输入管理员密码";
-          prompt_modal(msg, function(pwd){
-              if (!pwd) {
+          var pwd = prompt(msg);
+          if (!pwd) {
                 alert_flash("请输入密码");
                 stateMap[order]--;
               }
@@ -231,6 +237,42 @@
                 })
               }
           });
+          /*prompt_modal(msg, function(pwd){
+              if (!pwd) {
+                alert_flash("请输入密码");
+                stateMap[order]--;
+              }
+              else{
+                pwd = $.base64.btoa(des("isalways", pwd, 1, 0, "", 1));
+                var data = JSON.stringify({
+                    "VerifyID":myTodo[order].TeamID,
+                    "Password":pwd,
+                    "ActiveID":myTodo[order].ActiveID,
+                    "ReceiveID":myTodo[order].ReceiveID,
+                    "Score":judgeEqual(selected),
+                    "ArrangeID":myTodo[order].ArrangeID
+                });
+                //console.log(data);
+                $.ajax({
+                  type:'post',
+                  url: apiAddress+"record",
+                  contentType: 'application/json',
+                  dataType:'json',
+                  data:data,
+                  success: 
+                      function(result){
+                        if (result.success) {
+                          alert_flash("上传比分成功");
+                           window.location.reload(true);
+                        }
+                        else if (!result.success) {
+                          alert_flash("输入的密码错误");
+                          stateMap[order]--;
+                        }
+                      }
+                })
+              }
+          });*/
         break;
       default:
          stateMap[order]--;

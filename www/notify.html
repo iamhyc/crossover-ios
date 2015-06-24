@@ -95,13 +95,19 @@
                 }
 
                 $(".accepted, .done, .refaused").on("click", function(){
-                    var that = this;
+                    if (confirm("是否删除此信息")){
+                        $.get(apiAddress+"arrange/delete/"+that.id, function(data){
+                            alert_flash("删除成功！");
+                            window.location.reload(true);
+                        });
+                    }
+                    /*var that = this;
                     confirm_modal("是否删除此信息", function(){
                         $.get(apiAddress+"arrange/delete/"+that.id, function(data){
                             alert_flash("删除成功！");
                             window.location.reload(true);
                         });
-                    })
+                    })*/
                 })
             });
 
