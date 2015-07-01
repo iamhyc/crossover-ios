@@ -154,10 +154,10 @@
   }
   function setScore(t1, t2) {
     if (parseInt(t1)>parseInt(t2)){
-      $(".fakeBox2 .vs").css("background-image", "linear-gradient(90deg,#007979,#007979 50%, #E0E0E0 50%, #E0E0E0)"); 
+      $(".fakeBox2 .vs").css("background-image", "linear-gradient(90deg,#007979,#007979 50%, #DCDDDD 50%, #DCDDDD)"); 
     }
     else{
-      $(".fakeBox2 .vs").css("background-image", "linear-gradient(90deg,#E0E0E0,#E0E0E0 50%, #007979 50%, #007979)");
+      $(".fakeBox2 .vs").css("background-image", "linear-gradient(90deg,#DCDDDD,#DCDDDD 50%, #007979 50%, #007979)");
     }
     $(".fakeBox2 .3_t1 span").text(t1[0]);  
     $(".fakeBox2 .2_t1 span").text(t1[1]);  
@@ -180,14 +180,20 @@
     switch(stateMap[order]){
       case 1:
         $(selected+".processBtn > font").text("确定");
+        $(selected + ".vs").css("background-image", "linear-gradient(90deg,#DCDDDD,#DCDDDD 50%, #C9CACA 50%, #C9CACA)");
+        $(selected + ".devider").css("background-image", "linear-gradient(90deg,#DCDDDD,#DCDDDD 50%, #C9CACA 50%, #C9CACA)");
         $(selected+" .Info2").removeClass("hidden");
         break;
       case 2:
+        $(selected + ".vs").css("background-image", "linear-gradient(90deg,#C9CACA,#C9CACA 50%, #DCDDDD 50%, #DCDDDD)");
+        $(selected + ".devider").css("background-image", "linear-gradient(90deg,#C9CACA,#C9CACA 50%, #DCDDDD 50%, #DCDDDD)");
         $(selected+".Info2").addClass("hidden");
         $(selected+".Info1").removeClass("hidden");
         break;
       case 3:
         if (judgeEqual(selected)){
+          $(selected + ".vs").css("background-image", "");
+          $(selected + ".devider").css("background-image", "");
           $(selected+".Info1").addClass("hidden");
           $(selected+".processBtn > font").text("提交分数");
           break;
@@ -390,7 +396,7 @@
   				<p id="myName" style="text-align:center">干</p>
   			</div>
   			<div class="col-xs-4 col-sm-4 col-md-4" style="padding:2% 3% 0 0;text-align:right">
-  				<button class="btn btn-lg" style="padding:0;width:80%;height:2em;text-align:center; background:#E0E0E0" onclick="turnToPhotos()">相册</button>
+  				<button class="btn btn-lg" style="padding:0;width:80%;height:2em;text-align:center; background:#DCDDDD" onclick="turnToPhotos()">相册</button>
   			</div>
 		</div>
 		
@@ -448,12 +454,12 @@
       <div class="fakeBox1 hidden">
       <!--BEGINNING FOR PROCESSING LIST-->
       <div class="processItem" style="background:#F6F7F7;width:94.5%;margin:0 auto;padding:2% 2% 2% 2%">
-          <div class="vs" style="background:#E0E0E0;height:19em;width:100%">
+          <div class="vs" style="background:#DCDDDD;height:19em;width:100%">
             <!--PART 1-->
-            <div class="Row1 row" style="height:30%; padding:3% 3% 3% 3%">
+            <div class="Row1 row" style="height:30%; padding:3% 0 3% 0;width:100%;margin:0;">
           
-              <div class="col-xs-3"> 
-                <img src="abc.jpg" class="THead1 img-circle" width="41px" height="41px" style="">
+              <div class="col-xs-3" style="padding-left:3%"> 
+                <img src="abc.jpg" class="THead1 img-circle" width="41px" height="41px">
               </div>
             
               <div class="col-xs-2" style="padding-top:4%">
@@ -464,8 +470,8 @@
                 <span class="TName2" style="text-align:right;  margin-left: -60%;"><font size="3em" color="#000093">萌萌队</font></span></div>    
               
           
-              <div class="col-xs-3" style="margin-left:-8%">
-                <img src="abc.jpg" class="THead2 img-circle" width="41px" height="41px" style="">
+              <div class="col-xs-3" style="margin-left:-8%;text-align:right;padding-right:3%">
+                <img src="abc.jpg" class="THead2 img-circle" width="41px" height="41px">
               </div>  
 
             </div>
@@ -487,7 +493,7 @@
         <span style="font-size:60px; color:#000093" onclick="dynamic($(this))" teamid="1">0</span>
       </td>
       
-      <td class="devider" style="background-color: #E0E0E0;width:53px;text-align:center">
+      <td class="devider" style="background-color: #DCDDDD;width:53px;text-align:center">
         <span style="font-size:60px; color:#000093">:</span>
 
       <td class="3_t2" style="background-color: #FFFFFF;text-align:center">
@@ -534,10 +540,10 @@
       <!--BEGINNING FOR FINISHED LIST-->
       <div class="scoreItem" height="14em" width="100%"  style="padding:2% 2% 2% 2%;margin:0 auto">
           <div style="background:#F6F7F7;height:100%;width:100%;">
-             <div class="vs" style="background-image:linear-gradient(90deg,#E0E0E0,#E0E0E0 50%, #007979 50%, #007979);height:14em">
-              <div class="Row1 row" style="height:30%;width:100%;margin:0;padding:3% 3% 3% 3%">
+             <div class="vs" style="background-image:linear-gradient(90deg,#DCDDDD,#DCDDDD 50%, #007979 50%, #007979);height:14em">
+              <div class="Row1 row" style="height:30%;width:100%;margin:0;padding:3% 0 3% 0">
           
-              <div class="col-xs-3"> 
+              <div class="col-xs-3" style="padding-left:3%"> 
                 <img src="abc.jpg" class="THead1 img-circle" width="41px" height="41px" style="">
               </div>
             
@@ -553,7 +559,7 @@
               </div>    
 
           
-              <div class="col-xs-3" style="text-align:right">
+              <div class="col-xs-3" style="text-align:right;padding-right:3%">
                 <img src="abc.jpg" class="THead2 img-circle" width="41px" height="41px" style="">
               </div>  
 
