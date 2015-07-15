@@ -1,86 +1,88 @@
 <html style="height:100%">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-	<title>Notification</title>
-	<script src="javascripts/jquery-1.11.2.js"></script>
-	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
-	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
-	<link rel="stylesheet" href="stylesheets/style.css">
-	<script type="text/javascript">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <title>Notification</title>
+    <script src="javascripts/jquery-1.11.2.js"></script>
+    <script type="text/javascript" src="javascripts/styleFunc.js"></script>
+    <link rel='stylesheet' href='stylesheets/bootstrap.css' />
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script type="text/javascript">
         localStorage.lastView = "notify.html";
-		var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
-    	var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
-    	var myObj = JSON.parse(localStorage.current_user);
-    	var userID = myObj.TeamID;
+        var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
+        var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
+        var myObj = JSON.parse(localStorage.current_user);
+        var userID = myObj.TeamID;
 
-    	function toggle(id){
-    		//console.log($("#"+id))
-    		$("#"+id+"> div").toggleClass("hidden");
-    	}
-    	function sendMsg (id, sign) {
-    		var tmp;
-    		if (sign == 1) tmp= "accepted"; else tmp = "refaused";
-    		$.get(apiAddress+"arrange/receive/"+id+"/"+tmp, function(result){
-    			if (result&&sign == 1) {
-    				alert_modal("已应战，双方自行安排比赛", function(){
-    					window.location.reload(true);
-    				})
-    			}
+        function toggle(id){
+            //console.log($("#"+id))
+            $("#"+id+"> div").toggleClass("hidden");
+        }
+        function sendMsg (id, sign) {
+            var tmp;
+            if (sign == 1) tmp= "accepted"; else tmp = "refaused";
+            $.get(apiAddress+"arrange/receive/"+id+"/"+tmp, function(result){
+                if (result&&sign == 1) {
+                    alert_modal("已应战，双方自行安排比赛", function(){
+                        window.location.reload(true);
+                    })
+                }
                 else if (sign == 0){
                     window.location.reload(true);
                 }
-    			else {
-    				alert_flash("回复失败！")
-    			}
-    		})
-    	}
-    	function addBlue (item, img, msg) {
-    		var content = '<div class="'+item.Status+'" id="'+item.ArrangeID+'"><div class="blue_up" style="height:15%;background:#0072E3;margin-top:3%;margin-left: 3%;margin-right:4%;margin-bottom:2%"><div class="row" style="height:100%;width:100%"><div class="col-xs-2"> <img src="'+img+'" class="img-circle circle" style="margin:30% 0% 20% 25%;width:250%;height:76%;background:#d0d0d0"></div><div class="col-xs-6"><p style="margin:20% 0% 0% 18%;"><font color="#FFFFFF" size="3em">'+msg+'</font></p></div><div class="col-xs-4 col-sm-4 col-md-4" style="padding:6% 0% 0 0;text-align:right"><button class="btn btn-lg" style="padding:0; width:90%; height:45%;text-align:center;background:#E0E0E0" onclick="toggle('+item.ArrangeID+');stopBubble(event)"><font color="#000093">查看</font></button></div></div></div><div class="blue_down hidden" style="height:25%;background:#0072E3;margin-top:3%;margin-left:3%;margin-right:4%;margin-bottom:2%"><div class="row" style="height:60% ;width:100%" ><div class="col-xs-2"> <img class="img-circle circle" src="'+img+'" style="margin:30% 0% 20% 25%;width:250%;height:76%" /></div><div class="col-xs-10 "style="margin-left:8%;width:60%;height:100%;margin-top:6%"><div class="team" style="height:25%;width:100%"><font color="#FFFFFF" size="3em">'+msg+'</font></div><div class="team" style="height:60%;width:100%;margin-top:5%"><button class="btn btn-lg" style="padding:0; height:60%;text-align:center; background:#E0E0E0;width:110px"><font color="#000093" size="3%">'+item.Phone+'</font></button></div></div></div><div class="row" style="height:40% ;width:100%;text-align:right"><button class="btn btn-lg" style="padding:0; width:30%; height:70%;text-align:center;background:#E0E0E0;margin-top:-6%" onclick="toggle('+item.ArrangeID+');stopBubble(event)"><font color="#000093">收起</font></button></div></div></div>';
-    		$(".message").append(content);
-    	}
+                else {
+                    alert_flash("回复失败！")
+                }
+            })
+        }
+        function addBlue (item, img, msg) {
+            ''
+            var content = '<div class="'+item.Status+'" id="'+item.ArrangeID+'" style="background:#FFFFFF;width:100%;margin-left:0;padding:1.5% 3% 1.5% 3%"><div class = "blue_up" style="background:rgb(23, 142, 211);width:100%;margin-left:0;padding:3% 3% 3% 3%"><table style="100%;"><tr><th style="width:60px"><img class="img-circle circle" src="'+ img +'" style="width:57px"></img></th><th style="width:55%;padding-left:3%;padding-right:3%"><span style="font-size:8px;color:#F6F6F7;font-weight:normal">'+ msg +'</span></th><th><button class="btn btn-primary" type="button" style="width:90px; border-color:rgb(220, 221, 221);  padding: 3px 12px; color: #286090; background-color: rgb(220, 221, 221);" onclick="toggle('+item.ArrangeID+');stopBubble(event)"><span>查看</span></button></th></tr></table></div><div class = "blue_down hidden" style="background:rgb(23, 142, 211);;width:100%;margin-left:0; padding:3% 3% 3% 3%"><table ><tr><th style="width:60px"><img class="img-circle circle" src="'+ img +'" style="width:57px"></img></th><th style="width:100%;padding-left:3%;padding-right:3%"><p style="  margin: 0 0 5px;"><span style="font-size:8px;color:#F6F6F7;font-weight:normal">'+msg+'</span></p><p style="margin: 0 0 0px;"><button class="btn btn-primary" type="button" style="width:98px; padding:0px 0px; border-color:rgb(220, 221, 221);height:30px;  color: #286090; background-color: rgb(220, 221, 221);"><span>'+item.Phone+'</span></button></p></th><th style="width:10%"></th></tr></table><table><tr><th style="width:27%"></th><th style="width:60%"></th><th><button class="btn btn-primary" type="button" style="width:90px;border-color:rgb(220, 221, 221);  padding: 3px 12px;color: #286090; background-color: rgb(220, 221, 221);" onclick="toggle('+item.ArrangeID+');stopBubble(event)"><span style="font-weight:font-weight:normal">收起</span></button></th></tr></table></div></div>';
+            $(".message").append(content);
+        }
 
 
-    	function addPend (item) {
-    		var img = imgAddress+ 'TeamLogo/'+ item.TeamLogo;
-    		var msg;
-    		if (item.ActiveID == userID) addBlue(item, img, "等待对方应战")
-    		else{
-    			msg = item.TeamName+" 向你约战";
+        function addPend (item) {
+            var img = imgAddress+ 'TeamLogo/'+ item.TeamLogo;
+            var msg;
+            if (item.ActiveID == userID) addBlue(item, img, "等待对方应战")
+            else{
+                msg = item.TeamName+" 向你约战";
 
-    			var up = '<div id="'+item.ArrangeID+'"><div class="grey_up" style="height:15%;background:#F0F0F0;margin-top:3%;margin-left:3%;margin-right:4%;margin-bottom:2%;"><div class="row" style="height:100% ;width:100%" ><div class="col-xs-2"><img class="img-circle circle" src="'+img+'" style="margin:30% 0% 20% 25%;width:250%;height:76%" /></div><div class="col-xs-6 col-sm-6 col-md-6"><p style="margin:20% 0% 0% 18%;"><font color="#000079" size="3em">'+msg+'</font></p></div><div class="col-xs-4 col-sm-4 col-md-4" style="padding:6% 0% 0 0;text-align:right"><button class="btn btn-lg" style="padding:0;width:90%;height:45%;text-align:center;background:#E0E0E0" onclick="toggle('+item.ArrangeID+');stopBubble(event)"><font color="#000093">查看</font></button></div></div></div>';
+                var up = '<div class="'+item.Status+'" id="'+item.ArrangeID+'" style="background:#FFFFFF;width:100%;margin-left:0;padding:1.5% 3% 1.5% 3%"><div class = "grey_up" style="background:rgb(240, 240, 240);width:100%;margin-left:0;padding:3% 3% 3% 3%"><table style="100%;"><tr><th style="width:60px"><img class="img-circle circle" src="'+ img +'" style="width:57px"></img></th><th style="width:55%;padding-left:3%;padding-right:3%"><span style="font-size:8px;color:rgb(40, 96, 144);font-weight:normal">'+ msg +'</span></th><th><button class="btn btn-primary" type="button" style="width:90px; border-color:rgb(220, 221, 221);  padding: 3px 12px; color: #286090; background-color: rgb(220, 221, 221);" onclick="toggle('+item.ArrangeID+');stopBubble(event)"><span>查看</span></button></th></tr></table></div>';
 
-    			var down = '<div class="grey_down hidden" style="height:30%;background:#F0F0F0;margin-top:3%;margin-left:3%;margin-right:4%;margin-bottom:2%;"><div class="row" style="height:50%;width:100%"><div class="col-xs-2"><img src="'+img+'" class="img-circle circle" style="margin:30% 0% 20% 25%;width:250%;height:76%;background:#d0d0d0"></div><div class="col-xs-10 "style="margin-left:8%;width:60%;height:100%;margin-top:6%"><div class="team" style="height:25%;width:100%"><font color="#000079" size="3em">'+msg+'</font></div><div class="team" style="height:60%;width:100%;margin-top:5%"><button class="btn btn-lg" style="padding:0;height:60%;width:110px;text-align:center;background:#E0E0E0"><font color="#000093" size="3%">'+item.Phone+'</font></button></div></div></div><div class="row" style="height:50%;width:100%;margin-left:3%"><div class="col-xs-6" style="text-align:right"><button class="btn btn-danger btn-lg" style="padding:0;width:90%;height:45%;text-align:center;background:#CE0000;border-radius:1em;margin-left:3%" onclick="sendMsg('+item.ArrangeID+', 0)"><font color="#000093">拒绝</font></button></div><div class="col-xs-6" style="width:47%;margin-left:-3%"><button class="btn btn-lg" style="padding:0;width:96%;height:45%;text-align:center;background:#E0E0E0;border-radius:1em" onclick="sendMsg('+item.ArrangeID+', 1)"><font color="#000093">接受</font></button></div></div></div>';
-    			$('.message').append(up+down);
-    		}
-    		
-    	}
-    	function addAccepted (item) {
-    		var img = imgAddress+ 'TeamLogo/'+ item.TeamLogo;
-    		var msg;
-    		if (item.ActiveID == userID)
-    			msg = item.TeamName + " 接受你的约战";
-    		else msg = "已接受 "+ item.TeamName +" 的约战";
+                var down = '<div class = "grey_down hidden" style="background:rgb(240, 240, 240);;width:100%;margin-left:0; padding:3% 3% 3% 3%"><table ><tr><th style="width:60px"><img class="img-circle circle" src="'+ img +'" style="width:57px"></img></th><th style="width:100%;padding-left:3%;padding-right:3%"><p style="margin: 0 0 5px;"><span style="font-size:8px;color:#286090;font-weight:normal">'+ msg +'</span></p><p style="margin: 0 0 0px;"><button class="btn btn-primary" type="button" style="width:98px; padding:0px 0px; border-color:rgb(220, 221, 221);height:30px;  color: #286090; background-color: rgb(220, 221, 221);"><span>'+ item.Phone +'</span></button></p></th><th style="width:10%"></th></tr></table><table style="width:100%;margin-top:9px"><tr><th style="width:50%;text-align:center"><button class="btn btn-primary" type="button" style="width:90%;border-color: rgb(230, 0, 18);  padding: 3px 12px;color: #286090; background-color: rgb(230, 0, 18);" onclick="sendMsg('+item.ArrangeID+', 0)"><span style="font-weight:font-weight:normal">拒绝</span></button></th><th style="width:50%;text-align:center"><button class="btn btn-primary" type="button" style="width:90%;border-color:rgb(220, 221, 221);padding: 3px 12px;color:#286090;background-color:rgb(220, 221, 221)" onclick="sendMsg('+item.ArrangeID+', 1)"><span style="font-weight:font-weight:normal">接受</span></button></th></tr></table></div>';
+                $('.message').append(up+down);
+            }
+            
+        }
+        function addAccepted (item) {
+            var img = imgAddress+ 'TeamLogo/'+ item.TeamLogo;
+            var msg;
+            if (item.ActiveID == userID)
+                msg = item.TeamName + " 接受你的约战";
+            else msg = "已接受 "+ item.TeamName +" 的约战";
 
-    		addBlue(item, img, msg)
-    	}
-    	function addDone (item) {
-    		var img = imgAddress+ 'TeamLogo/'+ item.TeamLogo;
-    		var msg = "比赛已结束";
-    		addBlue(item, img, msg);
-    	}
+            addBlue(item, img, msg)
+        }
+        function addDone (item) {
+            var img = imgAddress+ 'TeamLogo/'+ item.TeamLogo;
+            var msg = "比赛已结束";
+            addBlue(item, img, msg);
+        }
 
 
-    	function addReject (item) {
-    		var img = imgAddress+ 'TeamLogo/'+ item.TeamLogo;
-    		var msg;
-    		if (item.ActiveID == userID)
-    			msg = item.TeamName + " 拒绝你的约战";
-    		else msg = "已拒绝"+ item.TeamName +" 的约战";
-    		
-    		var reject = '<div class="'+item.Status+'" id="'+item.ArrangeID+'"" style="height:15%;background:#CE0000;margin-top:3%;margin-left:3%;margin-right:4%;margin-bottom:2%;"><div class="row" style="height:100%;width:100%" ><div class="col-xs-2"><img class="img-circle circle" src="'+img+'" style="margin:30% 0% 20% 25%;width:250%;height:76%" /></div><div class="col-xs-10 "><p style="margin: 13% 0% 0% 10%"><font color="#FFFFFF" size="3em">'+msg+'</font></p></div></div></div>';
-    		$(".message").append(reject);
-    	}
+        function addReject (item) {
+            var img = imgAddress+ 'TeamLogo/'+ item.TeamLogo;
+            var msg;
+            if (item.ActiveID == userID)
+                msg = item.TeamName + " 拒绝你的约战";
+            else msg = "已拒绝"+ item.TeamName +" 的约战";
+            
+            var reject = '<div class="'+item.Status+'" id="'+item.ArrangeID+'" style="background:#FFFFFF;width:100%;margin-left:0;padding:1.5% 3% 1.5% 3%"><div class = "row1" style="background:rgb(230, 0, 18);width:100%;margin-left:0;padding:3% 3% 3% 3%"><table style="100%"><tr><th style="width:60px"><img class="img-circle circle" src="'+img+'" style="width:57px"></img></th><th style="width:100%;padding-left:3%"><span style="font-size:8px;color:#F6F6F7;font-weight:normal">'+msg+'</span></th></tr></table></div></div>'
+
+            $(".message").append(reject);
+        }
 
         $(document).ready(function(){
             $.get(apiAddress+"arrange/list/"+myObj.TeamID, function(data){
@@ -98,6 +100,7 @@
                 }
 
                 $(".accepted, .done, .refaused").on("click", function(){
+                    var that = this;
                     if (confirm("是否删除此信息")){
                         $.get(apiAddress+"arrange/delete/"+that.id, function(data){
                             alert_flash("删除成功！");
@@ -117,19 +120,19 @@
  
         });
 
-	</script>
+    </script>
 </head>
 
 <body background="images/bg.png" style="height:100%">
     <div id="black-bg"></div>
 
-	<nav class="navbar navbar-static-top" style="margin-bottom:0;padding-top:3%">
+    <nav class="navbar navbar-static-top" style="margin-bottom:0;padding-top:3%;height:11%">
         <span onclick="location.href='menu.html'"><img src="images/back.png" width="14%"></span>
-	</nav>
+    </nav>
 
-	
+    
 
-    <div class="message" style="height:87%;max-width:100%;overflow:scroll;background:#FFFFFF">
+    <div class="message" style="height:89%;max-width:100%;overflow:scroll;background:#FFFFFF">
 
     </div>
 
