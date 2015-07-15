@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html style="height:100%">
@@ -100,31 +101,30 @@
 			</div>
 		</div>
 
-		<div class="container text-left" style="height:36%">
+		<div class="container text-left" style="">
 			<p style="font-size:18px;margin:0 0 5% 0;">添加队员</p>
 
-  				<div class="row" style="height:20%;font-size:16px">
-  					<input type="text" id="mem_name" class="col-xs-5 net-control"  placeholder="队员名称" style="margin-left:4%;height:100%">
-  					<div class="col-xs-1">&nbsp;</div>
-  					<input type="text" id="mem_site" class="col-xs-5 net-control mem-info" placeholder="所打位置" style="height:100%">
+  				<div class="row" style="height:46px;font-size:16px;width:100%;margin:0 auto">
+  					<input type="text" id="mem_name" class="col-xs-5 net-control"  placeholder="队员名称" style="height:100%;width:46%">
+  					<input type="text" id="mem_site" class="col-xs-5 net-control mem-info" placeholder="所打位置" style="height:100%;width:46%;margin-left:8%">
   				</div>
-  				<div style = "height:9%"></div>
-  				<div class="row" style="height:20%;font-size:17px">
-  					<input type="text" id="mem_height" class="col-xs-5 net-control mem-info" onkeypress="return event.keyCode >= 48 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="3" placeholder="身高cm" style="margin-left:4%;height:100%">
-  					<div class="col-xs-1">&nbsp;</div>
-      				<input type="text" id="mem_weight" class="col-xs-5 net-control mem-info" onkeypress="return event.keyCode >= 48 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="3" placeholder="体重kg" style="height:100%">
+  				<div style = "height:10px"></div>
+  				<div class="row" style="height:46px;font-size:16px;width:100%;margin:0 auto">
+  					<input type="text" id="mem_height" class="col-xs-5 net-control mem-info" onkeypress="return event.keyCode >= 48 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="3" placeholder="身高cm" style="height:100%;width:46%">
+      				<input type="text" id="mem_weight" class="col-xs-5 net-control mem-info" onkeypress="return event.keyCode >= 48 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="3" placeholder="体重kg" style="height:100%;width:46%;margin-left:8%">
   				</div>
-  				<div style = "height:9%"></div>
-      			<textarea id="mem_info" class="net-control" rows="3" style="width:101.8%;height:35%;font-size:17px;margin-left:-1px;" placeholder="球员简介"></textarea>
+  				<div style = "height:10px"></div>
+      			<textarea id="mem_info" class="net-control" style="width:100%;height:auto;font-size:17px" placeholder="球员简介"></textarea>
 		</div>
-		<div class = "space" style="height:8%"></div>
+		
+		<!--<div class = "space" style="height:8%"></div>-->
 
 		<div class="text-center" style="margin-top:1%;width:100%;height:26%">
 			<div class="container">
   				<input type="file" accept="image/*" class="hidden" name="imgFile" id="imgFile"  />
-  				<img src="images/blue-plus.png" id="upload" class="img-circle" width="72px" height="72px">
+  				<img src="images/blue-plus.png" id="upload" class="img-circle" width="100px" height="100px">
   			</div>
-  			<div class = "space" style = "height:20%"></div>
+  			<div class = "space" style = "height:10px"></div>
 			<div class="inline-btn" style="display:inline-block;width:35%;margin-top:4%">
 				<button class="btn btn-block" style="" onclick="saveCheck()">保存</button>
 			</div>	

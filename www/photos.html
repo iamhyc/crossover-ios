@@ -60,7 +60,7 @@
 		}
 
 		function addUpload(){
-			var editIcon = '<span style="margin:0 0 0 74%" onclick="uploadImage()"><img src="images/white.png" height="55%" width="8%"></span>';
+			var editIcon = '<span style="margin:0 0 0 74%" onclick="uploadImage()"><img src="images/white.png" height="55%" width="auto"></span>';
 			$("nav").append(editIcon);
 
 		}
@@ -118,9 +118,10 @@
 	<div id="block-bg"></div><div id="black-bg"></div>
 	<input type="file" accept="image/*" class="hidden" name="photoImg" id="photoImg"  />
 
-  	<nav class="navbar navbar-fixed-static" style="height:8%;margin:0">
-      <span class="text-left" onclick="backLocate()"><img src="images/back.png" width="14%"></span>
-  	</nav>
+
+	<nav class="navbar navbar-static-top text-left" style="padding-top:3%;height:11%;margin:0">
+    	<span class="text-left" onclick="backLocate()"><img src="images/back.png" width="14%"></span>		
+	</nav>
 
   	<div class="photoGallery" style="height:89%;width:100%;overflow:scroll;background-color:#fff">
   		<div class="row gallery" style="max-width:100%;height:100%;margin-left:0%">

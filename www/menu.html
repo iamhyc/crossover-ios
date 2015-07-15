@@ -27,7 +27,7 @@
 			localStorage["myList"+pageNow] = JSON.stringify(myList);
 			for (var i = 0; i < myList.length; i++){
 				var spc = '<div class="spc" style="height:1.5%;width:100%">';
-				var col = '<div class="block" style="background:#FFFFFF;width:100%;margin-left:0;padding:1.5% 3% 1.5% 3%"><div class = "row blockr" id='+pageNow+'@'+i+'  style="background:rgb(247, 247, 247);width:100%;margin-left:0;padding:3% 3% 3% 3%"><table style="100%;"><tr><th style="width:60px"><img class="img-circle circle" src='+imgAddress+"TeamLogo/"+myList[i].TeamLogo+' style="height:50px;width:50px"></img></th><th style="width:57%;padding-left:2%"><span style="font-size:8px;color: rgb(2, 65, 126);font-weight:normal">'+myList[i].TeamName+'</span></th><th style="width:47%"><span class="glyphicon glyphicon-star" style="font-size:23px;color: rgb(2, 65, 126);"></span><span style="font-size:29px;font-style:italic;padding-left:11%;color: rgb(2, 65, 126);">'+myList[i].lntegral+'</span></th></tr></table></div></div>';
+				var col = '<div class="block" style="background:#FFFFFF;width:100%;margin-left:0;padding:1.5% 3% 1.5% 3%"><div class = "row blockr" id='+pageNow+'@'+i+'  style="background:rgb(247, 247, 247);width:100%;margin-left:0;padding:3% 3% 3% 3%"><table style="100%;"><tr><th style="width:60px"><img class="img-circle circle" src='+imgAddress+"TeamLogo/"+myList[i].TeamLogo+' style="height:50px;width:50px"></img></th><th style="width:57%;padding-left:2%"><span style="font-size:0.6em;color: rgb(2, 65, 126);font-weight:normal">'+myList[i].TeamName+'</span></th><th style="width:47%"><span class="glyphicon glyphicon-star" style="font-size:23px;color: rgb(2, 65, 126);"></span><span style="font-size:29px;font-style:italic;padding-left:11%;color: rgb(2, 65, 126);">'+myList[i].lntegral+'</span></th></tr></table></div></div>';
 
 				var spc='<div class="spc" style="height:1.5%;width:100%"></div><div class="block" style="height:15%;background-color:white"><div class="row blockr" id='+pageNow+'@'+i+'  style="height:100%;width:96%;margin-left:2%;margin-right:2%;background-color: whitesmoke;">',
 				    col_top='<div class="col-xs-3" style="padding:0;padding-left:3%"><img class="img-circle circle" src='+imgAddress+"TeamLogo/"+myList[i].TeamLogo+' style="margin:18% 0 0 0%;" /></div>',
@@ -89,9 +89,9 @@
 		<div class="home" style="height:85%;width:100%">
 			<img id="myHead" class="img-circle circle" style="margin: 5% 0% 0% 0%;height:66px;width:66px">
 			<p id="myName">HEHE~</p>
-			<button type="button" style="width: 60%;height15%;margin: 0% 0% 8%; background-color:rgb(220, 221, 221);color:rgb(2, 65, 126)" class="btn btn-default" onclick="location.href='personal.html'">战队主页</button>
-			<button type="button" style="width: 60%;background-color:rgb(220, 221, 221); " class="btn btn-default" onclick="location.href='notify.html'">
- 		  		<img src="images/menu-icon.png" width="35%" style="padding-bottom:4%">
+			<button type="button" style="width: 60%;margin: 0% 0% 20px;height:35px;background-color:rgb(220, 221, 221);color:rgb(2, 65, 126)" class="btn btn-default" onclick="location.href='personal.html'">战队主页</button>
+			<button type="button" style="width:60%;background-color:rgb(220, 221, 221);height:35px" class="btn btn-default" onclick="location.href='notify.html'">
+ 		  		<img src="images/menu-icon.png" height="20px">
 			</button>
 		</div>
 
