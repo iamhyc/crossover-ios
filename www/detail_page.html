@@ -18,19 +18,27 @@
     var userShow = JSON.parse(localStorage.userShow);
         userShow = JSON.parse(localStorage['myList'+userShow.pageNow])[userShow.order];
       //UserID: userShow
+    var startX, endX, clientWidth, pageShow;
 
       $(document).ready(function(){
+        clientWidth = document.body.clientWidth;
+        document.getElementById("score").addEventListener("touchstart", touchStart, false);
+        document.getElementById("score").addEventListener("touchmove", touchMove, false);
+        document.getElementById("score").addEventListener("touchcancel", touchEnd, false);
+        document.getElementById("score").addEventListener("touchend", touchEnd, false);
 
-        $(".score").click(function(){
-          if ($('.against').hasClass('hidden')){
-            $("#block-bg").css("display", "block");
-            $(".against").removeClass('hidden').animate({bottom:"15%"});
-          } 
-          else {
-            $("#block-bg").css("display", "none");
-            $(".against").animate({bottom:"-65%"}, function(){$(".against").addClass('hidden')});
-          }
-      });
+        $(".score").click(
+            function(){
+                if ($('.against').hasClass('hidden')){
+                  $("#block-bg").css("display", "block");
+                  $(".against").removeClass('hidden').animate({bottom:"15%"});
+                } 
+                else {
+                  $("#block-bg").css("display", "none");
+                  $(".against").animate({bottom:"-65%"}, function(){$(".against").addClass('hidden')});
+                }
+            }
+        )
 
       $("#block-bg").click(function(){
           $("#block-bg").css("display", "none");
@@ -38,7 +46,7 @@
       });
 
         $.get(apiAddress+'team/teammate/user/'+userShow.UserID+'/team/'+userShow.TeamID, function(data){
-          hisData = data;
+          hisData = data; console.log(data);
           hisPlayer = hisData.players;
           hisList = hisData.scoreList;
           //INITIALIZATION ON
@@ -48,6 +56,8 @@
           if (userShow.TeamHomePhoto)
               $('#back').attr("src", imgAddress+"TeamHome/"+userShow.TeamHomePhoto).attr("width","100%").attr("height","100%");
           $("#myGrade").text(userShow.lntegral);
+          $("#times").text(hisData.WinCount);
+          $("#percent").text(Math.round(100*hisData.WinCount/hisData.RaceCount)+"%")
           
           //ADD PLAYER
           for (var i = 0; i < hisPlayer.length; i++){
@@ -140,7 +150,8 @@
     $.get(apiAddress+"arrange/send/"+myObj.TeamID+"/"+userShow.TeamID, function(result){
         if (result.success) alert_flash("约战成功");
         else {
-          alert_modal(result.message);
+          //alert_modal(result.message);
+          alert(result.message);
         }
     })
   }
@@ -151,6 +162,48 @@
     localStorage.galleryShow = "0_"+userShow.TeamID;
     window.location.href = 'photos.html';
   }
+
+  function touchStart(event) {
+      $("#score").css("overflow", "visible");
+      var touch = event.touches[0];
+      startX = touch.pageX;
+  }
+             
+  function touchMove(event) {
+      event.preventDefault();
+      var touch = event.touches[0];
+      endX = touch.pageX;
+      var tmp = 100*(endX - startX)/(clientWidth);
+      if ((pageShow == 0)&&(tmp < 0))
+        $(".score").css("-webkit-transform", "translate("+ tmp +"%, 0px) translateZ(0px)");
+      else if ((pageShow == 1)&&(tmp > 0))
+        $(".score").css("-webkit-transform", "translate("+ (tmp-100) +"%, 0px) translateZ(0px)");
+  }
+             
+  function touchEnd(event) {
+    //RESTABLE
+    $("#score").css("-webkit-transition", "-webkit-transform 300ms ease-out 0s");
+    $("#score").css("transition", "-webkit-transform 300ms ease-out 0s")
+    if (endX - startX > clientWidth/2) {
+      $(".score").css("-webkit-transform", "translate(0%, 0px) translateZ(0px)").css("overflow", "hidden");
+      pageShow = 0;
+    }
+    else if((endX - startX < clientWidth/2)&&(endX - startX > 0)){
+      $(".score").css("-webkit-transform", "translate(-100%, 0px) translateZ(0px)");
+      pageShow = 1;
+    }
+    else if((endX - startX > -clientWidth/2)&&(endX - startX < 0)){
+      $(".score").css("-webkit-transform", "translate(0%, 0px) translateZ(0px)").css("overflow", "hidden");
+      pageShow = 0;
+    }
+    else if(endX - startX < -clientWidth/2){
+      $(".score").css("-webkit-transform", "translate(-100%, 0px) translateZ(0px)");
+      pageShow = 1;
+    }
+
+    $(".score").css("-webkit-transition", "initial").css("transition", "initial");
+  }
+
 	</script>
 </head>
 
@@ -209,19 +262,34 @@
 </div>
 
 
-  <div class="score" style="width:100%;height:11.5%; margin-left:0;padding:0% 0% 0% 0%;">
-    <table style="width:100%; height:100%;color:#ffffff">
-      <tr>
-        <th style="width:40%;text-align:right"><span id="myGrade" style="font-size:28px; font-weight:normal">GRADE</span></th>
-        <th style="width:20%;text-align:center"><span class="glyphicon glyphicon-star" style="font-size:18px"></span></th>
+  <div class="score" id="score" style="width:100%;height:11.5%;margin-left:0;padding:0;-webkit-transform:translate(0%, 0px) translateZ(0px);-webkit-transition:initial;transition:initial;overflow:hidden">
+    <table style="height:100%;width:200%;color:#fffff">
+      <tbody style="width:100%">
+      <tr style="width:100%">
 
-        <th style="width:40%;text-align:left">
-          <button class="btn btn-block" onclick="fightVS();stopBubble(event)" style="width:80px; padding:0%;height:31px">
-            <span style="color: #003E64;font-size:13px;">约战</span>
-          </button>
-        </th>
+        <td style="width:20%;text-align:right"><span id="myGrade" style="font-size:28px; font-weight:normal">GRADE</span></td>
+
+        <td style="width:10%;text-align:center"><span class="glyphicon glyphicon-star" style="font-size:18px"></span></td>
+
+        <td style="width:20%;text-align:left">
+          <button class="btn btn-block" onclick="fightVS();stopBubble(event)" style="width:80px; padding:0%;height:31px"><span style="color: #003E64;font-size:13px;">约战</span></button>
+        </td>
+
+        <td style="width:50%;color:#fff">
+          <div class="row">
+            <div class="col-xs-6" style="border-right:1px solid white;padding-left:30px">
+              <div style="width:100%"><span style="font-weight:bold">次数</span></div>
+              <div style="width:100%;text-align:center"><span id="times" style="font-style:italic;font-size:1.5em">4</span></div>
+            </div>
+            <div class="col-xs-6">
+              <div style="width:100%"><span style="font-weight:bold">胜率</span></div>
+              <div style="width:100%;text-align:right"><span id="percent" style="font-size:1.5em;font-size:italic">75%</span></div>
+            </div>
+          </div>
+        </td>
 
       </tr>
+      </tbody>
     </table>
   </div>
 
