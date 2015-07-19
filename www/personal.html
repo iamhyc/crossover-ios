@@ -49,7 +49,7 @@
 
         //ADD PLAYER
         for (var i = 0; i < myPlayer.length; i++){
-          var img='<div class="col-xs-3 col-sm-3 col-md-3" style="padding:11px 0 0 0"><img src="'+imgAddress+'Teammate/'+myPlayer[i].HeadIcon+'" id='+i+' class="img-circle isMem" width="50px" height="50px"></div>';
+          var img='<div class="col-xs-3 col-sm-3 col-md-3" style="padding:11px 0 0 0"><img src="'+imgAddress+'Teammate/'+myPlayer[i].HeadIcon+'" id='+i+' class="img-circle isMem" width="50px" height="50px"><div add_id='+i+' class="hidden delete" style="border-radius:50%;background:red;width:15px;height:15px;text-align:center;position:absolute;left:35px;bottom:35px"><span class="delete_icon">-</span></div></div>';
           $(".portrait").append(img);
         }
         var img='<div class="col-xs-3 col-sm-3 col-md-3" style="padding:11px 0 0 0"><img src="images/white-plus.png" id="addMem" class="img-circle" width="50px" height="50px"></div>';
@@ -57,12 +57,13 @@
 
         longFocus($(".isMem"), function (id){
             //console.log(id)
-            if (confirm("删除该队员?")){
+            $("div[add_id="+id+"]").removeClass("hidden");
+            /*if (confirm("删除该队员?")){
               $.get(apiAddress+"player/delete/"+myPlayer[id].PlayerID, function(result){
                 if (result) alert_flash("删除成功");
                 window.location.reload(true);
               })
-            }
+            }*/
             /*confirm_modal("删除该队员?", function (){
               $.get(apiAddress+"player/delete/"+myPlayer[id].PlayerID, function(result){
                 if (result) alert_flash("删除成功");
@@ -73,6 +74,14 @@
         $(".isMem").on('click', function(){
           showMsg(this.id);
         });
+        $(".delete").click(function () {
+          if (confirm("删除该队员?")){
+              $.get(apiAddress+"player/delete/"+myPlayer[$(this).attr("add_id")].PlayerID, function(result){
+                if (result) alert_flash("删除成功");
+                window.location.reload(true);
+              })
+          }
+        })
         $("#addMem").on('click', function(){
           location.href = "member_add.html";
         });
@@ -112,12 +121,12 @@
   function generateReadyList () {
     $(".record > .processItem").remove();
     $(".THead1").attr("src", imgAddress+"TeamLogo/"+myObj.TeamLogo);
-    $(".TName1 font").text(myObj.TeamName);
+    $(".TName1").text(myObj.TeamName);
 
         for (var i = myTodo.length-1; i >= 0; i--){
           //var block="<div id="+myTodo.ArrangeID+"></div>"
           $(".fakeBox1 .THead2").attr("src", imgAddress+"TeamLogo/"+myTodo[i].TeamLogo);
-          $(".fakeBox1 .TName2 font").text(myTodo[i].TeamName);
+          $(".fakeBox1 .TName2").text(myTodo[i].TeamName);
           stateMap[i] = 0;  
           $(".fakeBox1 .processItem").attr("id", i);
           $(".fakeBox1 .processBtn").attr("name", i);
@@ -138,7 +147,7 @@
     
     for (var i = 0; i < myList.length; i++){
       $(".fakeBox2 .THead2").attr("src", imgAddress+"TeamLogo/"+myList[i].TeamLogo);
-      $(".fakeBox2 .TName2 font").text(myList[i].TeamName); 
+      $(".fakeBox2 .TName2").text(myList[i].TeamName); 
 
       var score = myList[i].Score.split(',');
       //console.log(score);
@@ -179,7 +188,7 @@
     stateMap[order]++;  //console.log(stateMap[order]);
     switch(stateMap[order]){
       case 1:
-        $(selected+".processBtn > font").text("确定");
+        $(selected+".processBtn > span").text("确定");
         $(selected + ".vs").css("background-image", "linear-gradient(90deg,#DCDDDD,#DCDDDD 50%, #C9CACA 50%, #C9CACA)");
         $(selected + ".devider").css("background-image", "linear-gradient(90deg,#DCDDDD,#DCDDDD 50%, #C9CACA 50%, #C9CACA)");
         $(selected+" .Info2").removeClass("hidden");
@@ -195,7 +204,7 @@
           $(selected + ".vs").css("background-image", "");
           $(selected + ".devider").css("background-image", "");
           $(selected+".Info1").addClass("hidden");
-          $(selected+".processBtn > font").text("提交分数");
+          $(selected+".processBtn > span").text("提交分数");
           break;
         }
         else{
@@ -393,7 +402,7 @@
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top:-27px;text-align:center">
           <img id="myHead" src="abc.jpg" class="img-circle" width="55px" height="55px">
-          <p id="myName" style="text-align:center;font-size:13px;color: rgb(2, 65, 126);">干</p>
+          <p id="myName" style="text-align:center;font-size:13px;color:rgb(2, 65, 126);margin:3px 0 3px 0">干</p>
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4" style="text-align:center;padding: 8px 3.5% 0 3.5%;height:100%">
           <button class="btn btn-block" style="text-align:center;background:#DCDDDD" onclick="turnToPhotos()"><span style="color: rgb(2, 65, 126);font-size:13px">相册</span></button>
@@ -409,7 +418,7 @@
 		</div>
 	</div>
 		
-	<div class="score" style="width:100%; height:11.7%;margin-left:0;padding:0% 0% 0% 0%;">
+	<div class="score" style="width:100%; height:11.7%;margin-left:0;padding:0;position:absolute;z-index:1092">
     <table style="width:100%; height:100%;color:#ffffff">
       <tr>
         <th style="width:10%;text-align:right">
@@ -485,42 +494,55 @@
             </div>
             <!--END FOR PART 1-->
             <!--PART 2-->
-           <table border="0" class="againstScore" style="width:100%">
-    <tr>
-      <td  class="space"  style="width:20px">
-      </td>
-      <td class="3_t1" style="background-color: #FFFFFF;text-align:center;border-radius: 8px; padding-top:8px; padding-bottom:8px">
-        <span style="font-size:44px; color: rgb(2, 65, 126);line-height:1.1;padding-left:4px; padding-right:4px" onclick="dynamic($(this))" teamid="1">0</span>
-      </td >
-      <td  class="space" style="width:4px"></td>
-      <td class="2_t1" style="background-color: #FFFFFF;text-align:center;border-radius: 8px; padding-top:8px; padding-bottom:8px">
-        <span style="font-size:44px; color: rgb(2, 65, 126);line-height:1.1;padding-left:4px; padding-right:4px" onclick="dynamic($(this))" teamid="1">0</span>
-      </td>
-      <td  class="space" style="width:4px "></td>
-      <td  class="1_t1" style="background-color:  #FFFFFF;text-align:center;border-radius: 8px; padding-top:8px; padding-bottom:8px">
-        <span style="font-size:44px; color: rgb(2, 65, 126);line-height:1.1;padding-left:4px; padding-right:4px" onclick="dynamic($(this))" teamid="1">0</span>
-      </td>
-      
-      <td class="devider" style="background-color: #DCDDDD;width:53px;text-align:center">
-        <span style="font-size:44px; color: rgb(2, 65, 126);line-height:1.1;padding-left:4px; padding-right:4px">:</span>
+           <table border="0" class="againstScore" style="height:15%;width:100%" >
+            <tr align="center">
+              <td style="width:45%">
+                <table border="0" class="againstScore" style="">
+                  <tr align="center">    
+                    <td class="3_t1" style="background-color: #FFFFFF;text-align:center;border-radius: 8px; padding-top:8px; padding-bottom:8px">
+                      <span style="font-size:44px; color: rgb(2, 65, 126);line-height:1.1;padding-left:4px; padding-right:4px" onclick="dynamic($(this))" teamid="1">0</span>
+                    </td>
+                    <td class="space" style="width:4px"></td>
+                    <td class="2_t1" style="background-color: #FFFFFF;text-align:center;border-radius: 8px; padding-top:8px; padding-bottom:8px">
+                      <span style="font-size:44px; color: rgb(2, 65, 126);line-height:1.1;padding-left:4px; padding-right:4px" onclick="dynamic($(this))" teamid="1">0</span>
+                    </td>
+                    <td  class="space" style="width:4px "></td>
+                    <td  class="1_t1" style="background-color:  #FFFFFF;text-align:center;border-radius: 8px; padding-top:8px; padding-bottom:8px">
+                      <span style="font-size:44px; color: rgb(2, 65, 126);line-height:1.1;padding-left:4px; padding-right:4px" onclick="dynamic($(this))" teamid="1">0</span>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+         
+              <td style="width:10%">
+                <table border="0" class="againstScore" style="">
+                  <tr align="center">
+                    <td class="devider" style="background-color: #DCDDDD;width:53px;text-align:center">
+                      <span style="font-size:44px; color: rgb(2, 65, 126);line-height:1.1;padding-left:4px; padding-right:4px">:</span>
+                    </td>
+                  </tr>
+                </table>
+              </td>
 
-      <td class="3_t2" style="background-color: #FFFFFF;text-align:center;border-radius: 8px; padding-top:8px; padding-bottom:8px">
-        <span style="font-size:44px; color: rgb(2, 65, 126);line-height:1.1;padding-left:4px; padding-right:4px" onclick="dynamic($(this))" teamid="2">0</span>
-      </td >
-      <td  class="space" style="width:4px" ></td>
-      <td  class="2_t2" style="background-color:  #FFFFFF;text-align:center;border-radius: 8px; padding-top:8px; padding-bottom:8px">
-        <span style="font-size:44px; color: rgb(2, 65, 126);line-height:1.1;padding-left:4px; padding-right:4px" onclick="dynamic($(this))" teamid="2">0</span>
-      </td>
-      <td  class="space" style="width:4px"></td>
-      <td  class="1_t2" style="background-color:  #FFFFFF;text-align:center;border-radius: 8px;padding-top:8px; padding-bottom:8px">
-        <span style="font-size:44px; color: rgb(2, 65, 126);line-height:1.1;padding-left:4px; padding-right:4px" onclick="dynamic($(this))" teamid="2">0</span>
-      </td>
-    </td>
-        <td  class="space" style="width:20px">
-      </td>
-
-    </tr>
-  </table>
+              <td style="width:45%">
+                <table border="0" class="againstScore" style="height:35%">
+                  <tr align="center">           
+                    <td class="3_t2" style="background-color: #FFFFFF;text-align:center;border-radius: 8px; padding-top:8px; padding-bottom:8px">
+                      <span style="font-size:44px; color: rgb(2, 65, 126);line-height:1.1;padding-left:4px; padding-right:4px" onclick="dynamic($(this))" teamid="2">0</span>
+                    </td>
+                    <td class="space" style="width:4px" ></td>
+                    <td class="2_t2" style="background-color:  #FFFFFF;text-align:center;border-radius: 8px; padding-top:8px; padding-bottom:8px">
+                      <span style="font-size:44px; color: rgb(2, 65, 126);line-height:1.1;padding-left:4px; padding-right:4px" onclick="dynamic($(this))" teamid="2">0</span>
+                    </td>
+                    <td class="space" style="width:4px"></td>
+                    <td  class="1_t2" style="background-color:  #FFFFFF;text-align:center;border-radius: 8px;padding-top:8px; padding-bottom:8px">
+                      <span style="font-size:44px; color: rgb(2, 65, 126);line-height:1.1;padding-left:4px; padding-right:4px" onclick="dynamic($(this))" teamid="2">0</span>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
 
             <div class="infoBox row text-center" style="color: rgb(2, 65, 126);height:1em">
               <div class="col-xs-6">

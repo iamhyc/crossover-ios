@@ -42,8 +42,8 @@ body {
 
 #myHead, #teamHead {
   border: 2px solid #fff;
-
 }
+
 .nav {
   list-style: none;
   text-align: center;
@@ -136,6 +136,15 @@ body {
 }
 .form-control::-webkit-input-placeholder {
   color: #ffffff;
+}
+
+.delete_icon{
+    position: absolute;
+    right: 25%;
+    top: -82%;
+    color: #fff;
+    font-size: 25px;
+
 }
 
 #alert_flash { 
