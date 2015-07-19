@@ -9,7 +9,9 @@
 	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
 	<script type="text/javascript">
 		localStorage.lastView = "photos.html";
-		var userID, userType
+		var userID, userType;
+		var recData;
+		var imgWidth;
 		var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
     	var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
 
@@ -17,16 +19,18 @@
 		$(document).ready(function(){
 			init();
 			if (userType == "1") addUpload();
+
 			$.get(apiAddress+"gallery/list/"+userID, function(result){
 				//if (userID!=result.AdminID&&userType == "1") {
 				//	localStorage.current_user = null;
           		//	window.location.href = "index.html";
 				//};
-				console.log(result);
-				result.forEach(function (pic){
-					var imgBox = '<div class="col-xs-4" style="max-height:20.37%;height:20.37%;padding:1px 1px 1px 1px;"><img class="photo" id="'+pic.GalleryID+'" src="'+imgAddress+'Gallery/'+pic.PhotoName+'" height="100%" width="100%" onclick="magnify(this.id)"/></div>';
+				recData = result; console.log(result);
+
+				for (var i = 0;i < result.length;i++){
+					var imgBox = '<div class="col-xs-4" style="height:'+imgWidth+'px;padding:1px 1px 1px 1px;display:table"><div style="display:table-cell;vertical-align:middle"><img class="photo" id="'+i+'" src="'+imgAddress+'Gallery/'+result[i].PhotoName+'" height="auto" width="100%" onclick="magnify(this.id)"/></div></div>';
 					$(".gallery").append(imgBox);
-				});
+				}
 
 				longFocus($(".photo"), function(id){
 					if (confirm("删除该图片？")){
@@ -54,9 +58,11 @@
 		})
 
 		function init () {
+			imgWidth = document.body.clientWidth/3;
+
 			var tmp = localStorage.galleryShow.split('_');
 			userID = tmp[1];	userType = tmp[0];
-			document.getElementById("photoImg").addEventListener( 'change',preview,false );
+			document.getElementById("photoImg").addEventListener('change',preview,false);
 		}
 
 		function addUpload(){
@@ -65,8 +71,10 @@
 
 		}
 
-		function magnify(){
-			
+		function magnify(id){
+			console.log(id);
+			localStorage.photoSelected = imgAddress+'Gallery/'+recData[id].PhotoName;
+			window.location.href = "photoView.html";
 		}
 
 		function uploadImage () {
