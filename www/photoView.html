@@ -8,12 +8,94 @@
 	<script src="javascripts/jquery-1.11.2.js"></script>
 	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
 	<script type="text/javascript">
-		var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
-    	var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
+		var oldX, oldY, startX, startY, startWidth, startHeight, initWidth, initHeight;
+		var moveD;
+		var isMove = false;
+		var isZoom = false;
+		var lastClickTime = 0;
 
-		$(document).ready(function() {
-			$("#imgSelected").attr("src", localStorage.photoSelected);
-		})
+		function get_distance(x1, y1, x2, y2){
+			return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2), 2);
+		}
+
+		function img_mousedown(e){
+			if (e.touches.length == 1){
+				x = $('#imgSelected').position().left;
+				y = $('#imgSelected').position().top;
+			}
+			else if (e.touches.length >= 2){
+				isMove = false;
+				isZoom = true;
+				x1 = e.touches[0].pageX;	y1 = e.touches[0].pageY;
+				x2 = e.touches[1].pageX;	y2 = e.touches[1].pageY;
+
+				startX = $('#imgSelected').position().left;
+				startY = $('#imgSelected').position().top;
+				startWidth = $('#imgSelected').width();
+				startHeight = $('#imgSelected').height();
+
+				moveD = get_distance(x1, y1, x2, y2);
+
+				return;
+			}
+
+			isMove = true;
+			oldX = e.touches[0].pageX;
+			oldY = e.touches[0].pageY;
+			startX = $('#imgSelected').position().left;
+			startY = $('#imgSelected').position().top; 
+			e.preventDefault();
+			e.stopPropagation();
+			//return false;
+		}
+
+		function img_mouseup(e){
+			isZoom = false;
+			isMove = false;
+		}
+
+		function img_mousemove(e){
+			if (isZoom){
+			//targetTouches changedTouches touches
+				if (e.touches.length >= 2){
+					var x1, y1, x2, y2, d1;
+					x1 = e.touches[0].pageX;	y1 = e.touches[0].pageY;
+					x2 = e.touches[1].pageX;	y2 = e.touches[1].pageY;
+					d1 = get_distance(x1, y1, x2, y2);
+				
+					var rate = d1 / moveD;
+					var w = startWidth * rate;
+					var h = startHeight * rate;
+					if (w<initWidth||w>5*initWidth) return;
+					$('#imgSelected').width(w);
+					$('#imgSelected').height(h);
+					$('#imgSelected').css('left', (startWidth - w) / 2 + startX + 'px');
+					$('#imgSelected').css('top', (startHeight - h) / 2 + startY + 'px');
+				}
+
+				return;
+			}
+
+			if (!isMove) return;
+			
+			x = e.changedTouches[0].pageX - oldX;
+			y = e.changedTouches[0].pageY - oldY;
+			$('#imgSelected').css('top', y + startY + 'px');
+			$('#imgSelected').css('left', x + startX + 'px');
+		}
+
+	$(document).ready(function(){
+		$("#imgSelected").attr("src", localStorage.photoSelected);
+		initWidth = $("#imgSelected").width();
+		initHeight = $("#imgSelected").height();
+		var clientHeight = $(".photoGallery").height();
+		//$("#imgHeight").css("width", clientWidth+px);
+		var gapHeight = (clientHeight - initHeight)/2;	
+		$("#imgSelected").css("top", gapHeight+"px");
+	document.getElementById("imgSelected").addEventListener('touchstart', img_mousedown, false);
+	document.getElementById("imgSelected").addEventListener('touchend', img_mouseup, false);
+	document.getElementById("imgSelected").addEventListener('touchmove', img_mousemove, false);
+	})
 
 	</script>
 	<link rel='stylesheet' href='stylesheets/bootstrap.css'/>
@@ -21,15 +103,13 @@
 	<link rel="stylesheet" href="stylesheets/style.css">
 </head>
 
-<body background="images/bg.png" style="height:100%;overflow">
+<body background="images/bg.png" style="height:100%">
 
 	<nav class="navbar navbar-static-top text-left" style="padding-top:3%;height:11%;margin:0">
     	<span class="text-left" onclick="location.href='photos.html'"><img src="images/back.png" width="14%"></span>		
 	</nav>
 
-  	<div class="photoGallery" style="height:89%;width:100%;overflow:scroll;background-color:#fff;display:table">
-  		<div id="series" style="margin-left:0%;display:table-cell;vertical-align:middle">
-  			<img id="imgSelected" src="abc.jpg" width="100%" height="auto">
-  		</div>
+  	<div class="photoGallery" style="height:89%;width:100%;overflow:scroll;background-color:#fff;position:absolute;overflow:hidden">
+  		<img id="imgSelected" src="" height="auto" width="100%" style="position:relative">
   	</div>
 </body>
