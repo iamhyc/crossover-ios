@@ -8,7 +8,7 @@
 	<script src="javascripts/jquery-1.11.2.js"></script>
 	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
 	<script type="text/javascript">
-		var oldX, oldY, startX, startY, startWidth, startHeight, initWidth, initHeight;
+		var oldX, oldY, startX, startY, startWidth, startHeight, initWidth, initHeight, gapHeight;
 		var moveD;
 		var isMove = false;
 		var isZoom = false;
@@ -20,8 +20,27 @@
 
 		function img_mousedown(e){
 			if (e.touches.length == 1){
+				var nowTime = Math.round(new Date().getTime() / 1000);
 				x = $('#imgSelected').position().left;
 				y = $('#imgSelected').position().top;
+				if (nowTime - lastClickTime < 1 && Math.abs(x - startX) < 20 && Math.abs(y - startY) < 20){
+					if (startWidth > initWidth){
+						$('#imgSelected').width(initWidth);
+						$('#imgSelected').height(initHeight);
+						$('#imgSelected').css('left', 0);
+						$('#imgSelected').css('top', gapHeight+"px");
+						startWidth = 0;	startHeight = 0;
+					}
+					else{
+						startWidth = 2*initWidth;
+						startHeight = 2*initHeight;
+						$('#imgSelected').width(startWidth);
+						$('#imgSelected').height(startHeight);
+						$('#imgSelected').css('left', -initWidth/2);
+						$('#imgSelected').css('top', -initHeight/2+gapHeight);
+					}
+				}
+				lastClickTime = nowTime;
 			}
 			else if (e.touches.length >= 2){
 				isMove = false;
@@ -90,7 +109,7 @@
 		initHeight = $("#imgSelected").height();
 		var clientHeight = $(".photoGallery").height();
 		//$("#imgHeight").css("width", clientWidth+px);
-		var gapHeight = (clientHeight - initHeight)/2;	
+		gapHeight = (clientHeight - initHeight)/2;	
 		$("#imgSelected").css("top", gapHeight+"px");
 	document.getElementById("imgSelected").addEventListener('touchstart', img_mousedown, false);
 	document.getElementById("imgSelected").addEventListener('touchend', img_mouseup, false);
