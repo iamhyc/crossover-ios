@@ -40,10 +40,9 @@
 			$(".blockr").on({
 				click:function(){
 					var s1 = this.id.indexOf('@');
-    				localStorage.userShow = JSON.stringify({
-    					pageNow:this.id.substr(0, s1),
-    					order:this.id.substr(s1+1, this.id.length-s1-1)
-    				});
+					var pageNow = this.id.substr(0, s1),
+    					order = this.id.substr(s1+1, this.id.length-s1-1)
+    				localStorage.userShow = JSON.stringify(JSON.parse(localStorage['myList'+pageNow])[order]);
     				window.location.href = "detail_page.html";
     			},
     			touchstart:function(){
