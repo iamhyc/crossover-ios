@@ -18,6 +18,7 @@
   var myObj = JSON.parse(localStorage.current_user);
   var myData, myList, myPlayer, myTodo;
   var stateMap = new Array();
+  var ejected = false;
 
   $(document).ready(function(){
     //INITIALIZE ON
@@ -98,22 +99,25 @@
 
     //INITIALIZE OFF
 
-      $(".score").click(function(){
-          if ($('.against').hasClass('hidden')){
-            $("#block-bg").css("display", "block");
-            $(".against").removeClass('hidden').animate({bottom:"13%"});
-          } 
-          else {
-            $("#block-bg").css("display", "none");
-            $(".against").animate({bottom:"-65%"}, function(){$(".against").addClass('hidden')});
-            generateReadyList();
-          }
-      });
+      $(".score").click(
+          function(){
+              if (!ejected){
+                $("#block-bg").css("display", "block");
+                $(".against").css("-webkit-transform", "translate(0px, -118%) translateZ(0px)");
+                ejected = !ejected; generateReadyList();
+              } 
+              else {
+                $("#block-bg").css("display", "none");
+                $(".against").css("-webkit-transform", "translate(0px, 0px) translateZ(0px)");
+                ejected = !ejected; generateReadyList();
+              }
+            }
+      );
 
       $("#block-bg").click(function(){
           $("#block-bg").css("display", "none");
-          $(".against").animate({bottom:"-65%"}, function(){$(".against").addClass('hidden')});
-          generateReadyList();
+          $(".against").css("-webkit-transform", "translate(0px, 0px) translateZ(0px)");
+          ejected = !ejected;
       });
 
   });
@@ -418,7 +422,7 @@
 		</div>
 	</div>
 		
-	<div class="score" style="width:100%; height:11.7%;margin-left:0;padding:0;position:absolute;z-index:1092">
+	<div class="score" style="width:100%; height:11.7%;margin-left:0;padding:0;z-index:1092">
     <table style="width:100%; height:100%;color:#ffffff">
       <tr>
         <th style="width:10%;text-align:right">
@@ -460,7 +464,7 @@
 
 
 
-<div class="against hidden" style="height:65%;width:100%;position:absolute;z-index:1091">
+<div class="against slider" style="height:65%;width:100%;position:absolute;z-index:1091">
   <div class="record " style="background:#FFFFFF;height:100%;width:100%;padding:2% 0 0 0;overflow:scroll">
       <div class="fakeBox1 hidden">
       <!--BEGINNING FOR PROCESSING LIST-->
@@ -546,10 +550,10 @@
 
             <div class="infoBox row text-center" style="color: rgb(2, 65, 126);height:1em">
               <div class="col-xs-6">
-                <p class="Info1 hidden">等待对方填写分数</p>
+                <p class="Info1 hidden">等待对方填写</p>
               </div>
               <div class="col-xs-6">
-                <p class="Info2 hidden">等待对方填写分数</p>
+                <p class="Info2 hidden">请填写对方的分数</p>
               </div>
             </div>
             <!--END FOR PART 1-->

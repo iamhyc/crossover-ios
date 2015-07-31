@@ -58,13 +58,11 @@
 		//Start: Menu-slide part
 			$(".menu-open").click(function(){
 					$("#block-bg").css("display" ,"block");
- 	 				$(".menu").removeClass('hidden').animate({right:""});
- 	 				$(".body").animate({right:"+50%"});
+ 	 				$("body").css("-webkit-transform", "translate(-50%, 0px) translateZ(0px)");
     		});
 
 		   	$("#block-bg").click(function(){
-    				$(".menu").animate({right:"-50%"}, function(){$(".menu").addClass('hidden')}); 
-      				$(".body").animate({right:"0"});
+    				$("body").css("-webkit-transform", "translate(0, 0px) translateZ(0px)");
       				$("#block-bg").css("display" ,"none");
     		});
 		//End: Menu-slide part
@@ -83,8 +81,9 @@
 	<link rel='stylesheet' href="stylesheets/menu.css">
 	<link rel="stylesheet" href="stylesheets/style.css">
 </head>
-<body background="images/bg.png" style="height:100%">
-	<div class="menu hidden" style="height:100%">
+<body class="slider" background="images/bg.png" style="height:100%;">
+	<!--Menu on the Right-->
+	<div class="menu" style="height:100%">
 		<div class = "top" style="height:4%"></div>
 		<div class="home" style="height:85%;width:100%">
 			<img id="myHead" class="img-circle circle" style="margin: 5% 0% 0% 0%;height:66px;width:66px">
@@ -99,25 +98,26 @@
 			<button type="button" class="btn btn-danger" style="width:60%;background-color:rgb(230, 0, 18);color:#fff" onclick="Logout()">登出</button>
 		</div>
 	</div>
+	<!--Menu on the Right-->
 
-<div class="body" style="height:100%;  overflow: hidden">
-	<div id="block-bg"></div>
-	<nav class="navbar navbar-static-top" style="overflow:hidden;margin-bottom:0;height:10%">
-		<div class="row" style="background-color:rgba(0,0,0,0);padding-top:2%">
-			<div class="col-sm-6 col-xs-6 text-left" style="padding:2% 0 0 6%">
-    			<img src="images/cs.png" width="72%">
-    		</div>
-    		<div class="col-sm-2 col-xs-2"></div>
-    		<div class="col-sm-4 col-xs-4 text-right" style="padding:3% 6% 0 0">
-  				<span class="menu-open glyphicon glyphicon-menu-hamburger" style="font-size:20px;color:#ffffff"></span>
-			</div>
-		</div>	
-	</nav>
+	<div class="body" style="height:100%;overflow:hidden">
+		<div id="block-bg"></div>
+
+		<nav class="navbar navbar-static-top" style="margin-bottom:0;height:10%">
+			<div class="row" style="background-color:rgba(0,0,0,0);padding-top:2%">
+				<div class="col-sm-6 col-xs-6 text-left" style="padding:2% 0 0 6%">
+    				<img src="images/cs.png" width="72%">
+    			</div>
+    			<div class="col-sm-2 col-xs-2"></div>
+    			<div class="col-sm-4 col-xs-4 text-right" style="padding:3% 6% 0 0">
+  					<span class="menu-open glyphicon glyphicon-menu-hamburger" style="font-size:20px;color:#ffffff"></span>
+				</div>
+			</div>	
+		</nav>
        
-      <!-- Menu -->
-    <div class="homePage" style="height:90%;max-width:100%;overflow:scroll">
-    </div>  	
+    	<div class="homePage" style="height:90%;max-width:100%;overflow:scroll">
+    	</div>  	
 			
-</div>	    
+	</div>	    
 	
 </body>

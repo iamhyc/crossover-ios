@@ -8,12 +8,23 @@
 }
 
 body {
- 
+ overflow:hidden;
  background: url(../images/bg.png) no-repeat;
+
  -moz-background-size: 100% 100%;
  -o-background-size: 100% 100%;
  -webkit-background-size: 100% 100%;
  background-size: 100% 100%;
+
+ -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+.slider {
+  -webkit-transition:-webkit-transform 300ms ease-out 0s;
+  -webkit-transform: translate(0px, 0px) translateZ(0px);
 }
 
 .hasBg {

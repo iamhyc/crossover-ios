@@ -4,7 +4,7 @@
       /*左侧弹出窗口的长宽、背景颜色*/
       margin: 0 auto;
       height: 100%;
-      width: 51%;
+      width: 50%;
       background-color: #FFFFFF;
         /*布局排版*/
         position:absolute;/*关键处*/
