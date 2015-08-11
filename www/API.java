@@ -9,6 +9,7 @@ public class Var {
     public static final String server_images = "http://120.24.223.82:8080/Crossover/images/";
     public static final String server_address = "http://120.24.223.82:8080/Crossover/Api/";
 
+
     //user part
     public static final String api_register = server_address + "user/register";
     public static final String api_login = server_address + "user/login";

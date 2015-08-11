@@ -99,6 +99,7 @@
 
     //INITIALIZE OFF
 
+      //SLIDER DISPLAY
       $(".score").click(
           function(){
               if (!ejected){
@@ -119,6 +120,7 @@
           $(".against").css("-webkit-transform", "translate(0px, 0px) translateZ(0px)");
           ejected = !ejected;
       });
+      //[END]SLIDER DISPLAY
 
   });
 
@@ -133,6 +135,8 @@
           $(".fakeBox1 .TName2").text(myTodo[i].TeamName);
           stateMap[i] = 0;  
           $(".fakeBox1 .processItem").attr("id", i);
+          $(".fakeBox1 .processItem .THead2").attr("id0", i);
+          $(".fakeBox1 .processItem .TName2").attr("id0", i);
           $(".fakeBox1 .processBtn").attr("name", i);
 
           $(".fakeBox1 .3_t1 > span").attr("ArrID", i);
@@ -151,6 +155,9 @@
     
     for (var i = 0; i < myList.length; i++){
       $(".fakeBox2 .THead2").attr("src", imgAddress+"TeamLogo/"+myList[i].TeamLogo);
+      $(".fakeBox2 .scoreItem").attr("fid", i);
+      $(".fakeBox2 .scoreItem .THead2").attr("id1", i);
+      $(".fakeBox2 .scoreItem .TName2").attr("id1", i);
       $(".fakeBox2 .TName2").text(myList[i].TeamName); 
 
       var score = myList[i].Score.split(',');
@@ -383,6 +390,19 @@
     window.location.href = 'photos.html';
   }
 
+  function turnToDetail (id0, id1) {
+    var TeamID;
+    if (id0) TeamID = myTodo[id0].TeamID;
+    if (id1) TeamID = myList[id1].TeamID;
+    var userShow = {
+          "UserID":myObj.UserID,
+          "TeamID":TeamID
+        };
+    localStorage.userShow = JSON.stringify(userShow);
+    //console.log(localStorage.userShow);
+    window.location.href = "detail_page.html";
+  }
+
 	</script>
 </head>
 
@@ -485,7 +505,7 @@
                
                 <p style="margin-left:-25%;margin-right:-25%;">
                 <span class="TName1" style="float:left;line-height:1.1;font-size:14px;color:rgb(2, 65, 126)">干</span>
-                <span class="TName2" style="float:right;line-height:1.1;font-size:14px;color:rgb(2, 65, 126)">萌萌队</span>
+                <span class="TName2" style="float:right;line-height:1.1;font-size:14px;color:rgb(2, 65, 126)" onclick="turnToDetail($(this).attr('id0'), $(this).attr('id1'))">萌萌队</span>
               </p>
                 
                
@@ -495,7 +515,7 @@
               
           
               <div class="col-xs-3" style="text-align:right;padding-right:3%">
-                <img src="abc.jpg" class="THead2 img-circle" width="41px" height="41px">
+                <img src="abc.jpg" class="THead2 img-circle" width="41px" height="41px" onclick="turnToDetail($(this).attr('id0'), $(this).attr('id1'))">
               </div>  
 
             </div>
@@ -589,7 +609,7 @@
                
                 <p style="margin-left:-25%;margin-right:-25%;">
                 <span class="TName1" style="float:left;font-size:14px;color:rgb(2, 65, 126)">干</span>
-                <span class="TName2" style="float:right;font-size:14px;color:rgb(2, 65, 126)">萌萌队</font></span>
+                <span class="TName2" style="float:right;font-size:14px;color:rgb(2, 65, 126)" onclick="turnToDetail($(this).attr('id0'), $(this).attr('id1'))">萌萌队</span>
               </p>
 
               
@@ -597,7 +617,7 @@
 
           
               <div class="col-xs-3" style="text-align:right;padding-right:3%">
-                <img src="abc.jpg" class="THead2 img-circle" width="41px" height="41px" style="">
+                <img src="abc.jpg" class="THead2 img-circle" width="41px" height="41px" style="" onclick="turnToDetail($(this).attr('id0'), $(this).attr('id1'))">
               </div>  
 
             </div>

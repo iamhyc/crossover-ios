@@ -14,7 +14,7 @@
     var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
     var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
     var myObj = JSON.parse(localStorage.current_user);
-    var hisData, hisList, hisPlayer;
+    var hisList, hisPlayer;
     var userShow = JSON.parse(localStorage.userShow);
       //UserID: userShow
     var startX, endX, clientWidth, pageShow;
@@ -51,18 +51,18 @@
         });
 
         $.get(apiAddress+'team/teammate/user/'+userShow.UserID+'/team/'+userShow.TeamID, function(data){
-          hisData = data; console.log(data);
-          hisPlayer = hisData.players;
-          hisList = hisData.scoreList;
+          console.log(data);
+          hisPlayer = data.players;
+          hisList = data.scoreList;
           //INITIALIZATION ON
-          $("#myHead").attr("src", imgAddress + "TeamLogo/" +userShow.TeamLogo);
-          $("#myName").text(userShow.TeamName);
-          $("#myAddress").text(userShow.City);
-          if (userShow.TeamHomePhoto)
-              $('#back').attr("src", imgAddress+"TeamHome/"+userShow.TeamHomePhoto).attr("width","100%").attr("height","100%");
-          $("#myGrade").text(userShow.lntegral);
-          $("#times").text(hisData.WinCount);
-          $("#percent").text(Math.round(100*hisData.WinCount/hisData.RaceCount)+"%")
+          $("#myHead").attr("src", imgAddress + "TeamLogo/" +data.TeamLogo);
+          $("#myName").text(data.TeamName);
+          $("#myAddress").text(data.City);
+          if (data.TeamHomePhoto)
+              $('#back').attr("src", imgAddress+"TeamHome/"+data.TeamHomePhoto).attr("width","100%").attr("height","100%");
+          $("#myGrade").text(data.lntegral);
+          $("#times").text(data.WinCount);
+          $("#percent").text(Math.round(100*data.WinCount/data.RaceCount)+"%")
           
           //ADD PLAYER
           for (var i = 0; i < hisPlayer.length; i++){
@@ -168,6 +168,13 @@
     window.location.href = 'photos.html';
   }
 
+  function backLocation(){
+    if (history.length == 1)
+      window.location.href = 'menu.html';
+    else
+      history.back();
+  }
+
   function touchStart(event) {
       $(".score").css("-webkit-transition", "initial").css("transition", "initial");
       var touch = event.touches[0];
@@ -213,7 +220,7 @@
 <body background="images/bg.jpg" style="height:100%;overflow:hidden">
   <div id="block-bg"></div><div id="black-bg"></div>
   <nav class="navbar navbar-fixed-top" style="margin-bottom:0; padding-top:3%">
-        <span onclick="location.href='menu.html'"><img src="images/back.png" width="14%"></span>
+        <span onclick="backLocation()"><img src="images/back.png" width="14%"></span>
   </nav>
 	
 	<div class="back" style="height:30%;width:100%;text-align:center">
@@ -319,7 +326,7 @@
                
                 <p style="margin-left:-25%;margin-right:-25%;">
                 <span class="TName1" style="float:left;font-size:14px;color:rgb(2, 65, 126)">干</span>
-                <span class="TName2" style="float:right;font-size:14px;color:rgb(2, 65, 126)">萌萌队</font></span>
+                <span class="TName2" style="float:right;font-size:14px;color:rgb(2, 65, 126)">萌萌队</span>
               </p>
 
               

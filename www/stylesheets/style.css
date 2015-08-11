@@ -185,6 +185,19 @@ body {
   opacity:0;  
   filter: alpha(opacity=000);
 }
+.block-bg{
+  display: none;  
+  position: absolute;  
+  top: 0%;  
+  left: 0%;  
+  width: 100%;  
+  height: 100%;  
+  background-color: #fff;  
+  z-index:1090;  
+  -moz-opacity: 50;  
+  opacity:50;  
+  filter: alpha(opacity=050);
+}
 
 #black-bg{ 
   display: none;  

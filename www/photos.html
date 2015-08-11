@@ -28,11 +28,12 @@
 				recData = result; console.log(result);
 
 				for (var i = 0;i < result.length;i++){
-					var imgBox = '<div class="col-xs-4" style="height:'+imgWidth+'px;padding:1px 1px 1px 1px;display:table"><div style="display:table-cell;vertical-align:middle"><img class="photo" id="'+i+'" src="'+imgAddress+'Gallery/'+result[i].PhotoName+'" height="auto" width="100%" onclick="magnify(this.id)"/></div></div>';
+					var imgBox = '<div class="col-xs-4" style="height:'+imgWidth+'px;padding:1px 1px 1px 1px;display:table;overflow:hidden"><div style="display:table-cell;vertical-align:middle"><img class="photo" id="'+i+'" src="'+imgAddress+'Gallery/'+result[i].PhotoName+'" width="100%" onclick="magnify(this.id)"/></div></div>';
 					$(".gallery").append(imgBox);
 				}
 
-				longFocus($(".photo"), function(id){
+				if (userType == "1"){
+					longFocus($(".photo"), function(id){
 					if (confirm("删除该图片？")){
 						$.get(apiAddress+"gallery/delete/"+id, function(result){
 							//console.log(result);
@@ -53,7 +54,8 @@
 							else alert_flash("删除失败");
 						})
 					})*/
-				})
+					})
+				}
 			})
 		})
 
@@ -62,6 +64,7 @@
 
 			var tmp = localStorage.galleryShow.split('_');
 			userID = tmp[1];	userType = tmp[0];
+
 			document.getElementById("photoImg").addEventListener('change',preview,false);
 		}
 
