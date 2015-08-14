@@ -21,6 +21,14 @@
       window.location.href = 'photos.html';
     }
 
+    function backLocation(){
+      //if (history.length == 1)
+        window.location.href = 'menu.html';
+      //else
+        //history.back();
+    }
+
+
     localStorage.lastView = "detail_page.html";
     var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
     var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
@@ -49,7 +57,7 @@
             function(){
                 if (!ejected&&!pageShow){
                   $("#block-bg").css("display", "block");
-                  $("#against").css("-webkit-transform", "translate(0px, -118%) translateZ(0px)");
+                  $("#against").css("-webkit-transform", "translate(0px, -119%) translateZ(0px)");
                   ejected = !ejected;
                 } 
                 else {

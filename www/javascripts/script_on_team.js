@@ -82,14 +82,6 @@ function fightVS () {
   })
 }
 
-
-function backLocation(){
-  if (history.length == 1)
-    window.location.href = 'menu.html';
-  else
-    history.back();
-}
-
 function stopDefault (event) {
   //event.preventDefault(); 
 }
