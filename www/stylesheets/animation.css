@@ -1,12 +1,12 @@
 .spinner {
   margin: 0px auto 0;
-  width: 150px;
+  width: 100%;
   text-align: center;
 }
  
 .spinner > div {
-  width: 30px;
-  height: 30px;
+  width: 10px;
+  height: 10px;
   background-color: #67CF22;
  
   border-radius: 100%;

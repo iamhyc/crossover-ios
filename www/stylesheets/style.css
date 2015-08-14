@@ -8,23 +8,40 @@
 }
 
 body {
+ height:100%;
+
  overflow:hidden;
+ position: relative;
  background: url(../images/bg.png) no-repeat;
 
- -moz-background-size: 100% 100%;
- -o-background-size: 100% 100%;
  -webkit-background-size: 100% 100%;
  background-size: 100% 100%;
 
  -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
+ -moz-user-select:none;
+ -ms-user-select:none;
+ user-select:none;
+}
+
+.scroll-container{
+  /*For IOS*/
+  -webkit-overflow-scrolling : touch;
 }
 
 .slider {
   -webkit-transition:-webkit-transform 300ms ease-out 0s;
+  transition:-webkit-transform 300ms ease-out 0s;
   -webkit-transform: translate(0px, 0px) translateZ(0px);
+  transform: translate(0px, 0px) translateZ(0px);
+}
+
+.record{
+  background:#FFFFFF;
+  height:100%;
+  width:100%;
+  padding-left:2% 2% 0 2%;
+  overflow-x:hidden;
+  overflow-y:scroll;
 }
 
 .hasBg {
@@ -187,7 +204,7 @@ body {
 }
 .block-bg{
   display: none;  
-  position: absolute;  
+  position: relative;  
   top: 0%;  
   left: 0%;  
   width: 100%;  
@@ -228,13 +245,13 @@ body {
 
 .modal_input{
   width:90%;height:40%;
-      margin-left:5%;
-      margin-top:-3%;
-      outline:none;
-      border-top:none;
-      border-left:none;
-      border-right:none;
-      border-bottom-color:#009393;
+  margin-left:5%;
+  margin-top:-3%;
+  outline:none;
+  border-top:none;
+  border-left:none;
+  border-right:none;
+  border-bottom-color:#009393;
 }
 
 .modal_button{

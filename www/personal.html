@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 
-<html style="height:100%">
+<html style="height:100%;overflow:hidden">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 	<title>Personal</title>
+
 	<script src="javascripts/jquery-1.11.3.min.js"></script>
   <script type="text/javascript" src="javascripts/jquery.base64.js"></script>
   <script type="text/javascript" src="javascripts/styleFunc.js"></script>
   <script type="text/javascript" src="javascripts/DES.js"></script>
+  <script type="text/javascript" src="javascripts/script_on_team.js"></script>
+
 	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/animation.css">
+  
 	<script type="text/javascript">
   localStorage.lastView = "personal.html";
   var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
@@ -20,7 +25,11 @@
   var stateMap = new Array();
   var ejected = false;
 
-  $(document).ready(function(){
+  $(function(){
+    $(".spinner").css("display", "block");
+  })
+
+  $(window).load(function(){
     //INITIALIZE ON
       $('#myHead').attr("src", imgAddress + "TeamLogo/" +myObj.TeamLogo);
       $('#myName').text(myObj.TeamName);
@@ -90,6 +99,7 @@
 
         //BEGINNING FOR READY LIST PART
         generateReadyList();
+        $(".spinner").css("display", "none")
         //END FOR READYLIST PART
         
         //BEGGING FOR FINISHED LIST
@@ -104,12 +114,12 @@
           function(){
               if (!ejected){
                 $("#block-bg").css("display", "block");
-                $(".against").css("-webkit-transform", "translate(0px, -118%) translateZ(0px)");
+                $("#against").css("-webkit-transform", "translate(0px, -118%) translateZ(0px)");
                 ejected = !ejected; generateReadyList();
               } 
               else {
                 $("#block-bg").css("display", "none");
-                $(".against").css("-webkit-transform", "translate(0px, 0px) translateZ(0px)");
+                $("#against").css("-webkit-transform", "translate(0px, 0px) translateZ(0px)");
                 ejected = !ejected; generateReadyList();
               }
             }
@@ -117,7 +127,7 @@
 
       $("#block-bg").click(function(){
           $("#block-bg").css("display", "none");
-          $(".against").css("-webkit-transform", "translate(0px, 0px) translateZ(0px)");
+          $("#against").css("-webkit-transform", "translate(0px, 0px) translateZ(0px)");
           ejected = !ejected;
       });
       //[END]SLIDER DISPLAY
@@ -185,12 +195,6 @@
     $(".fakeBox2 .3_t2 span").text(t2[0]);  
     $(".fakeBox2 .2_t2 span").text(t2[1]);  
     $(".fakeBox2 .1_t2 span").text(t2[2]);
-  }
-  function zeroFill (str) {
-    while(str.length < 3){
-      str = "0" + str;
-    }
-    return str;
   }
 
   function process(obj) {
@@ -327,31 +331,6 @@
     window.location.href = "member_add.html";
   }
 
-  function deal_spc (content) {
-    content=content.replace(/\r\n/g,"<BR>")  
-    content=content.replace(/\n/g,"<BR>");  
-    return content;
-  }
-  function showMsg(usr){
-    //console.log(usr);
-    $('#black-bg').css("display", 'block');
-      $('#name').text(myPlayer[usr].PlayerName);
-      $('#height').text("身高："+myPlayer[usr].tall);
-      $('#weight').text("体重："+myPlayer[usr].weight);
-      $('#site').text("所打位置："+myPlayer[usr].position);
-      $('#intro').html("简介："+deal_spc(myPlayer[usr].Detail));
-      //console.log(myPlayer[usr].Detail);
-      $('#memHead').attr("src", imgAddress+"Teammate/"+myPlayer[usr].HeadIcon);
-    $('.show-block').removeClass("hidden").fadeIn(400);
-    //$('body').append(block);
-  }
-  function deMsg(){
-    $('.show-block').fadeOut(400,function(){
-      $(this).addClass("hidden");
-      $('#black-bg').css('display', 'none');
-    });
-  }
-
   function preview(){
       //var patn = /\.jpg$|\.jpeg$|\.png$|\.gif$/i;
         var file = this.files[0]; 
@@ -414,7 +393,7 @@
       <span style="margin:0 0 0 70%" onclick="location.href='detail_edit.html'"><img src="images/edit.png" width="14%"></span>
   </nav>
 
-  <div class="back" style="height:37%;width:100%;text-align:center">
+  <div class="back" style="height:30%;width:100%;text-align:center">
     <img src="" id="back">
 	</div>
   <input type="file" accept="image/*" class="hidden" name="imgHome" id="imgHome"  />
@@ -435,7 +414,12 @@
 		
 	</div>
   <div class="spa" style="height:0.3%"></div>
-	<div class="container-fluid" style="height:40%;background:rgb(247, 247, 247);width:100%;margin-left:0;padding:0 17% 0 17%">
+	<div class="container-fluid" style="height:47%;background:rgb(247, 247, 247);width:100%;margin-left:0;padding:0 14% 0 14%">
+    <div class="block-bg spinner" style="background:inherit">    
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
 		<p style="text-align:center;margin:9px 0px 3px;"><span style="text-align:center;color: rgb(2, 50, 113);font-size:13px;">队员</span></p>
     <p style="text-align:center;margin:0">
       <span style="text-align:center;color:rgb(2, 65, 126);font-size:13px">一</span>
@@ -487,8 +471,8 @@
 
 
 
-<div class="against slider" style="height:65%;width:100%;position:absolute;z-index:1091">
-  <div class="record " style="background:#FFFFFF;height:100%;width:100%;padding:2% 0 0 0;overflow:scroll">
+<div class="slider" id="against" style="height:65%;width:100%;position:absolute;z-index:1091">
+  <div class="record " style="padding:2% 0 0 0">
       <div class="fakeBox1 hidden">
       <!--BEGINNING FOR PROCESSING LIST-->
       <div class="processItem" style="background:#F6F7F7;width:94.5%;margin:0 auto;padding:2% 2% 2% 2%">
