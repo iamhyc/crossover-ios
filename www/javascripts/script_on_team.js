@@ -114,9 +114,28 @@ function fightVS () {
   })
 }
 
-function stopDefault (event) {
-  //event.preventDefault(); 
+
+//personal.html
+function addMem(){
+  window.location.href = "member_add.html";
 }
+  function turnToPhotos () {
+    localStorage.galleryShow = "1_"+myObj.TeamID;
+    window.location.href = 'photos.html';
+  }
+
+  function turnToDetail (id0, id1) {
+    var TeamID;
+    if (id0) TeamID = myTodo[id0].TeamID;
+    if (id1) TeamID = myList[id1].TeamID;
+    var userShow = {
+          "UserID":myObj.UserID,
+          "TeamID":TeamID
+        };
+    localStorage.userShow = JSON.stringify(userShow);
+    //console.log(localStorage.userShow);
+    window.location.href = "detail_page.html";
+  }
 
   function touchStart(event) {
       $(".score").css("-webkit-transition", "initial").css("transition", "initial");

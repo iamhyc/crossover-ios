@@ -57,27 +57,6 @@
         document.getElementById("score").addEventListener("touchcancel", touchEnd, false);
         document.getElementById("score").addEventListener("touchend", touchEnd, false);
 
-        $(".score").click(
-            function(){
-                if (!ejected&&!pageShow){
-                  $("#block-bg").css("display", "block");
-                  $("#against").css("-webkit-transform", "translate(0px, -119%) translateZ(0px)");
-                  ejected = !ejected;
-                } 
-                else {
-                  $("#block-bg").css("display", "none");
-                  $("#against").css("-webkit-transform", "translate(0px, 0px) translateZ(0px)");
-                  ejected = !ejected;
-                }
-            }
-        );
-
-        $("#block-bg").click(function(){
-            $("#block-bg").css("display", "none");
-            $("#against").css("-webkit-transform", "translate(0px, 0px) translateZ(0px)");
-            ejected = !ejected;
-        });
-
         $.get(apiAddress+'team/teammate/user/'+userShow.UserID+'/team/'+userShow.TeamID, function(data){
           //console.log(data);
           hisPlayer = data.players;
@@ -97,12 +76,13 @@
             var img='<div class="col-xs-3" style="padding-top:5%"><img src="'+imgAddress+'Teammate/'+hisPlayer[i].HeadIcon+'" id='+i+' class="img-circle isMem" width="50px" height="50px"><p style="margin:0;width:50px; text-align:center"><span style="text-align:center;color:rgb(2, 65, 126);font-size:13px">'+hisPlayer[i].PlayerName+'</span></p></div>';
             $(".portrait").append(img);
           }
-          $(".spinner").css("display", "none");
-
-
           $(".isMem").on('click', function(){
             showMsg(this.id, hisPlayer);
           })
+
+
+          $(".spinner").css("display", "none");
+
           //INITIALIZATION DONE
           generateFinishedList(hisList);
         })
@@ -135,8 +115,8 @@
     </div>
 		
 	</div>
-  <div class = "space" style = "height:2px"></div>
-	<div class="container-fluid" style="height:47%;background:rgb(247, 247, 247);width:100%;margin-left:0;padding:0 14% 0 14%">
+  <div class ="space" style="height:2px"></div>
+	<div class="container-fluid" style="height:47%;overflow-y:scroll;background:rgb(247, 247, 247);width:100%;margin-left:0">
     <div class="block-bg spinner">    
         <div class="bounce1"></div>
         <div class="bounce2"></div>
@@ -147,9 +127,12 @@
       <span style="text-align:center;color:rgb(2, 65, 126);font-size:13px">一</span>
     </p>
 
-		<div class="row portrait" style="height:80.5%;overflow-y:scroll">
+		<div class="row portrait" style="padding:0 14% 0 14%">
 		</div>
     
+    <div class="record scroll-container">
+    </div>
+
 	</div>
 
 
@@ -207,7 +190,6 @@
 
 
 <div class="slider" id="against" style="height:65%;width:100%;position:absolute;z-index:1091">
-  <div class="record scroll-container">
   <div class="fakeBox2 hidden">
       <!--BEGINNING FOR FINISHED LIST-->
       <div class="scoreItem" height="14em" width="100%"  style="padding:2% 2% 2% 2%">
@@ -287,7 +269,6 @@
       </div>
       <!--END FOR FINISHED LIST-->
     </div>
-  </div>
 </div>
 
 </body>
