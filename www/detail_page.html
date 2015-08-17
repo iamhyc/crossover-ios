@@ -40,11 +40,15 @@
     var ejected = false;
 
       $(function(){
-        $(".spinner").css("display", "block")
+        $(".spinner").css("display", "block");
       })
 
       $(window).load(function(){
+        //PAGE INITIALIZE
+        $(".fakeBox2 .THead1").attr("src", imgAddress+"TeamLogo/"+userShow.TeamLogo);
+        $(".fakeBox2 .TName1").text(userShow.TeamName);
         $('#black-bg').click(deMsg);
+
 
         clientWidth = document.body.clientWidth;
         document.body.addEventListener("touchmove", stopDefault, false);
@@ -97,10 +101,10 @@
 
 
           $(".isMem").on('click', function(){
-            showMsg(this.id);
+            showMsg(this.id, hisPlayer);
           })
           //INITIALIZATION DONE
-          generateFinishedList();
+          generateFinishedList(hisList);
         })
       })
 	</script>
@@ -133,7 +137,7 @@
 	</div>
   <div class = "space" style = "height:2px"></div>
 	<div class="container-fluid" style="height:47%;background:rgb(247, 247, 247);width:100%;margin-left:0;padding:0 14% 0 14%">
-    <div class="block-bg spinner" style="background:inherit">    
+    <div class="block-bg spinner">    
         <div class="bounce1"></div>
         <div class="bounce2"></div>
         <div class="bounce3"></div>

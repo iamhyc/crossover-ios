@@ -88,3 +88,16 @@ function prompt_modal (message, callback) {
 		$("body").append(modal0);
 	}
 }
+
+
+/*AJAX HTML LOADING OPTIMIZE*/
+
+function preLoad (url) {
+	$.get(url, null, function(data){
+		return data;
+	})
+}
+
+function pullRefresh (url, num) {
+	// body...
+}

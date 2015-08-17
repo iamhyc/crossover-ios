@@ -1,3 +1,10 @@
+/*
+  The code here share the same function both in personal.html & detail_page.html
+  No modoules includes.
+*/
+var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
+var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
+
 function deal_spc (content) {
     content=content.replace(/\r\n/g,"<BR>")  
     content=content.replace(/\n/g,"<BR>");  
@@ -11,16 +18,16 @@ function zeroFill (str) {
   return str;
 }
 
-function showMsg(usr){
+function showMsg(usr ,players){
   //console.log(usr);
   $('#black-bg').css("display", 'block');
-    $('#name').text(hisPlayer[usr].PlayerName);
-    $('#height').text("身高："+hisPlayer[usr].tall);
-    $('#weight').text("体重："+hisPlayer[usr].weight);
-    $('#site').text("所打位置："+hisPlayer[usr].position);
-    $('#intro').html("简介："+deal_spc(hisPlayer[usr].Detail));
-    //console.log(hisPlayer[usr].Detail);
-    $('#memHead').attr("src", imgAddress+"Teammate/"+hisPlayer[usr].HeadIcon);
+    $('#name').text(players[usr].playersName);
+    $('#height').text("身高："+players[usr].tall);
+    $('#weight').text("体重："+players[usr].weight);
+    $('#site').text("所打位置："+players[usr].position);
+    $('#intro').html("简介："+deal_spc(players[usr].Detail));
+    //console.log(players[usr].Detail);
+    $('#memHead').attr("src", imgAddress+"Teammate/"+players[usr].HeadIcon);
   $('.show-block').removeClass("hidden").fadeIn(400);
   //$('body').append(block);
 }
@@ -32,17 +39,42 @@ function deMsg(){
   });
 }
 
-function generateFinishedList () {
-  $(".fakeBox2 .THead1").attr("src", imgAddress+"TeamLogo/"+userShow.TeamLogo);
-  $(".fakeBox2 .TName1").text(userShow.TeamName);
-    
-  for (var i = 0; i < hisList.length; i++){
-    $(".fakeBox2 .THead2").attr("src", imgAddress+"TeamLogo/"+hisList[i].TeamLogo);
-    $(".fakeBox2 .TName2").text(hisList[i].TeamName); 
+function generateReadyList () {
+    $(".record > .processItem").remove();
 
-    var score = hisList[i].Score.split(',');
+      for (var i = myTodo.length-1; i >= 0; i--){
+        //var block="<div id="+myTodo.ArrangeID+"></div>"
+        $(".fakeBox1 .THead2").attr("src", imgAddress+"TeamLogo/"+myTodo[i].TeamLogo);
+        $(".fakeBox1 .TName2").text(myTodo[i].TeamName);
+        stateMap[i] = 0;  
+        $(".fakeBox1 .processItem").attr("id", i);
+        $(".fakeBox1 .processItem .THead2").attr("id0", i);
+        $(".fakeBox1 .processItem .TName2").attr("id0", i);
+        $(".fakeBox1 .processBtn").attr("name", i);
+
+        $(".fakeBox1 .3_t1 > span").attr("ArrID", i);
+        $(".fakeBox1 .2_t1 > span").attr("ArrID", i);
+        $(".fakeBox1 .1_t1 > span").attr("ArrID", i);
+        $(".fakeBox1 .3_t2 > span").attr("ArrID", i);
+        $(".fakeBox1 .2_t2 > span").attr("ArrID", i);
+        $(".fakeBox1 .1_t2 > span").attr("ArrID", i);
+
+        $(".record").prepend($(".fakeBox1 > .processItem").clone());
+      }
+}
+
+function generateFinishedList (List) {
+    
+  for (var i = 0; i < List.length; i++){
+    $(".fakeBox2 .THead2").attr("src", imgAddress+"TeamLogo/"+List[i].TeamLogo);
+    $(".fakeBox2 .scoreItem").attr("fid", i);
+    $(".fakeBox2 .scoreItem .THead2").attr("id1", i);
+    $(".fakeBox2 .scoreItem .TName2").attr("id1", i);
+    $(".fakeBox2 .TName2").text(List[i].TeamName); 
+
+    var score = List[i].Score.split(',');
     //console.log(score);
-    if (hisList[i].ActiveID == hisList[i].ActiveTeamID){
+    if (List[i].ActiveID == List[i].ActiveTeamID){
       setScore(zeroFill(score[0]), zeroFill(score[1]))
     }
     else {

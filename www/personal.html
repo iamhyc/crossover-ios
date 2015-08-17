@@ -18,8 +18,6 @@
   
 	<script type="text/javascript">
   localStorage.lastView = "personal.html";
-  var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
-  var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
   var myObj = JSON.parse(localStorage.current_user);
   var myData, myList, myPlayer, myTodo;
   var stateMap = new Array();
@@ -30,6 +28,11 @@
   })
 
   $(window).load(function(){
+    //PAGE INITIALIZE
+    $(".THead1").attr("src", imgAddress+"TeamLogo/"+myObj.TeamLogo);
+    $(".TName1").text(myObj.TeamName);
+    $('#black-bg').click(deMsg);
+
     //INITIALIZE ON
       $('#myHead').attr("src", imgAddress + "TeamLogo/" +myObj.TeamLogo);
       $('#myName').text(myObj.TeamName);
@@ -82,7 +85,7 @@
             })*/
         });
         $(".isMem").on('click', function(){
-          showMsg(this.id);
+          showMsg(this.id, myPlayer);
         });
         $(".delete").click(function () {
           if (confirm("删除该队员?")){
@@ -103,7 +106,7 @@
         //END FOR READYLIST PART
         
         //BEGGING FOR FINISHED LIST
-        if (myList.length > 0) generateFinishedList();
+        if (myList.length > 0) generateFinishedList(myList);
         //END FOR FINISHED LIST
       })
 
@@ -134,68 +137,7 @@
 
   });
 
-  function generateReadyList () {
-    $(".record > .processItem").remove();
-    $(".THead1").attr("src", imgAddress+"TeamLogo/"+myObj.TeamLogo);
-    $(".TName1").text(myObj.TeamName);
-
-        for (var i = myTodo.length-1; i >= 0; i--){
-          //var block="<div id="+myTodo.ArrangeID+"></div>"
-          $(".fakeBox1 .THead2").attr("src", imgAddress+"TeamLogo/"+myTodo[i].TeamLogo);
-          $(".fakeBox1 .TName2").text(myTodo[i].TeamName);
-          stateMap[i] = 0;  
-          $(".fakeBox1 .processItem").attr("id", i);
-          $(".fakeBox1 .processItem .THead2").attr("id0", i);
-          $(".fakeBox1 .processItem .TName2").attr("id0", i);
-          $(".fakeBox1 .processBtn").attr("name", i);
-
-          $(".fakeBox1 .3_t1 > span").attr("ArrID", i);
-          $(".fakeBox1 .2_t1 > span").attr("ArrID", i);
-          $(".fakeBox1 .1_t1 > span").attr("ArrID", i);
-          $(".fakeBox1 .3_t2 > span").attr("ArrID", i);
-          $(".fakeBox1 .2_t2 > span").attr("ArrID", i);
-          $(".fakeBox1 .1_t2 > span").attr("ArrID", i);
-
-          $(".record").prepend($(".fakeBox1 > .processItem").clone());
-        }
-  }
-
-  function generateFinishedList () {
-    $(".record").append('<div class="space" style="height:2em"></div>');
-    
-    for (var i = 0; i < myList.length; i++){
-      $(".fakeBox2 .THead2").attr("src", imgAddress+"TeamLogo/"+myList[i].TeamLogo);
-      $(".fakeBox2 .scoreItem").attr("fid", i);
-      $(".fakeBox2 .scoreItem .THead2").attr("id1", i);
-      $(".fakeBox2 .scoreItem .TName2").attr("id1", i);
-      $(".fakeBox2 .TName2").text(myList[i].TeamName); 
-
-      var score = myList[i].Score.split(',');
-      //console.log(score);
-      if (myList[i].ActiveID == myList[i].ActiveTeamID){
-        setScore(zeroFill(score[0]), zeroFill(score[1]))
-      }
-      else {
-        setScore(zeroFill(score[1]), zeroFill(score[0]));
-      }
-
-      $(".record").append($(".fakeBox2 > .scoreItem").clone());
-    }
-  }
-  function setScore(t1, t2) {
-    if (parseInt(t1)>parseInt(t2)){
-      $(".fakeBox2 .vs").css("background-image", "linear-gradient(90deg,#007979,#007979 50%, #DCDDDD 50%, #DCDDDD)"); 
-    }
-    else{
-      $(".fakeBox2 .vs").css("background-image", "linear-gradient(90deg,#DCDDDD,#DCDDDD 50%, #007979 50%, #007979)");
-    }
-    $(".fakeBox2 .3_t1 span").text(t1[0]);  
-    $(".fakeBox2 .2_t1 span").text(t1[1]);  
-    $(".fakeBox2 .1_t1 span").text(t1[2]);
-    $(".fakeBox2 .3_t2 span").text(t2[0]);  
-    $(".fakeBox2 .2_t2 span").text(t2[1]);  
-    $(".fakeBox2 .1_t2 span").text(t2[2]);
-  }
+  
 
   function process(obj) {
     var order = obj.attr("name");
@@ -415,7 +357,7 @@
 	</div>
   <div class="spa" style="height:0.3%"></div>
 	<div class="container-fluid" style="height:47%;background:rgb(247, 247, 247);width:100%;margin-left:0;padding:0 14% 0 14%">
-    <div class="block-bg spinner" style="background:inherit">    
+    <div class="block-bg spinner">    
         <div class="bounce1"></div>
         <div class="bounce2"></div>
         <div class="bounce3"></div>
