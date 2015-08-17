@@ -138,7 +138,7 @@ function addMem(){
   }
 
   function touchStart(event) {
-      $(".score").css("-webkit-transition", "initial").css("transition", "initial");
+      $(".score-bar").css("-webkit-transition", "initial").css("transition", "initial");
       var touch = event.touches[0];
       startX = touch.pageX;
   }
@@ -148,29 +148,29 @@ function addMem(){
       endX = touch.pageX;
       var tmp = 100*(endX - startX)/(clientWidth);
       if ((pageShow == 0)&&(tmp < 0))
-        $(".score").css("-webkit-transform", "translate("+ tmp +"%, 0px) translateZ(0px)");
+        $(".score-bar").css("-webkit-transform", "translate("+ tmp +"%, 0px) translateZ(0px)");
       else if ((pageShow == 1)&&(tmp > 0))
-        $(".score").css("-webkit-transform", "translate("+ (tmp-100) +"%, 0px) translateZ(0px)");
+        $(".score-bar").css("-webkit-transform", "translate("+ (tmp-100) +"%, 0px) translateZ(0px)");
   }
              
   function touchEnd(event) {
     //RESTABLE
-    $(".score").css("-webkit-transition", "-webkit-transform 300ms ease-out 0s");
-    $(".score").css("transition", "-webkit-transform 300ms ease-out 0s")
+    $(".score-bar").css("-webkit-transition", "-webkit-transform 300ms ease-out 0s");
+    $(".score-bar").css("transition", "-webkit-transform 300ms ease-out 0s")
     if (endX - startX > clientWidth/2.5) {
-      $(".score").css("-webkit-transform", "translate(0%, 0px) translateZ(0px)");
+      $(".score-bar").css("-webkit-transform", "translate(0%, 0px) translateZ(0px)");
       pageShow = 0;
     }
     else if((endX - startX < clientWidth/2.5)&&(endX - startX > 0)){
-      $(".score").css("-webkit-transform", "translate(-100%, 0px) translateZ(0px)");
+      $(".score-bar").css("-webkit-transform", "translate(-100%, 0px) translateZ(0px)");
       pageShow = 1;
     }
     else if((endX - startX > -clientWidth/2.5)&&(endX - startX < 0)){
-      $(".score").css("-webkit-transform", "translate(0%, 0px) translateZ(0px)");
+      $(".score-bar").css("-webkit-transform", "translate(0%, 0px) translateZ(0px)");
       pageShow = 0;
     }
     else if(endX - startX < -clientWidth/2.5){
-      $(".score").css("-webkit-transform", "translate(-100%, 0px) translateZ(0px)");
+      $(".score-bar").css("-webkit-transform", "translate(-100%, 0px) translateZ(0px)");
       pageShow = 1;
     }
   }

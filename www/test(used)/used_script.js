@@ -54,7 +54,7 @@ $('#moon').html(response);
 });
 
 
-
+document.title = "Crossover";
 
 $(".score").click(
             function(){

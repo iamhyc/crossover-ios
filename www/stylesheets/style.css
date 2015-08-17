@@ -10,7 +10,8 @@
 body {
  height:100%;
 
- overflow:hidden;
+ overflow-y: scroll;
+ overflow-x: hidden;
  position: relative;
  background: url(../images/bg.png) no-repeat;
 
@@ -24,8 +25,7 @@ body {
 }
 
 .scroll-container{
-  /*For IOS*/
-  -webkit-overflow-scrolling : touch;
+  
 }
 
 .slider {
@@ -125,6 +125,11 @@ body {
   text-decoration: none;
   color: #555;
   background: #f5f5f5;
+}
+
+.navbar{
+  -webkit-transition: -webkit-transform 300ms ease-out 0s;
+  transition: -webkit-transform 300ms ease-out 0s;
 }
 
 .net-control{
@@ -262,4 +267,22 @@ body {
   font-size:1.5em;
 }
 
+.upper-side{
+  width: 100%;
+  height: 88%;
+  background: #fff;
+  overflow: scroll;
+  /*For IOS*/
+  -webkit-overflow-scrolling : touch;
+}
+
+.score-bar{
+  width:100%;
+  height:12%;
+  margin-left:0;
+  padding:0;
+  z-index:1092;
+  position:fixed;
+  bottom:0;
+}
 
