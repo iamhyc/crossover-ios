@@ -1,62 +1,10 @@
-<!DOCTYPE html>
-
-<html style="height:100%">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<div class="load-body">
 	<title>用户注册-CrossOver</title>
-	<script src="javascripts/jquery-1.11.3.min.js"></script>
-	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
-	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-	<script type="text/javascript">
-		var readingFlag = true;
-		$(document).ready(function(){
-			document.getElementById("imgFile").addEventListener( 'change',preview,false );
-			$('#upload').click(function(){
-				$('#imgFile').click();
-			})
-		})
-		
-		function preview(){
-				var file = this.files[0]; 
-				var reader = new FileReader(); 
-				reader.readAsDataURL(file);
-				/* */ 
-				reader.onload = function(e) {
-					$('#upload').attr('src', this.result);
-					localStorage.reg_PhotoBase64 = this.result.slice(this.result.indexOf(',')+1);
-					console.log(this.result);
-				}
-				reader.onloadend = function() {
-					readingFlag = false;
-				}
-		}
-
-		function imgCheck () {
-			var cityName = $('#cityName').val(),
-				teamName = $('#teamName').val();
-			if (!teamName) alert_flash('请输入战队名称')
-			else if (!cityName) alert_flash('请输入城市')//to 加特技
-			else if (!document.getElementById('imgFile').value) alert_flash("请上传战队队标")
-			else {
-				localStorage.reg_cityName = cityName;
-				localStorage.reg_teamName = teamName;
-				console.log(localStorage.reg_PhotoBase64);
-				window.location.href = "register3.html"
-			}
-			
-		}
-	</script>
-</head>
-
-<body background="images/bg.jpg" style="height:100%">
-
 	<nav class="navbar navbar-fixed-top text-left" style="padding-top:3%">
-    		<span onclick="location.href='register.html'"><img src="images/back.png" width="14%"></span>		
+    		<span onclick="ctrl.move('register.html',false)"><img src="images/back.png" width="14%"></span>		
 	</nav>
 		
-		<div class="spc" style="height:15%"></div>
+		<div class="h-div" style="height:15%"></div>
 		<div class="container" style="height:85%;margin:0 atuo;color:#ffffff" >
 			<div class="form-group input-group-lg" style="">
 				<input type="text" id="teamName"class="form-control" autofocus placeholder="球队名称">
@@ -73,5 +21,15 @@
 				</div>
 			</div>
 		</div>
-</body>
-</html>
+
+	<script type="text/javascript" src="javascripts/script_on_register.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			document.getElementById("imgFile").addEventListener('change',preview, false);
+
+			$('#upload').click(function(){
+				$('#imgFile').click();
+			});
+		});
+	</script>
+</div>

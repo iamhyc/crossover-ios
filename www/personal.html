@@ -1,24 +1,8 @@
-<!DOCTYPE html>
 
-<html style="height:100%;overflow:hidden">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-	<title>Personal</title>
 
-	<script src="javascripts/jquery-1.11.3.min.js"></script>
-  <script type="text/javascript" src="javascripts/jquery.base64.js"></script>
-  <script type="text/javascript" src="javascripts/styleFunc.js"></script>
-  <script type="text/javascript" src="javascripts/DES.js"></script>
-
-  <script type="text/javascript" src="javascripts/script_on_team.js"></script>
-  <script type="text/javascript" src="javascripts/script_for_race.js"></script>
-
-	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/animation.css">
-  
-	<script type="text/javascript">
+<script type="text/javascript" src="javascripts/script_on_team.js"></script>
+<script type="text/javascript" src="javascripts/script_for_race.js"></script>
+<script type="text/javascript">
   localStorage.lastView = "personal.html";
   var myObj = JSON.parse(localStorage.current_user);
   var myData, myList, myPlayer, myTodo;
@@ -38,7 +22,7 @@
     });
   })
 
-  $(window).load(function(){
+  $(".load-body").ready(function(){
     //PAGE INITIALIZE
     $(".THead1").attr("src", imgAddress+"TeamLogo/"+myObj.TeamLogo);
     $(".TName1").text(myObj.TeamName);
@@ -102,12 +86,12 @@
           if (confirm("删除该队员?")){
               $.get(apiAddress+"player/delete/"+myPlayer[$(this).attr("add_id")].PlayerID, function(result){
                 if (result) alert_flash("删除成功");
-                window.location.reload(true);
+                ctrl.reload();
               })
           }
         })
         $("#addMem").on('click', function(){
-          location.href = "member_add.html";
+          ctrl.move("member_add.html", true);
         });
         //END FOR ADD PLAYER
 
@@ -124,50 +108,21 @@
     //INITIALIZE OFF
   });
 
-
-  function preview(){
-      //var patn = /\.jpg$|\.jpeg$|\.png$|\.gif$/i;
-        var file = this.files[0]; 
-        var reader = new FileReader(); 
-        reader.readAsDataURL(file);
-        /* */ 
-        reader.onloadend = function(e) {
-          var data = JSON.stringify({
-                  "TeamID":myObj.TeamID,
-                  "PhotoBase64": this.result.slice(this.result.indexOf(',')+1)
-          });
-          $.ajax({
-            type:'post',
-            url: apiAddress+"team/photo/home",
-            contentType: 'application/json',
-            dataType:'json',
-            data:data,
-            success: 
-              function(result){
-                if (!result){
-                  alert_flash("上传失败")
-                }
-                else{
-                  myObj.TeamHomePhoto = result.FileName;
-                  localStorage.current_user = JSON.stringify(myObj);
-                  //$('#back').attr('src', this.result).css("left", "0").css("top", "0");
-                }
-              }
-          })
-          $('#back').attr('src', this.result).css("left", "0").css("top", "0");
-        }
+  function turnToPhotos () {
+    localStorage.galleryShow = "1_"+myObj.TeamID;
+    ctrl.move('photos.html', true);
   }
 
+</script>
 
-	</script>
-</head>
 
-<body background="images/bg.jpg" style="height:100%">
+<div class="load-body">
+  <title>Personal</title>
   <div id="block-bg"></div><div id="black-bg"></div>
 
   <nav class="navbar navbar-fixed-top" style="padding-top:3%">
-      <span class="text-left" onclick="location.href='menu.html'"><img src="images/back.png" width="14%"></span>
-      <span style="margin:0 0 0 70%" onclick="location.href='detail_edit.html'"><img src="images/edit.png" width="14%"></span>
+      <span class="text-left" onclick="ctrl.move('menu.html',false)"><img src="images/back.png" width="14%"></span>
+      <span style="margin:0 0 0 70%" onclick="ctrl.move('detail_edit.html',true)"><img src="images/edit.png" width="14%"></span>
   </nav>
 
   <div class="upper-side">
@@ -441,6 +396,3 @@
       </div> 
   </div>
 </div>
-
-</body>
-</html>

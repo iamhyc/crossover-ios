@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html style="height:100%">
 
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
 	<title>相册-CrossOver</title>
-	<script src="javascripts/jquery-1.11.3.min.js"></script>
-	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
 	<script type="text/javascript">
 		var oldX, oldY, startX, startY, startWidth, startHeight, initWidth, initHeight, gapHeight;
 		var moveD;
@@ -103,7 +97,7 @@
 			$('#imgSelected').css('left', x + startX + 'px');
 		}
 
-	$(document).ready(function(){
+	$(function(){
 		$("#imgSelected").attr("src", localStorage.photoSelected);
 		initWidth = $("#imgSelected").width();
 		initHeight = $("#imgSelected").height();
@@ -117,18 +111,14 @@
 	})
 
 	</script>
-	<link rel='stylesheet' href='stylesheets/bootstrap.css'/>
-	<link rel='stylesheet' href="stylesheets/menu.css">
-	<link rel="stylesheet" href="stylesheets/style.css">
-</head>
 
-<body background="images/bg.png" style="height:100%">
+<div class="load-body">
 
 	<nav class="navbar navbar-static-top text-left" style="padding-top:3%;height:11%;margin:0">
-    	<span class="text-left" onclick="location.href='photos.html'"><img src="images/back.png" width="14%"></span>		
+    	<span class="text-left" onclick="ctrl.move('photos.html', false)"><img src="images/back.png" width="14%"></span>		
 	</nav>
 
   	<div class="photoGallery" style="height:89%;width:100%;overflow:scroll;background-color:#fff;position:absolute;overflow:hidden">
   		<img id="imgSelected" src="" height="auto" width="100%" style="position:relative">
   	</div>
-</body>
+</div>

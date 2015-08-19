@@ -24,7 +24,7 @@ function loadPage(num){
 				var num = this.id.substr(0, s1),
     				order = this.id.substr(s1+1, this.id.length-s1-1)
     			localStorage.userShow = JSON.stringify(JSON.parse(localStorage['myList'+num])[order]);
-    			window.location.href = "detail_page.html";
+    			ctrl.move("detail_page.html", true);
     		},
     		touchstart:function(){
     			$(this).css("backgroundColor", "#178ED3");

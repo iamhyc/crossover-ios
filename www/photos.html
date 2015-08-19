@@ -1,18 +1,6 @@
-<!DOCTYPE html>
 
-<html style="height:100%" >
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
 	<title>相册-CrossOver</title>
-
-	<link rel='stylesheet' href='stylesheets/bootstrap.css'/>
-	<link rel='stylesheet' href="stylesheets/menu.css">
-	<link rel="stylesheet" href="stylesheets/style.css">
-	<link rel="stylesheet" href="stylesheets/animation.css">
-
-	<script src="javascripts/jquery-1.11.3.min.js"></script>
-	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
 	<script type="text/javascript">
 		localStorage.lastView = "photos.html";
 		var userID, userType; 
@@ -25,7 +13,7 @@
     		$(".spinner").css("display", "block");
     	})
 
-		$(window).load(function(){
+		$(".load-body").ready(function(){
 			init();
 			if (userType == "1") addUpload();
 
@@ -54,7 +42,7 @@
 							//console.log(result);
 							if (result) {
 								alert_flash("删除成功");
-								window.location.reload(true);
+								ctrl.reload();
 							}
 							else alert_flash("删除失败");
 						})
@@ -92,7 +80,7 @@
 		function magnify(id){
 			console.log(id);
 			localStorage.photoSelected = imgAddress+'Gallery/'+recData[id].PhotoName;
-			window.location.href = "photoView.html";
+			ctrl.move("photoView.html", true);
 		}
 
 		function uploadImage () {
@@ -120,7 +108,7 @@
                   				alert_flash("上传失败")
                 			}
                 			else{
-                					window.location.reload(false);
+                					ctrl.reload();
                 				}
               			}
           			})
@@ -130,13 +118,12 @@
 
 		function backLocate () {
 			if (userType == "1")	
-				window.location.href = "personal.html";
-			else window.location.href = "detail_page.html";
+				ctrl.move("personal.html", false);
+			else ctrl.move("detail_page.html", false);
 		}
 	</script>
-</head>
 
-<body background="images/bg.png" style="height:100%;overflow">
+<div class="load-body">
 	<div id="block-bg"></div><div id="black-bg"></div>
 	<input type="file" accept="image/*" class="hidden" name="photoImg" id="photoImg"  />
 
@@ -154,4 +141,4 @@
       		</div>
   		</div>
   	</div>
-</body>
+</div>

@@ -91,13 +91,62 @@ function prompt_modal (message, callback) {
 
 
 /*AJAX HTML LOADING OPTIMIZE*/
+var ajaxLoad = function(){
+	var load_backface = false;
+	var global_url;
+	var main = "#body1", back = "#body2";
+	var val = "100%";
 
-function preLoad (url) {
-	$.get(url, null, function(data){
-		return data;
-	})
-}
+	this.pageLoad = function(url, callback){
+		$.post(url, null, function(data){
+			global_url = url;
+			callback(data);
+		})
+	};
 
-function pullRefresh (url, num) {
-	// body...
+	this.preLoad = function(url, callback){
+		this.pageLoad(url, function(data){;
+
+			if (load_backface){
+				main = "#body2";
+				back = "#body1";
+			}
+			else{
+				main = "#body1";
+				back = "#body2";
+			}
+			$(back).html(data);
+
+			if(callback) callback(data);
+		})
+	}
+
+	this.reload = function(url){
+		var re_url = (url)?url:global_url;
+
+		this.pageLoad(re_url, function(data){
+			$(main).html(data);
+		})
+	}
+
+	this.switchPage = function(data, onward){
+		if(!onward){
+			val = "-100%";
+		}
+		$(main).css("z-index", 100);	$(back).css("z-index" ,101);
+		$(back).css("-webkit-transition", "initial").css("transition", "initial").css("left", val);
+		//DISPLAY ANIMATION
+		$(back).css("-webkit-transition", "left 300ms").css("transition", "left 300ms");
+		$(back).css("left", 0);
+
+		$(main).html("").css("left", val);
+		load_backface = !load_backface;
+	};
+
+	this.move = function(url, onward){
+		that = this;
+		this.preLoad(url, function(data){
+			that.switchPage(data, onward);
+		});
+	}
 }

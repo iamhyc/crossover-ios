@@ -1,21 +1,13 @@
-<!DOCTYPE html>
 
-<html style="height:100%">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
 	<title>Detail_edit</title>
-	<script src="javascripts/jquery-1.11.3.min.js"></script>
-	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
-	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
 	<script type="text/javascript">
 		localStorage.lastView = "detail_edit.html";
 		var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
   		var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
   		var myObj = JSON.parse(localStorage.current_user);
 
-		$(document).ready(function(){
+		$(function(){
 			document.getElementById("teamLogo").addEventListener('change',uploadCheck,false );
 			//INITIALIZATION ON
 			$('#team_name').val(myObj.TeamName);
@@ -56,7 +48,7 @@
 									myObj.TeamLogo = result.FileName;
 									localStorage.current_user = JSON.stringify(myObj);
 									alert_flash("头像上传成功");
-									window.location.reload(true);
+									ctrl.reload();
 								}
 							}
 					})
@@ -86,7 +78,7 @@
 							function(result){
 								if (result.success){
 									alert_flash("保存成功");
-									window.location.href = "personal.html";
+									ctrl.move("personal.html", false);
 								}
 								else{
 									alert_flash("失败");
@@ -96,12 +88,11 @@
 			}
 		}
 	</script>
-</head>
 
-<body background="images/bg.jpg" style="height:100%">
+<div class="load-body">
 	<div class="container" style="height:100%;color:#ffffff">
 		<nav class="navbar navbar-fixed-top text-left" style="padding-top:3%">
-    		<span onclick="location.href='personal.html'"><img src="images/back.png" width="14%"></span>		
+    		<span onclick="ctrl.move('personal.html', false)"><img src="images/back.png" width="14%"></span>		
 	    </nav>
 		
 		<div class="container-fluid" style="height:30%">

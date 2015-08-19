@@ -6,15 +6,17 @@
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 	<title>CrossOver</title>
 
-	<script type="text/javascript">
-		if (localStorage.lastView&&localStorage.current_user){
-			window.location.href = localStorage.lastView;
-		}
-	</script>
-
 	<script type="text/javascript" src="javascripts/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
 	<script type="text/javascript" src="javascripts/touchEvent.js"></script>
+	<script type="text/javascript">	
+		window.onload = function(){
+			ctrl = new ajaxLoad();
+			if (localStorage.lastView&&localStorage.current_user){
+				ctrl.reload(localStorage.lastView);
+			}
+		}
+	</script>
 	
 	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
 	<link rel='stylesheet' href='stylesheets/animation.css' />
@@ -23,10 +25,11 @@
 
 </head>
 
-<body style="height:100%">
+<body>
+  <div id="body1">
 	<div class="text-center" style="height:100%;color:#ffffff">
 		<div class="hasBg" style="height:80%;background-image:url('images/csbg.png')">
-			<div class="spc" style="height:15%"></div>
+			<div class="h-div" style="height:15%"></div>
 			<h1>WELCOME</h1>
 			<h1>TO</h1>
 			<img src="images/cs.png" title="image" width="60%" style="margin:3% 0 0 0" />
@@ -34,15 +37,17 @@
 			<p style="font-size:1em">这里有你身边最厉害的篮球战队。</p>
 		</div>
 		<div style="height:20%;padding:0 10px 0 10px">
-			<div class="spc" style="height:35%"></div>
+			<div class="h-div" style="height:35%"></div>
 			<div class="inline-btn" style="display:inline-block;width:40%;padding-right:5%">
-				<button class="btn spc-btn btn-block" onclick="location.href='login.html'">登陆</button>
+				<button class="btn spc-btn btn-block" onclick="ctrl.move('login.html', true)">登陆</button>
 			</div>	
 			<div class="inline-btn" style="display:inline-block;width:40%;padding-left:5%">
-				<button class="btn spc-btn btn-block" onclick="location.href='register.html'">注册</button>
+				<button class="btn spc-btn btn-block" onclick="ctrl.move('register.html', true)">注册</button>
 			</div>	
 		</div>
 	</div>
-
+  </div>
+  <div id="body2">
+  </div>
 </body>
 </html>

@@ -1,15 +1,21 @@
-<html style="height:100%">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<div class="load-body">
     <title>Notification</title>
-    
-    <link rel='stylesheet' href='stylesheets/bootstrap.css' />
-    <link rel="stylesheet" href="stylesheets/style.css" />
-    <link rel="stylesheet" href="stylesheets/animation.css" />
+    <div id="black-bg"></div>
 
-    <script src="javascripts/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="javascripts/styleFunc.js"></script>
+    <nav class="navbar navbar-static-top" style="margin-bottom:0;padding-top:3%;height:11%">
+        <span onclick="ctrl.move('menu.html',false)"><img src="images/back.png" width="14%"></span>
+    </nav>
+
+    
+
+    <div class="message scroll-container" style="height:89%;max-width:100%;overflow:scroll;background:#FFFFFF">
+        <div class="block-bg spinner">    
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+
     <script type="text/javascript" src="javascripts/script_on_notify.js"></script>
     <script type="text/javascript">
         localStorage.lastView = "notify.html";
@@ -23,27 +29,9 @@
             $(".spinner").css("display", "block");
         });
     </script>
-</head>
-
-<body background="images/bg.png" style="height:100%">
-    <div id="black-bg"></div>
-
-    <nav class="navbar navbar-static-top" style="margin-bottom:0;padding-top:3%;height:11%">
-        <span onclick="location.href='menu.html'"><img src="images/back.png" width="14%"></span>
-    </nav>
-
-    
-
-    <div class="message scroll-container" style="height:89%;max-width:100%;overflow:scroll;background:#FFFFFF">
-        <div class="block-bg spinner">    
-            <div class="bounce1"></div>
-            <div class="bounce2"></div>
-            <div class="bounce3"></div>
-        </div>
-    </div>
 
     <script type="text/javascript">
-        $(window).load(function(){
+        $(".load-body").ready(function(){
             $.get(apiAddress+"arrange/list/"+myObj.TeamID, function(data){
                 console.log(data);
                 if (myObj.AdminID!=data.AdminID) {
@@ -65,7 +53,7 @@
                     if (confirm("是否删除此信息")){
                         $.get(apiAddress+"arrange/delete/"+that.id, function(data){
                             alert_flash("删除成功！");
-                            window.location.reload(true);
+                            ctrl.reload();
                         });
                     }
                     /*var that = this;
@@ -78,13 +66,15 @@
                 })
 
                 $(".pending").on("click", function(){
-                    var userShow = {
+                    if($(this).attr("fid")){
+                        var userShow = {
                             "UserID":myObj.UserID,
                             "TeamID":$(this).attr("fid")
                         };
-                    localStorage.userShow = JSON.stringify(userShow);
-                    //console.log(localStorage.userShow);
-                    window.location.href = "detail_page.html";
+                        localStorage.userShow = JSON.stringify(userShow);
+                        //console.log(localStorage.userShow);
+                        ctrl.move("detail_page.html", true);
+                    }
                 })
             });
         })

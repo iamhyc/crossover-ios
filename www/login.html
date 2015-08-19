@@ -1,15 +1,39 @@
-<!DOCTYPE html>
+<div class="load-body">
+	<nav class="navbar navbar-fixed-top text-left" style="margin:0;height:10%">
+    	<div onclick="location.href='index.html'" style="padding-top:2%"><img src="images/back.png" width="14%"></div>
+	</nav>
 
-<html style="height:100%">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-	<script src="javascripts/jquery-1.11.3.min.js"></script>
+	<div class="text-center" style="height:100%;color:#ffffff">
+		<div class="hasBg" style="height:80%;background-image:url('images/vcsbg.png')">
+			<div class="h-div" style="height:15%"></div>
+			<div class="container content text-left" >
+				<div class="text-center">
+					<img src="images/cs.png" title="image"/ width="60%">
+				</div>
+				<br />
+				<h3>登陆</h3>
+				<br />
+
+				<div class="form-group input-group-lg" style="">
+        			<input class="form-control" name="user" id="usr_name" style="IME-MODE:disabled" onkeypress="return event.keyCode >= 48 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" autofocus maxlength="11" type="text" placeholder="电话"/>
+      			</div>
+      			
+				<div class="form-group input-group-lg" style="">
+        			<input type="password" class="form-control" name="pwd" id="usr_pwd" placeholder="密码">
+      			</div>
+				<p style="padding:5% 0 0 0"><a onclick="ctrl.move('reset.html',true)" style="color:#ffffff;font-size:1.3em">忘记密码？</a></p>
+			</div>
+		</div>
+
+		<div class="text-center" style="display:table;height:20%;margin:0 auto">
+			<div class="inline-btn" style="display:table-cell;vertical-align:middle">
+				<button class="btn btn-lg btn-block" style="padding:10px 40px"onclick="userCheck()">登陆</button>
+			</div>	
+		</div>
+	</div>
+
 	<script type="text/javascript" src="javascripts/jquery.base64.js"></script>
-	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
 	<script type="text/javascript" src="javascripts/DES.js"></script>
-	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
 	<script type="text/javascript">
 		function userCheck () {
 			var user = $('#usr_name').val(),
@@ -34,47 +58,13 @@
 								//console.log(data);
 								localStorage.current_user = JSON.stringify(data);
 								//console.log(localStorage.current_user);
-								window.location.href = "menu.html";
+								//location.href="menu.html";
+								ctrl.move("menu.html", true);
+								alert_flash("登陆成功");
 							}
 						}
 					})
 				}
 		}
 	</script>
-</head>
-
-<body background="images/bg.png" style="height:100%">
-	<nav class="navbar navbar-fixed-top text-left" style="margin:0;height:10%">
-    		<div onclick="location.href='index.html'" style="padding-top:2%"><img src="images/back.png" width="14%"></div>		
-	</nav>
-
-	<div class="text-center" style="height:100%;color:#ffffff">
-		<div class="hasBg" style="height:80%;background-image:url('images/vcsbg.png')">
-			<div class="spc" style="height:15%"></div>
-			<div class="container content text-left" >
-				<div class="text-center">
-					<img src="images/cs.png" title="image"/ width="60%">
-				</div>
-				<br />
-				<h3>登陆</h3>
-				<br />
-
-				<div class="form-group input-group-lg" style="">
-        			<input class="form-control" name="user" id="usr_name" style="IME-MODE:disabled" onkeypress="return event.keyCode >= 48 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" autofocus maxlength="11" type="text" placeholder="电话"/>
-      			</div>
-      			
-				<div class="form-group input-group-lg" style="">
-        			<input type="password" class="form-control" name="pwd" id="usr_pwd" placeholder="密码">
-      			</div>
-				<p style="padding:5% 0 0 0"><a href="reset.html" style="color:#ffffff;font-size:1.3em">忘记密码？</a></p>
-			</div>
-		</div>
-
-		<div class="text-center" style="display:table;height:20%;margin:0 auto">
-			<div class="inline-btn" style="display:table-cell;vertical-align:middle">
-				<button class="btn btn-lg btn-block" style="padding:10px 40px"onclick="userCheck()">登陆</button>
-			</div>	
-		</div>
-	</div>
-</body>
-</html>
+</div>

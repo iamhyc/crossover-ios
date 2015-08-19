@@ -56,7 +56,7 @@ function process(obj) {
                       function(result){
                         if (result.success) {
                           alert_flash("上传比分成功");
-                           window.location.reload(true);
+                           ctrl.reload();
                         }
                         else if (!result.success) {
                           alert_flash("输入的密码错误");

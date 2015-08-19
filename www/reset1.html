@@ -1,58 +1,5 @@
-<!DOCTYPE html>
-
-<html style="height:100%">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<div class="load-body">
 	<title>修改密码-CrossOver</title>
-	<script src="javascripts/jquery-1.11.3.min.js"></script>
-	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
-	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
-	<link rel='stylesheet' href='stylesheets/style.css' />
-	<script type="text/javascript">
-		var time = 0;
-		function setVerBtn(){
-			if (time == 0) {
-				$('#verBtn').html('再次发送');
-			}
-			else{
-				$('#verBtn').html('再次发送(' + time +')');
-				time--;
-				setTimeout("setVerBtn()" , 1000);
-			}
-		}
-
-		function userCheck(){
-			//verify process
-			var user = $('#usr_name').val(),
-				ver = $('#ver').val();
-				if (user.length < 11) alert_flash("请输入11位手机号码")
-				//else if (ver.length == 0) alert_flash("请输入验证码");
-				else //if (ver) 
-				{
-					localStorage.reset_phone = user;
-					window.location.href="reset2.html"
-				}
-			//
-		}
-		function veriCheck(){
-			var phone = $('#usr_name').val();
-			if (time != 0) return;
-			if (phone.length == 0) alert_flash("请输入手机号");
-			else if (phone.length < 11) alert_flash("手机号为11位");
-			else {
-				//send verify code...
-				//if (true) {
-				//	time = 60;
-				//	setTimeout("setVerBtn()" , 1000)
-				//}
-				
-			}
-		}
-	</script>
-</head>
-
-<body background="images/bg.jpg" style="height:100%">
 	<div class="text-center" style="height:100%">
 	
 		<nav class="navbar navbar-fixed-top text-left" style="padding-top:3%">
@@ -60,9 +7,9 @@
 		</nav>
 
 		<div style="height:80%;color:#ffffff">
-			<div class="spc" style="height:30%"></div>
+			<div class="h-div" style="height:30%"></div>
 			<div class="container content text-left" >
-				<h3>注册</h3>
+				<h3>修改密码</h3>
 				<br />
 				<div class="form-group input-group-lg" style="width:100%">
         			<input class="form-control" id="usr_name" style="IME-MODE:disabled" onkeypress="return event.keyCode >= 48 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" autofocus maxlength="11" type="text" placeholder="输入手机号"/>
@@ -84,6 +31,5 @@
 		</div>
 
 	</div>
-
-</body>
-</html>
+	<script type="text/javascript" src="javascripts/script_on_reset.js"></script>
+</div>

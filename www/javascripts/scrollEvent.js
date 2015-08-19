@@ -1,40 +1,4 @@
-<!DOCTYPE html>
-<html>
- <head>
-  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
-  <link type="text/css" href="css/main.css" rel="stylesheet">
-  <title>滑动回弹</title>
-  <!--[if lt IE 9]>      <![endif]-->
-  <noscript></noscript>
-  <style type="text/css">
-    body,html {background-color:#333; margin: 0; height: 100%; line-height: 2.0; font-family: 'Microsoft YaHei'; overflow-y:hidden;}
-#contain{margin: 0 auto; position:relative; width: 100%; max-width: 480px; _width: 480px; height: 100%; cursor: pointer !important;}
-#appArea{position: absolute; width: 100%; height: 100%; overflow: hidden;  background-color: #fff;}  
-#topInfo{position: absolute;top: 60px;width: 100%; height:60px; text-align: center; font-size: 18px; }
-#bottomInfo{position: absolute;bottom: 0;width: 100%;}
-#scrollerArea{position: absolute; right: 0; width: 1.5%; height: 100%;visibility: hidden;}
-#scroller{position: absolute; top:0; width: 100%;  background-color: #aaa;}
-#moveArea{position: absolute; top:0px; width: 100%; background-color: #ddd;}
-  </style>
- </head>
- <body>
-  <div id="contain">
-   <div id="appArea">
-    <div id="topInfo">
-     logo or animate
-    </div>
-    <div id="bottomInfo">
-     some imformation  2014-4-28
-    </div>
-    <div id="moveArea"></div>
-    <div id="scrollerArea">
-     <div id="scroller"></div>
-    </div>
-   </div>
-  </div>
-  <script type="text/javascript">
-    window.onload = function() {
+window.onload = function() {
     /*测试数据*/
     var insert = '';
     for (var i = 0; i < 80; i++) {
@@ -240,6 +204,3 @@ appTouch.prototype = {
         //其他功能扩充
     }
 }
-  </script>
- </body>
-</html>

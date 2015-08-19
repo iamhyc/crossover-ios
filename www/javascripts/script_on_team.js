@@ -117,12 +117,8 @@ function fightVS () {
 
 //personal.html
 function addMem(){
-  window.location.href = "member_add.html";
+  ctrl.move("member_add.html", true);
 }
-  function turnToPhotos () {
-    localStorage.galleryShow = "1_"+myObj.TeamID;
-    window.location.href = 'photos.html';
-  }
 
   function turnToDetail (id0, id1) {
     var TeamID;
@@ -134,8 +130,43 @@ function addMem(){
         };
     localStorage.userShow = JSON.stringify(userShow);
     //console.log(localStorage.userShow);
-    window.location.href = "detail_page.html";
+    ctrl.move("detail_page.html", true);
   }
+
+  function preview(){
+      //var patn = /\.jpg$|\.jpeg$|\.png$|\.gif$/i;
+        var file = this.files[0]; 
+        var reader = new FileReader(); 
+        reader.readAsDataURL(file);
+        /* */ 
+        reader.onloadend = function(e) {
+          var data = JSON.stringify({
+                  "TeamID":myObj.TeamID,
+                  "PhotoBase64": this.result.slice(this.result.indexOf(',')+1)
+          });
+          $.ajax({
+            type:'post',
+            url: apiAddress+"team/photo/home",
+            contentType: 'application/json',
+            dataType:'json',
+            data:data,
+            success: 
+              function(result){
+                if (!result){
+                  alert_flash("上传失败")
+                }
+                else{
+                  myObj.TeamHomePhoto = result.FileName;
+                  localStorage.current_user = JSON.stringify(myObj);
+                  //$('#back').attr('src', this.result).css("left", "0").css("top", "0");
+                }
+              }
+          })
+          $('#back').attr('src', this.result).css("left", "0").css("top", "0");
+        }
+  }
+
+
 
   function touchStart(event) {
       $(".score-bar").css("-webkit-transition", "initial").css("transition", "initial");

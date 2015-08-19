@@ -1,14 +1,6 @@
-<!DOCTYPE html>
+	
 
-<html style="height:100%">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 	<title>Detail_seen</title>
-	<script src="javascripts/jquery-1.11.3.min.js"></script>
-	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
-	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
 	<script type="text/javascript">
 		localStorage.lastView = "detail_seen.html";
 		var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
@@ -25,12 +17,11 @@
   			$('#city').text(content.City);
   		})
 	</script>
-</head>
 
-<body background="images/bg.jpg" style="height:100%">
+<div class="load-body">
 	<div class="text-center" style="height:100%;color:#ffffff">
 		<nav class="navbar navbar-fixed-top text-left" style="padding-top:3%">
-    		<span onclick="location.href='detail_page.html'"><img src="images/back.png" width="14%"></span>		
+    		<span onclick="ctrl.move('detail_page.html',false)"><img src="images/back.png" width="14%"></span>		
 		</nav>
 		
 		<div class="container" style="height:30%">
@@ -52,5 +43,4 @@
 				<p id="city">Where</p>
 			</article>
 		</div>
-</body>
-</html>
+</div>

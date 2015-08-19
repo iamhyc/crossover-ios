@@ -1,29 +1,14 @@
- <!DOCTYPE html>
-
-<html style="height:100%;overflow:hidden">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-	<title>Detail_page</title>
-
-  <link rel='stylesheet' href='stylesheets/bootstrap.css' />
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/animation.css">
-
-	<script src="javascripts/jquery-1.11.3.min.js"></script>
-  <script type="text/javascript" src="javascripts/styleFunc.js"></script>
   <script type="text/javascript" src="javascripts/script_on_team.js"></script>
-	
 	<script type="text/javascript">
     function turnToPhotos () {
       //console.log(userShow.TeamID);
       localStorage.galleryShow = "0_"+userShow.TeamID;
-      window.location.href = 'photos.html';
+      ctrl.move('photos.html', true);
     }
 
     function backLocation(){
       //if (history.length == 1)
-        window.location.href = 'menu.html';
+        ctrl.move('menu.html', false);
       //else
         //history.back();
     }
@@ -53,7 +38,7 @@
 
       })
 
-      $(window).load(function(){
+      $("load-body").ready(function(){
         //PAGE INITIALIZE
         $(".fakeBox2 .THead1").attr("src", imgAddress+"TeamLogo/"+userShow.TeamLogo);
         $(".fakeBox2 .TName1").text(userShow.TeamName);
@@ -97,9 +82,9 @@
         })
       })
 	</script>
-</head>
 
-<body>
+<div class="load-body">
+  <title>Detail_page</title>
   <div id="block-bg"></div><div id="black-bg"></div>
 
   <nav class="navbar navbar-fixed-top" style="margin-bottom:0;padding-top:3%">
@@ -117,7 +102,7 @@
           <span id="position" style="text-align:left;font-size:13px;color: rgb(2, 65, 126);">广东省 深圳市</span>
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top:-27px;text-align:center">
-          <img id="myHead" src="abc.jpg" onclick="location.href='detail_seen.html'" class="img-circle" width="55px" height="55px">
+          <img id="myHead" src="abc.jpg" onclick="ctrl.move('detail_seen.html',true)" class="img-circle" width="55px" height="55px">
           <p id="myName" style="text-align:center;font-size:13px;color:rgb(2, 65, 126);margin:3px 0 3px 0">干</p>
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4" style="text-align:center;padding: 8px 3.5% 0 3.5%;height:100%">
@@ -285,5 +270,5 @@
     </div>
 </div>
 
-</body>
+</div>
 </html>

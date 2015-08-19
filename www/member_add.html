@@ -1,16 +1,6 @@
 
-<!DOCTYPE html>
 
-<html style="height:100%">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 	<title>Member_add</title>
-	<script src="javascripts/jquery-1.11.3.min.js"></script>
-	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
-	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
-	<link rel='stylesheet' href='stylesheets/style.css' />
 	<script type="text/javascript">
 		localStorage.lastView = "member_add.html"
 		var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
@@ -81,9 +71,8 @@
 			}
 		}
 	</script>
-</head>
 
-<body background="images/bg.jpg" style="height:100%;color:#ffffff">
+<div class="load-body">
 	<div class="container" style="height:100%;padding:0">
 		<nav class="navbar navbar-fixed-top text-left" style="margin:0 auto;padding-top:3%">
     		<span onclick="location.href='personal.html'"><img src="images/back.png" width="14%"></span>		
@@ -129,5 +118,4 @@
 				<button class="btn btn-block" style="" onclick="saveCheck()">保存</button>
 			</div>	
 		</div>
-</body>
-</html>
+</div>
