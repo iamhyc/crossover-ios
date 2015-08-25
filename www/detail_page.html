@@ -1,3 +1,5 @@
+  
+
   <script type="text/javascript" src="javascripts/script_on_team.js"></script>
 	<script type="text/javascript">
     function turnToPhotos () {
@@ -28,10 +30,13 @@
         $(".spinner").css("display", "block");
 
         $(".upper-side").scroll(function(){
+          console.log(this.scrollTop)
           if (this.scrollTop > 0){
+            $(".navbar").css("opacity", this.scrollTop/100);
             $(".navbar").css("background", "inherit");
           }
           else{
+            $(".navbar").css("opacity", 1);
             $(".navbar").css("background", "none");
           }
         });

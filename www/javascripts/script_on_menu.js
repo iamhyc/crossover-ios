@@ -1,8 +1,18 @@
-function loadPage(num){
+function loadPage(num, onward){
 	var lstAddress = apiAddress + "team/user/"+ myObj.UserID + "/list/" + num;
 	$.get(lstAddress, function(data){
-		//console.log(data);
+		//console.log(pageNow);
 		if (myObj.AdminID!=data.AdminID) Logout();
+
+		if (data.scoreList.length == 0){
+			if (onward){
+				pageNow++
+			}
+			else{
+				pageNow--;
+			}
+			alert_flash("没有更多数据了");
+		}
 		var myList = data.scoreList;
 		//console.log(myObj.TeamID);
 		localStorage["myList"+num] = JSON.stringify(myList);
@@ -15,7 +25,12 @@ function loadPage(num){
 			    col_mid='<div class="col-xs-4" style="padding:0;padding-top:2%;margin-left:-5%"><p style="margin:16% 0 0 0%;font-size:70%">'+myList[i].TeamName+'</p></div>',
 			    col_end='<div class="col-xs-5" style="padding:0;display: -webkit-inline-box;padding-top:6%;padding-left:6%"><span class="glyphicon glyphicon-star" style="margin:26% 0 0 10%;font-size:18px"></span><p style="padding-left:10%;font-style:oblique; padding-top:3%">'+myList[i].lntegral+'</p></div></div>';
 
-			$('.homePage').append(col);
+			if(!onward){
+				$('.homePage').append(col);
+			}
+			else{
+				$('.homePage').prepend(col);
+			}
 			//$('.homePage').append(spc+col_top+col_mid+col_end);
 		}
 		$(".blockr").on({
@@ -35,6 +50,26 @@ function loadPage(num){
 		});
 	});	
 }
+
+function addScrollListener () {
+	var at = new appTouch({
+        tContain : 'appArea', //必选：滑动区域id
+        tMove : 'moveArea', //必选：移动区域id
+    }, onmoveend);
+
+    function onmoveend(m) {
+    	console.log(m)
+        if (m=="top") {
+        	ctrl.reload();
+        }
+        else{
+        	pageNow++;
+        	loadPage(pageNow);
+        }
+    }
+
+}
+    		
 
 function Logout(){
 	localStorage.current_user = "";
