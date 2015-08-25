@@ -11,13 +11,13 @@
 			</button>
 		</div>
 
-		<div class="logout">
+		<div class="logout" style="">
 			<button type="button" class="btn btn-danger" style="width:60%;background-color:rgb(230, 0, 18);color:#fff" onclick="Logout()">登出</button>
 		</div>
 	</div>
 	<!--Menu on the Right-->
 
-	<div class="body" style="height:100%;overflow:hidden;postion:relative">
+	<div class="body" style="height:100%;overflow:hidden">
 		<div id="block-bg"></div>
 
 		<nav class="navbar navbar-static-top" style="margin-bottom:0;height:10%">
@@ -31,25 +31,23 @@
 				</div>
 			</div>	
 		</nav>
-
-		<div id="appArea" style="height:90%">
-			<div style="text-align:center">松开刷新</div>
-    		<div class="homePage" id="moveArea">
-    			<div class="block-bg spinner">		
-  					<div class="bounce1"></div>
-  					<div class="bounce2"></div>
-  					<div class="bounce3"></div>
-				</div>
-    		</div>
-    	</div>
+       
+    	<div class="homePage" style="height:90%;max-width:100%;overflow:scroll;background:#fff">
+    		<div class="block-bg spinner">		
+  				<div class="bounce1"></div>
+  				<div class="bounce2"></div>
+  				<div class="bounce3"></div>
+			</div>
+    	</div>  	
 			
 	</div>
 
 	<script type="text/javascript" src="javascripts/script_on_menu.js"></script>
-	<script type="text/javascript" src="javascripts/scrollEvent.js"></script>
 	<script type="text/javascript">
     	var pageNow = 0;
     	var myObj = JSON.parse(localStorage.current_user);
+    	var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
+    	var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
 
     	$(function(){
     		$(".spinner").css("display" ,"block");
@@ -64,8 +62,6 @@
 			loadPage(pageNow);		
 			$(".block-bg").css("display" ,"none");
 			//End: Initial part
-
-			addScrollListener();
 
 			//Start: Menu-slide part
 			$(".menu-open").click(function(){

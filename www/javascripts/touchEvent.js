@@ -1,11 +1,11 @@
 var touch_flag;
 
 
-var entry = function(config, callback){
+var entry = function(targetID, vertical, extent){
 	//String targetID, boolean vertical, String extent;
-	this.targetID = config.targetID;
-	this.vertical = config.vertical;
-	this.extent = config.extent;
 	(extent?"pricise":"rough");
 }
 
+function (){
+	
+}
