@@ -95,7 +95,13 @@ var ajaxLoad = function(){
 	var load_backface = false;
 	var global_url;
 	var main = "#body1", back = "#body2";
-	var val = "100%";
+	//var val = "100%";
+
+	document.getElementById("body1").addEventListener("webkitAnimationEnd",function(){
+		//console.log(main+" "+back);
+		$(back).removeClass();	$(main).removeClass();
+		$(main).css("display", "none");
+	})
 
 	this.pageLoad = function(url, callback){
 		$.post(url, null, function(data){
@@ -129,24 +135,25 @@ var ajaxLoad = function(){
 		})
 	}
 
-	this.switchPage = function(data, onward){
-		if(!onward){
-			val = "-100%";
-		}
-		$(main).css("z-index", 100);	$(back).css("z-index" ,101);
-		$(back).css("-webkit-transition", "initial").css("transition", "initial").css("left", val);
-		//DISPLAY ANIMATION
-		$(back).css("-webkit-transition", "left 300ms").css("transition", "left 300ms");
-		$(back).css("left", 0);
+	this.switchPage = function(onward){
+		$(back).css("display", "block");
 
-		$(main).html("").css("left", val);
+		if(onward){
+			$(back).addClass("slide-in");
+			$(main).addClass("slide-out");
+		}
+		else{
+			$(back).addClass("slide-reverse-in");
+			$(main).addClass("slide-reverse-out");
+		}
+
 		load_backface = !load_backface;
 	};
 
 	this.move = function(url, onward){
 		that = this;
 		this.preLoad(url, function(data){
-			that.switchPage(data, onward);
+			that.switchPage(onward);
 		});
 	}
 }

@@ -1,15 +1,18 @@
 @font-face{
-  font-family: 'GillSans-Bold';
-  src: url('../fonts/GillSans-Bold') format('truetype');
+  font-family: 'Hiragino';
+  src: url('../fonts/Hiragino-Sans-GB-W3.otf') format('truetype');
 }
 @font-face{
-  font-family: 'GillSans-BoldItalic';
-  src: url('../fonts/GillSans-BoldItalic') format('truetype');
+  font-family: 'GillSans-UltraBold';
+  src: url('../fonts/GillSans-UltraBold.otf') format('truetype');
+}
+@font-face{
+  font-family: 'GillSans';
+  src: url('../fonts/GillSans-BoldItalic.ttf') format('truetype');
 }
 
 body {
  height:100%;
-
  overflow-y: scroll;
  overflow-x: hidden;
  position: relative;
@@ -22,6 +25,8 @@ body {
  -moz-user-select:none;
  -ms-user-select:none;
  user-select:none;
+ 
+ font-family: 'Hiragino';
 }
 
 .scroll-container{
@@ -274,33 +279,24 @@ body {
   /*For IOS*/
   -webkit-overflow-scrolling : touch;
 }
-#body1{
+
+#body1, #body2{
   height:100%;
   width:100%;
   background: inherit;
-  /*INITIAL POSTION VALUE*/
   position: absolute;
   top:0; left:0%;
-  z-index: 100;
-  /*INITIAL ANIMATION VALUE*/
+
+  -webkit-animation-timing-function: ease-out;
+  -webkit-animation-duration: 225ms;
+
+  -webkit-animation-fill-mode: both;
+}
+#body1{
   display: block;
-  -webkit-transition: all 300ms;
-  transition: all 300ms;
-  /*-webkit-transform: translate(0%, 0px) translateZ(0px);*/
 }
 #body2{
-  height:100%;
-  width:100%;
-  background: inherit;
-  /*INITIAL POSTION VALUE*/
-  position: absolute;
-  top:0; left:-100%;
-  z-index: 101;
-  /*INITIAL ANIMATION VALUE*/
-  display: block;
-  -webkit-transition: all 300ms;
-  transition: all 300ms;
-  /*-webkit-transform: translate(0%, 0px) translateZ(0px);*/
+  display: none;
 }
 
 .upper-side{

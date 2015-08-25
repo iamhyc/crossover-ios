@@ -48,7 +48,7 @@ function preview(){
 	reader.onload = function(e) {
 		$('#upload').attr('src', this.result);
 		localStorage.reg_PhotoBase64 = this.result.slice(this.result.indexOf(',')+1);
-		console.log(this.result);
+		//console.log(this.result);
 	}
 	reader.onloadend = function() {
 		readingFlag = false;
@@ -64,7 +64,7 @@ function imgCheck () {
 	else {
 		localStorage.reg_cityName = cityName;
 		localStorage.reg_teamName = teamName;
-		console.log(localStorage.reg_PhotoBase64);
+		//console.log(localStorage.reg_PhotoBase64);
 		ctrl.move("register3.html", true);
 	}
 }
@@ -106,7 +106,7 @@ function pwdCheck () {
 				dataType:'json',
 				data:json,
 				success:function(data){
-					console.log(data);
+					//console.log(data);
 					if (data.success){
 						alert_flash("成功！");
 						window.location.href = "index.html"

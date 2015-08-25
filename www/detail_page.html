@@ -1,3 +1,5 @@
+  
+
   <script type="text/javascript" src="javascripts/script_on_team.js"></script>
 	<script type="text/javascript">
     function turnToPhotos () {
@@ -28,10 +30,13 @@
         $(".spinner").css("display", "block");
 
         $(".upper-side").scroll(function(){
+          //console.log(this.scrollTop)
           if (this.scrollTop > 0){
+            $(".navbar").css("opacity", this.scrollTop/100);
             $(".navbar").css("background", "inherit");
           }
           else{
+            $(".navbar").css("opacity", 1);
             $(".navbar").css("background", "none");
           }
         });
@@ -97,12 +102,12 @@
     </div>
 
     <div class="container-fluid" style="background:#ffffff;height:12.5%">
-      <div class="row" style="height:100%">
+      <div class="row" style="height:100%;">
         <div class="col-xs-4 col-sm-4 col-md-4" style="padding-top:8px;padding-left:8px;padding-right:0">
           <span id="position" style="text-align:left;font-size:13px;color: rgb(2, 65, 126);">广东省 深圳市</span>
         </div>
-        <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top:-27px;text-align:center">
-          <img id="myHead" src="abc.jpg" onclick="ctrl.move('detail_seen.html',true)" class="img-circle" width="55px" height="55px">
+        <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top:-35px;text-align:center">
+          <img id="myHead" src="abc.jpg" onclick="ctrl.move('detail_seen.html',true)" class="img-circle" width="70px" height="70px">
           <p id="myName" style="text-align:center;font-size:13px;color:rgb(2, 65, 126);margin:3px 0 3px 0">干</p>
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4" style="text-align:center;padding: 8px 3.5% 0 3.5%;height:100%">
@@ -111,7 +116,7 @@
       </div>
     </div>
 
-    <div class ="space" style="height:2px"></div>
+    <div class ="space" style="height:2px;    background-color:#192EA0;"></div>
 
     <div class="container-fluid">
       <div class="block-bg spinner">    
@@ -124,8 +129,9 @@
         <span style="text-align:center;color:rgb(2, 65, 126);font-size:13px">一</span>
       </p>
 
-      <div class="row portrait" style="padding:0 14% 0 14%">
+      <div class="row portrait" style="padding:0 14% 0 14%;">
       </div>
+      <p style="text-align:center;margin:0;height:20px"></p>
 
     </div>
 
@@ -136,11 +142,11 @@
 
 
 <div class="hidden show-block" style="z-index:1092;top:40%;left:3%;width:94%;background:#003D79;border-radius:1em;color:#FFFFFF;position:absolute;">
-  <div class="row" style="margin:0 0 0 0" >
+  <div class="row" style="margin:0 0 0 0;" >
     <div class="col-xs-4" style="padding:3% 0%  0% 3%">
       <img id="memHead" src="abc.jpg" class="img-circle" width="64px" height="64px">
     </div>
-    <div class="col-xs-8" style="padding-top:4%;height:100%;margin-left:-10%;font-size:1.2em">
+    <div class="col-xs-8" style="padding-top:4%;height:100%;margin-left:-10%;font-size: large;">
       <div id="name" style="height:15%">aaa</div>
       <div id="height"style="height:10%">身高:aaa</div>
       <div id="weight" style="height:10%">体重:aaa</div>
@@ -160,12 +166,12 @@
       <tbody style="width:100%">
       <tr style="width:100%">
 
-        <td style="width:20%;text-align:right"><span id="myGrade" style="font-size:28px; font-weight:normal">GRADE</span></td>
+        <td style="width:20%;text-align:right"><span id="myGrade" style="font-size:50px; font-weight:normal;font-family: sans-serif;">GRADE</span></td>
 
-        <td style="width:10%;text-align:center"><span class="glyphicon glyphicon-star" style="font-size:18px"></span></td>
+        <td style="width:10%;text-align:center"><span class="glyphicon glyphicon-star" style="font-size:12px"></span></td>
 
         <td style="width:20%;text-align:left">
-          <button class="btn btn-block" onclick="fightVS();stopBubble(event)" ontouchstart="stopBubble(event)" style="width:80px; padding:0%;height:31px"><span style="color: #003E64;font-size:13px">约战</span></button>
+          <button class="btn btn-block" onclick="fightVS();stopBubble(event)" ontouchstart="stopBubble(event)" style="width:66%; padding:0%;height:31px"><span style="color: #003E64;font-size:13px">约战</span></button>
         </td>
 
         <td style="width:50%;color:#fff;-webkit-backface-visibility:hidden">
@@ -192,9 +198,10 @@
   <div class="fakeBox2 hidden">
       <!--BEGINNING FOR FINISHED LIST-->
       <div class="scoreItem" height="14em" width="100%"  style="padding:2% 2% 2% 2%">
+        <div style="padding:2% 2% 2% 2%;    background-color: whitesmoke">
           <div style="background:#F6F7F7;height:100%;width:100%;">
              <div class="vs" style="background-image:linear-gradient(90deg,#E0E0E0,#E0E0E0 50%, #007979 50%, #007979);height:14em">
-              <div class="Row1 row" style="height:30%; padding:3% 3% 3% 3%">
+              <div class="Row1 row" style="height:30%; padding:3% 3% 3% 3%;">
           
               <div class="col-xs-3"> 
                 <img src="abc.jpg" class="THead1 img-circle" width="41px" height="41px" style="">
@@ -261,11 +268,12 @@
          </td>
        </tr>
      </table>
-            <div class = space style="height:10%; text-align:center;margin-top:-19%;margin-bottom:17%"><span style="background:#F6F6F9;font-size:33px">:</span></div>
+            <div class = space style="height:10%; text-align:center;margin-top:-16%;margin-bottom:17%"><span style="background:#F6F6F9;font-size:33px">:</span></div>
              </div>
          
           </div>
       </div>
+    </div>
       <!--END FOR FINISHED LIST-->
     </div>
 </div>

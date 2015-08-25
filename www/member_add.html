@@ -3,8 +3,6 @@
 	<title>Member_add</title>
 	<script type="text/javascript">
 		localStorage.lastView = "member_add.html"
-		var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
-  		var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
   		var myObj = JSON.parse(localStorage.current_user);
 
   		$(document).ready(function(){
@@ -42,7 +40,7 @@
 			}
 			else {
 				var photoData = $('#upload').attr('src');
-				console.log(photoData);
+				//console.log(photoData);
 				var data = JSON.stringify({
 						"TeamID":myObj.TeamID,
 						"PlayerName":name,
@@ -52,7 +50,7 @@
 						"position":site,
 						"PhotoBase64":photoData.slice(photoData.indexOf(',')+1)
 				});
-				console.log(data);
+				//console.log(data);
 				$.ajax({
 					type:'post',
 					url: apiAddress+"player",
@@ -64,7 +62,7 @@
 							if (result) window.location.href="personal.html";
 							else {
 									alert_flash("添加失败");
-									console.log(result);
+									//console.log(result);
 								}
 						}
 				})
@@ -75,7 +73,7 @@
 <div class="load-body">
 	<div class="container" style="height:100%;padding:0">
 		<nav class="navbar navbar-fixed-top text-left" style="margin:0 auto;padding-top:3%">
-    		<span onclick="location.href='personal.html'"><img src="images/back.png" width="14%"></span>		
+    		<span onclick="ctrl.move('personal.html', false)"><img src="images/back.png" width="14%"></span>
 		</nav>
 		
 		<div class="container-fluid" style="margin-top:8%;height:15.5%">
@@ -91,7 +89,7 @@
 		</div>
 
 		<div class="container text-left" style="">
-			<p style="font-size:18px;margin:0 0 5% 0;">添加队员</p>
+			<p style="font-size:18px;margin:0 0 5% 0;"><span style="color:#ffffff">添加队员</span></p>
 
   				<div class="row" style="height:46px;font-size:16px;width:100%;margin:0 auto">
   					<input type="text" id="mem_name" class="col-xs-5 net-control"  placeholder="队员名称" style="height:100%;width:46%">
