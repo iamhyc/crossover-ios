@@ -13,12 +13,10 @@
     $(".spinner").css("display", "block");
 
     $(".upper-side").scroll(function(){
-      if (this.scrollTop > 0){
-        $(".navbar").css("opacity", this.scrollTop/100);
+      if (this.scrollTop){
         $(".navbar").css("background", "inherit");
       }
       else{
-        $(".navbar").css("opacity", 1);
         $(".navbar").css("background", "none");
       }
     });
