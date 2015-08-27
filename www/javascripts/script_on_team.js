@@ -2,8 +2,6 @@
   The code here share the same function both in personal.html & detail_page.html
   No modoules includes.
 */
-var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
-var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
 
 function deal_spc (content) {
     content=content.replace(/\r\n/g,"<BR>")  
@@ -121,16 +119,36 @@ function addMem(){
 }
 
   function turnToDetail (id0, id1) {
-    var TeamID;
-    if (id0) TeamID = myTodo[id0].TeamID;
-    if (id1) TeamID = myList[id1].TeamID;
+    var TeamID, TeamLogo, TeamName;
+    if (id0) {
+      TeamID = myTodo[id0].TeamID;
+      TeamLogo = myTodo[id0].TeamLogo;
+      TeamName = myTodo[id0].TeamName;
+    }
+    if (id1) {
+      TeamID = myList[id1].TeamID;
+      TeamLogo = myList[id1].TeamLogo;
+      TeamName = myList[id1].TeamName;
+    }
     var userShow = {
           "UserID":myObj.UserID,
-          "TeamID":TeamID
+          "TeamID":TeamID,
+          "TeamLogo":TeamLogo,
+          "TeamName":TeamName
         };
     localStorage.userShow = JSON.stringify(userShow);
-    //console.log(localStorage.userShow);
     ctrl.move("detail_page.html", true);
+  }
+
+  function turnToMoreDetail(id1){
+    var userShow = {
+          "UserID":myObj.UserID,
+          "TeamID":hisList[id1].TeamID,
+          "TeamLogo":hisList[id1].TeamLogo,
+          "TeamName":hisList[id1].TeamName
+    }
+    localStorage.userShow = JSON.stringify(userShow);
+    ctrl.reload();
   }
 
   function preview(){

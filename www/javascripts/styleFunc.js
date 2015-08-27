@@ -100,8 +100,19 @@ var ajaxLoad = function(){
 	document.getElementById("body1").addEventListener("webkitAnimationEnd",function(){
 		//console.log(main+" "+back);
 		$(back).removeClass();	$(main).removeClass();
-		$(main).css("display", "none");
+		$(main).css("display", "none").html("");
 	})
+
+	this.judgement = function(){
+		if (load_backface){
+			main = "#body2";
+			back = "#body1";
+		}
+		else{
+			main = "#body1";
+			back = "#body2";
+		}
+	}
 
 	this.pageLoad = function(url, callback){
 		$.post(url, null, function(data){
@@ -111,16 +122,10 @@ var ajaxLoad = function(){
 	};
 
 	this.preLoad = function(url, callback){
-		this.pageLoad(url, function(data){;
+		that = this;
+		this.pageLoad(url, function(data){
+			that.judgement();
 
-			if (load_backface){
-				main = "#body2";
-				back = "#body1";
-			}
-			else{
-				main = "#body1";
-				back = "#body2";
-			}
 			$(back).html(data);
 
 			if(callback) callback(data);
@@ -129,7 +134,7 @@ var ajaxLoad = function(){
 
 	this.reload = function(url){
 		var re_url = (url)?url:global_url;
-
+		this.judgement();
 		this.pageLoad(re_url, function(data){
 			$(main).html(data);
 		})

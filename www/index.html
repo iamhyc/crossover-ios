@@ -6,10 +6,17 @@
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 	<title>CrossOver</title>
 
+	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
+	<link rel='stylesheet' href='stylesheets/style.css' />
+	<link rel='stylesheet' href='stylesheets/animation.css' />
+	<link rel='stylesheet' href='stylesheets/menu.css' />
+
 	<script type="text/javascript" src="javascripts/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="javascripts/styleFunc.js"></script>
 	<script type="text/javascript" src="javascripts/touchEvent.js"></script>
-	<script type="text/javascript">	
+	<script type="text/javascript">
+		var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
+    	var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
 		window.onload = function(){
 			ctrl = new ajaxLoad();
 			if (localStorage.lastView&&localStorage.current_user){
@@ -17,11 +24,6 @@
 			}
 		}
 	</script>
-	
-	<link rel='stylesheet' href='stylesheets/bootstrap.css' />
-	<link rel='stylesheet' href='stylesheets/animation.css' />
-	<link rel='stylesheet' href='stylesheets/style.css' />
-	<link rel='stylesheet' href='stylesheets/menu.css' />
 
 </head>
 
