@@ -10,6 +10,10 @@
   font-family: 'GillSans';
   src: url('../fonts/GillSans-BoldItalic.ttf') format('truetype');
 }
+@font-face{
+  font-family: 'GillSans-BoldItalic';
+  src: url('../fonts/Gill-Sans-MT-Bold-Italic.ttf') format('truetype');
+}
 
 body {
  height:100%;

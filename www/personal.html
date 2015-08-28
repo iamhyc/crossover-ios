@@ -59,10 +59,10 @@
 
         //ADD PLAYER
         for (var i = 0; i < myPlayer.length; i++){
-          var img='<div class="col-xs-4" style="padding:11px 0 0 0"><img src="'+imgAddress+'Teammate/'+myPlayer[i].HeadIcon+'" id='+i+' class="img-circle isMem" width="50px" height="50px"><p style="margin:0;width:50px; text-align:center"><span style="text-align:center;color:rgb(2, 65, 126);font-size:13px">'+myPlayer[i].PlayerName+'</span></p><div add_id='+i+' class="hidden delete" style="border-radius:50%;background:red;width:15px;height:15px;text-align:center;position:absolute;left:35px;bottom:35px"><span class="delete_icon">-</span></div></div>';
+          var img='<div class="col-xs-4" style="padding-top:5%"><img src="'+imgAddress+'Teammate/'+myPlayer[i].HeadIcon+'" id='+i+' class="img-circle isMem" width="60px" height="60px"><p style="margin:0;width:60px; text-align:center"><span style="text-align:center;color:rgb(2, 65, 126);font-size:13px">'+myPlayer[i].PlayerName+'</span></p><div add_id='+i+' class="hidden delete" style="border-radius:50%;background:red;width:15px;height:15px;text-align:center;position:absolute;left:35px;bottom:35px"><span class="delete_icon">-</span></div></div>';
           $(".portrait").append(img);
         }
-        var img='<div class="col-xs-3 col-sm-3 col-md-3" style="padding:11px 0 0 0"><img src="images/white-plus.png" id="addMem" class="img-circle" width="50px" height="50px"></div>';
+        var img='<div class="col-xs-3 col-sm-3 col-md-3" style="padding-top:5%"><img src="images/white-plus.png" id="addMem" class="img-circle" width="60px" height="60px"></div>';
         $(".portrait").append(img);
 
         longFocus($(".isMem"), function (id){
@@ -123,8 +123,8 @@
   <div id="block-bg"></div><div id="black-bg"></div>
 
   <nav class="navbar navbar-fixed-top" style="padding-top:3%">
-      <span class="text-left" onclick="ctrl.move('menu.html',false)"><img src="images/back.png" width="14%"></span>
-      <span style="margin:0 0 0 70%" onclick="ctrl.move('detail_edit.html',true)"><img src="images/edit.png" width="14%"></span>
+      <span class="text-left" onclick="ctrl.move('menu.html',false)"><img src="images/back.png" width="12%"></span>
+      <span style="margin:0 0 0 71%" onclick="ctrl.move('detail_edit.html',true)"><img src="images/edit.png" width="12%"></span>
   </nav>
 
   <div class="upper-side personal">
@@ -138,12 +138,12 @@
           <div class="col-xs-4 col-sm-4 col-md-4" style="padding-top:8px;padding-left:8px;padding-right:0">
             <span id="position" style="text-align:left;font-size:13px;color: rgb(2, 65, 126);">广东省 深圳市</span>
           </div>
-          <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top:-35px;text-align:center">
-            <img id="myHead" src="abc.jpg" class="img-circle" width="70px" height="70px">
-            <p id="myName" style="text-align:center;font-size:13px;color:rgb(2, 65, 126);margin:3px 0 3px 0">干</p>
+          <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top:-37px;text-align:center">
+            <img id="myHead" src="abc.jpg" class="img-circle" width="75px" height="75px">
+            <p id="myName" style="text-align:center;font-size:15px;font-weight:bold;color:rgb(2, 65, 126);margin:3px 0 3px 0">干</p>
           </div>
           <div class="col-xs-4 col-sm-4 col-md-4" style="text-align:center;padding: 8px 3.5% 0 3.5%;height:100%">
-            <button class="btn btn-block" style="text-align:center;background:#DCDDDD" onclick="turnToPhotos()"><span style="color: rgb(2, 65, 126);font-size:13px">相册</span></button>
+            <button class="btn btn-block" style="text-align:center;background:#DCDDDD;height:29px; font-size:13px" onclick="turnToPhotos()"><span style="color: rgb(2, 65, 126);">相册</span></button>
           </div>
         </div>
       </div>
@@ -179,7 +179,7 @@
             <span class="glyphicon glyphicon-star" style="font-size:12px;"></span>
         </th>
         <th style="width:80%;text-align:center">
-            <span id="grade" style="padding-right:0;text-align:center;font-size:50px;color:#FFFFFF;font-weight:normal;    font-family: sans-serif;">1000</span>
+            <span id="grade" style="padding-right:0;text-align:center;font-size:50px;color:#FFFFFF;font-weight:normal;    font-family: GillSans-BoldItalic;">1000</span>
         </th>
         <th style="width:10%;text-aligh:left">
             <span class="glyphicon glyphicon-star" style="font-size:12px"></span>
@@ -215,7 +215,7 @@
       <div class="fakeBox1 hidden">
       <!--BEGINNING FOR PROCESSING LIST-->
       <div class="processItem" style="background:#F6F7F7;width:94.5%;margin:0 auto;padding:2% 2% 2% 2%">
-          <div class="vs" style="background:#DCDDDD;height:19em;width:100%">
+          <div class="vs" style="background:#DCDDDD;height:17em;width:100%">
             <!--PART 1-->
             <div class="Row1 row" style="height:30%; padding:3% 0 3% 0;width:100%;margin:0;">
           
@@ -303,7 +303,7 @@
               </div>
             </div>
             <!--END FOR PART 1-->
-            <div class="space1" style="height:2em"></div>
+            <div class="space1" style="height:20px"></div>
             <div style="height:5em">
                 <p style="text-align:center"><button class="btn btn-large processBtn" type="button" style="width:9em;background:#FFFFFF" onclick="process($(this))"><span  style="color:rgb(2, 65, 126);font-size:16px" >比赛结束</span></button></p>
             </div>
@@ -318,9 +318,9 @@
 
       <div class="fakeBox2 hidden" style="width:100%">
       <!--BEGINNING FOR FINISHED LIST-->
-      <div class="scoreItem" height="14em" width="100%"  style="padding:2% 2% 2% 2%;margin:0 auto">
+      <div class="scoreItem" height="10.5em" width="100%"  style="padding:2% 2% 2% 2%;margin:0 auto">
           <div style="background:#F6F7F7;height:100%;width:100%;">
-             <div class="vs" style="background-image:linear-gradient(90deg,#DCDDDD,#DCDDDD 50%, #007979 50%, #007979);height:14em">
+             <div class="vs" style="background-image:linear-gradient(90deg,#DCDDDD,#DCDDDD 50%, #007979 50%, #007979);height:10.5em">
               <div class="Row1 row" style="height:30%;width:100%;margin:0;padding:3% 0 3% 0">
           
               <div class="col-xs-3" style="padding-left:3%"> 
@@ -344,10 +344,10 @@
               </div>  
 
             </div>
-            <div class = "space" style="height:6%">
+            <div class = "space" style="height:15%">
               </div>
             <div class = "space" style="height:1%;background:#FFFFFF"></div>
-            <div class = "space" style="height:15%"></div>
+            <div class = "space" style="height:8%"></div>
             <table border="0" class="againstScore" style="height:35%;width:100%" >
               <tr align = "center">
                 <td style="width:50%">
@@ -390,7 +390,7 @@
          </td>
        </tr>
      </table>
-            <div class = space style="height:10%; text-align:center;margin-top:-19%;margin-bottom:17%"><span style="background:#F6F6F9;font-size:33px;color:rgb(2, 65, 126)">:</span></div>
+            <div class = space style="height:10%; text-align:center;margin-top:-14%;margin-bottom:17%"><span style="background:#F6F6F9;font-size:33px;color:rgb(2, 65, 126)">:</span></div>
              </div>
          
           </div>
