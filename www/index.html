@@ -22,6 +22,14 @@
 			if (localStorage.lastView&&localStorage.current_user){
 				ctrl.reload(localStorage.lastView);
 			}
+
+			var supportsOrientationChange = "onorientationchange" in window,
+    			orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+			window.addEventListener(orientationEvent, function() {
+    			if (screen.width > screen.height){
+    				alert("CrossOver不支持横屏");
+    			}
+			}, false);
 		}
 	</script>
 

@@ -10,10 +10,10 @@
 		$(function(){
 			document.getElementById("teamLogo").addEventListener('change',uploadCheck,false );
 			//INITIALIZATION ON
-			$('#team_name').val(myObj.TeamName);
-			$('#team_intro').val(myObj.Intro);
-			$('#team_city').val(myObj.City);
-			$('#myHead').attr("src", imgAddress+"TeamLogo/"+myObj.TeamLogo);
+			$('.de-panel #team_name').val(myObj.TeamName);
+			$('.de-panel #team_intro').val(myObj.Intro);
+			$('.de-panel #team_city').val(myObj.City);
+			$('.de-panel #myHead').attr("src", imgAddress+"TeamLogo/"+myObj.TeamLogo);
 			//INITIALIZATION DOWN
 
 			$("#changeLogo").click(function(){
@@ -44,7 +44,7 @@
 									console.log("fail");
 								}
 								else {
-									$('#myHead').attr('src', this.result);
+									$('.de-panel #myHead').attr('src', this.result);
 									myObj.TeamLogo = result.FileName;
 									localStorage.current_user = JSON.stringify(myObj);
 									alert_flash("头像上传成功");
@@ -56,9 +56,9 @@
 		}
 
 		function saveCheck(){
-			var name = $('#team_name').val(),
-				intro = $('#team_intro').val(),
-				city = $('#team_city').val();
+			var name = $('.de-panel #team_name').val(),
+				intro = $('.de-panel #team_intro').val(),
+				city = $('.de-panel #team_city').val();
 			if (name.length>15||name.length<2) alert_flash("队名为2-15位")
 			else if (intro.length == 0) alert_flash("请填写战队简介")
 			else {
@@ -95,10 +95,10 @@
     		<span onclick="ctrl.move('personal.html', false)"><img src="images/back.png" width="12%"></span>		
 	    </nav>
 		
-		<div class="container-fluid" style="height:30%">
+		<div class="container-fluid de-panel" style="height:30%">
 			<div class="space" style="height:40%"></div>
 			<div class="row">
-  				<div class="col-xs-5 col-sm-5">
+  				<div class="col-xs-5">
   					<img id="myHead" src="abc.jpg" class="img-circle" width="72px" height="72px">
   					<input type="file" accept="image/*" class="hidden" name="imgFile" id="teamLogo" />
   				</div>
@@ -109,7 +109,7 @@
 			</div>
 
 		</div>
-		<div class="container text-left" style="height:70%;width:100%">
+		<div class="container text-left de-panel" style="height:70%;width:100%">
 			<p style="font-size:1.5em">完善战队资料</p>
 
     		<input type="text" class="net-control" id="team_name" placeholder="队名" style="width:90%;font-size:1.3em;height:46px;padding:5px 5px 5px 5px">

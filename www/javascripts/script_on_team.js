@@ -176,11 +176,12 @@ function addMem(){
                 else{
                   myObj.TeamHomePhoto = result.FileName;
                   localStorage.current_user = JSON.stringify(myObj);
+                  ctrl.reload();
                   //$('#back').attr('src', this.result).css("left", "0").css("top", "0");
                 }
               }
           })
-          $('#back').attr('src', this.result).css("left", "0").css("top", "0");
+          //$('#back').attr('src', this.result).css("left", "0").css("top", "0");
         }
   }
 
