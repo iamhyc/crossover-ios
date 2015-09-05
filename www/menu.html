@@ -1,23 +1,6 @@
-<div class="load-body slider">
-	<!--Menu on the Right-->
-	<div class="menu" style="height:100%">
-		<div class = "top" style="height:4%"></div>
-		<div class="home" style="height:85%;width:100%">
-			<img id="myHead" class="img-circle circle" style="margin: 5% 0% 0% 0%;height:66px;width:66px">
-			<p id="myName" style="font-weight:bold;color:rgb(2, 65, 126); font-size:16px;    margin: 10px 0 10px;">HEHE~</p>
-			<button type="button" style="width: 60%;margin: 0% 0% 20px;font-size:13px;height:29px;background-color:rgb(220, 221, 221);color:rgb(2, 65, 126)" class="btn btn-default" onclick="ctrl.move('personal.html',true)">战队主页</button>
-			<button type="button" style="width:60%;background-color:rgb(220, 221, 221);height:29px;font-size:11px" class="btn btn-default" onclick="ctrl.move('notify.html',true)">
- 		  		<img src="images/menu-icon.png" height="20px">
-			</button>
-		</div>
-
-		<div class="logout">
-			<button type="button" class="btn btn-danger" style="width:60%;background-color:rgb(230, 0, 18);color:#fff;font-size:13px;height:29px" onclick="Logout()">登出</button>
-		</div>
-	</div>
-	<!--Menu on the Right-->
-
-	<div class="body" style="height:100%;overflow:hidden;postion:relative">
+<div class="load-body">
+	<div id="slider" style="height:100%">
+		<div class="body" style="height:100%;overflow:hidden;postion:relative">
 		<div id="block-bg"></div>
 
 		<nav class="navbar navbar-static-top" style="margin-bottom:0;height:10%">
@@ -44,19 +27,49 @@
     		</div>
     	</div>
 			
+		</div>
 	</div>
+	<!--Menu on the Right-->
+	<div id="menu" style="height:100%">
+		<div class = "top" style="height:4%"></div>
+		<div class="home" style="height:85%;width:100%">
+			<img id="myHead" class="img-circle circle" style="margin: 5% 0% 0% 0%;height:66px;width:66px">
+			<p id="myName" style="font-weight:bold;color:rgb(2, 65, 126); font-size:16px;    margin: 10px 0 10px;">HEHE~</p>
+			<button type="button" style="width: 60%;margin: 0% 0% 20px;font-size:13px;height:29px;background-color:rgb(220, 221, 221);color:rgb(2, 65, 126)" class="btn btn-default" onclick="ctrl.move('personal.html',true)">战队主页</button>
+			<button type="button" style="width:60%;background-color:rgb(220, 221, 221);height:29px;font-size:11px" class="btn btn-default" onclick="ctrl.move('notify.html',true)">
+ 		  		<img src="images/menu-icon.png" height="20px">
+			</button>
+		</div>
+
+		<div class="logout">
+			<button type="button" class="btn btn-danger" style="width:60%;background-color:rgb(230, 0, 18);color:#fff;font-size:13px;height:29px" onclick="Logout()">登出</button>
+		</div>
+	</div>
+	<!--Menu on the Right-->
+	
 
 	<script type="text/javascript" src="javascripts/script_on_menu.js"></script>
 	<script type="text/javascript" src="javascripts/scrollEvent.js"></script>
 	<script type="text/javascript">
     	var pageNow = 0;
     	var myObj = JSON.parse(localStorage.current_user);
+    	var menu_ejected = false;
+
     	$(function(){
     		$(".spinner").css("display" ,"block");
     	});
+
 		$(".load-body").ready(function(){
 			localStorage.lastView ="menu.html"
 			//Start: Initial part
+			$("#menu").off().on("webkitAnimationEnd", function(){	
+				$("#menu").removeClass();
+				if(!menu_ejected){
+					$("#slider").removeClass();
+					$("#menu").css("display", "none");
+				}
+			})
+
 			$('.home #myHead').attr('src', imgAddress + "TeamLogo/" +myObj.TeamLogo);
 			$('.home #myName').text(myObj.TeamName);
 			loadPage(pageNow);		
@@ -66,11 +79,15 @@
 			//Start: Menu-slide part
 			$(".menu-open").click(function(){
 				$("#block-bg").css("display" ,"block");
- 	 			$(".slider").css("-webkit-transform", "translate(-50%, 0px) translateZ(0px)");
+				$("#menu").css("display", "block");
+ 	 			$("#menu").addClass("slide-in-half");	$("#slider").addClass("slide-out-half");
+ 	 			menu_ejected = true;
     		});
 			$("#block-bg").click(function(){
-    			$(".slider").css("-webkit-transform", "translate(0, 0px) translateZ(0px)");
-      			$("#block-bg").css("display" ,"none");
+				menu_ejected = false;
+				$("#block-bg").css("display" ,"none");
+    			$("#slider").removeClass().addClass("slide-reverse-in-half");
+    			$("#menu").addClass("slide-reverse-out");
     		});
 			//End: Menu-slide part
 		})

@@ -97,11 +97,11 @@ var ajaxLoad = function(){
 	var main = "#body1", back = "#body2";
 	//var val = "100%";
 
-	document.getElementById("body1").addEventListener("webkitAnimationEnd",function(){
+	$("#body").on("webkitAnimationEnd",function(){
 		//console.log(main+" "+back);
 		$(back).removeClass();	$(main).removeClass();
 		$(main).css("display", "none").html("");
-	})
+	});
 
 	this.judgement = function(){
 		if (load_backface){

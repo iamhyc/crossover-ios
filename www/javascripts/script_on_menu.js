@@ -55,7 +55,6 @@ function loadPage(num, onward){
 }
 
 function addScrollListener () {
-	document.getElementById('touchmove', stop, false);
 	var at = new appTouch({
         tContain : 'appArea', //必选：滑动区域id
         tMove : 'moveArea', //必选：移动区域id
@@ -73,7 +72,6 @@ function addScrollListener () {
     }
 
 }
-    		
 
 function Logout(){
 	localStorage.current_user = "";

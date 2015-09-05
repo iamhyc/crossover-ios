@@ -1,4 +1,4 @@
-.menu {
+#menu {
     background: #202024 url('') repeat right top;
     /*左侧弹出窗口的长宽、背景颜色*/
     margin: 0 auto;
@@ -6,14 +6,21 @@
     width: 50%;
     background-color: #FFFFFF;
     /*布局排版*/
-    position:absolute;/*关键处*/
     z-index:1;
-    right:-50%;
     /*字体设置*/
     text-align: center;
+    display: none;
 }
 
-.menu .circle{
+#menu, #slider {
+  position: absolute;
+  top:0;  right:0%;
+  -webkit-animation-timing-function: ease-out;
+  -webkit-animation-duration: 225ms;
+  -webkit-animation-fill-mode: both;
+}
+
+#menu .circle{
   width: 72px;
   height:72px;
 }
