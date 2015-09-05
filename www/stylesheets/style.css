@@ -280,8 +280,8 @@ body {
   height:100%;
   width:100%;
   background: inherit;
-  /*For IOS*/
-  -webkit-overflow-scrolling : touch;
+  /*For IOS
+  -webkit-overflow-scrolling : touch;*/
 }
 
 #body1, #body2{
@@ -308,8 +308,8 @@ body {
   height: 88%;
   background: #fff;
   overflow: scroll;
-  /*For IOS*/
-  -webkit-overflow-scrolling : touch;
+  /*For IOS
+  -webkit-overflow-scrolling : touch*/;
 }
 
 .score-bar{

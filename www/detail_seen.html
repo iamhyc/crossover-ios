@@ -3,29 +3,27 @@
 	<title>Detail_seen</title>
 	<script type="text/javascript">
 		localStorage.lastView = "detail_seen.html";
-		var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
-  		var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
-  		//console.log(JSON.parse(localStorage.userShow).pageNow);
-  		var temp = JSON.parse(localStorage.userShow);
-  		var content = JSON.parse(localStorage["myList"+temp.pageNow])[temp.order];
-  		//console.log(content);
+
+  		var userShow = JSON.parse(localStorage.userShow);
+  		//console.log(userShow);
   		//INITIALIZATION ON
   		$(document).ready(function () {
-  			$("#Head").attr("src", imgAddress+"TeamLogo/"+content.TeamLogo);
-  			$('#name').text(content.TeamName);
-  			if (content.Intro) $('#intro').text(content.Intro);
-  			$('#city').text(content.City);
+  			$(".ds-panel #Head").attr("src", imgAddress+"TeamLogo/"+userShow.TeamLogo);
+  			$('.ds-panel #name').text(userShow.TeamName);
+  			if (userShow.Intro) 
+  				$('.ds-panel #intro').html(userShow.Intro.replace(/\n|\r|(\r\n)|(\u0085)|(\u2028)|(\u2029)/g, "<br>"));
+  			$('.ds-panel #city').text(userShow.City);
   		})
 	</script>
 
-<div class="load-body">
+<div class="load-body ds-panel">
 	<div class="text-center" style="height:100%;color:#ffffff">
 		<nav class="navbar navbar-fixed-top text-left" style="padding-top:3%">
     		<span onclick="ctrl.move('detail_page.html',false)"><img src="images/back.png" width="12%"></span>		
 		</nav>
 		
 		<div class="container" style="height:30%">
-			<div class="spc" style="height:15%"></div>
+			<div class="h-div" style="height:15%"></div>
 			<img src="abc.jpg" id="Head" class="img-circle" width="120px" height="120px">
 		</div>
 
@@ -36,7 +34,7 @@
 			</article>
 			<article class="container">
 				<h4>战队简介</h4>
-				<p id="intro">&nbsp;</p>
+				<p id="intro" style="max-height:120px;overflow-y:scroll">&nbsp;</p>
 			</article>
 			<article class="container">
 				<h4>所在城市</h4>

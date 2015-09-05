@@ -3,8 +3,7 @@
 	<title>Detail_edit</title>
 	<script type="text/javascript">
 		localStorage.lastView = "detail_edit.html";
-		var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
-  		var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
+
   		var myObj = JSON.parse(localStorage.current_user);
 
 		$(function(){
@@ -59,8 +58,8 @@
 			var name = $('.de-panel #team_name').val(),
 				intro = $('.de-panel #team_intro').val(),
 				city = $('.de-panel #team_city').val();
-			if (name.length>15||name.length<2) alert_flash("队名为2-15位")
-			else if (intro.length == 0) alert_flash("请填写战队简介")
+			if (name.length>15||name.length<2) alert_flash("队名为2-15位");
+			else if (intro.length == 0) alert_flash("请填写战队简介");
 			else {
 				var data = JSON.stringify({
 						'TeamID': myObj.TeamID,
@@ -77,6 +76,12 @@
 						success: 
 							function(result){
 								if (result.success){
+									data = JSON.parse(data);
+									myObj.TeamName = data.TeamName;
+									myObj.Intro = data.Intro;
+									myObj.City = data.City;
+									localStorage.current_user = JSON.stringify(myObj);
+
 									alert_flash("保存成功");
 									ctrl.move("personal.html", false);
 								}

@@ -2,7 +2,9 @@
 
 	<title>相册-CrossOver</title>
 	<script type="text/javascript">
-		var oldX, oldY, startX, startY, startWidth, startHeight, initWidth, initHeight, gapHeight;
+		var oldX, oldY, startX, startY, startWidth, startHeight, 
+			initWidth, initHeight, gapHeight,
+			clientHeight, clientWidth;
 		var moveD;
 		var isMove = false;
 		var isZoom = false;
@@ -67,6 +69,24 @@
 			isMove = false;
 		}
 
+		function verticeJudge(){
+			var tmp = $("#imgSelected");
+			var up_vt_top = tmp.position().top,
+				up_vt_left = tmp.position().left,
+				btm_vt_top = up_vt_top + tmp.height(),
+				btm_vt_left = up_vt_left + tmp.width();
+
+			var move_orient = {
+				"up":true,	"down":true,	"left":true,	"right":true
+			}
+			if(up_vt_top > 0) move_orient.down = false;
+			if(up_vt_left > 0) move_orient.right = false;
+			if(btm_vt_top < clientHeight) move_orient.up = false;
+			if(btm_vt_left < clientWidth) move_orient.left = false;
+			//console.log(move_orient)
+			return move_orient;
+		}
+
 		function img_mousemove(e){
 			if (isZoom){
 			//targetTouches changedTouches touches
@@ -90,25 +110,39 @@
 			}
 
 			if (!isMove) return;
+
+			var move_orient = verticeJudge();
+			var moveX = e.changedTouches[0].pageX - oldX,
+				moveY =	e.changedTouches[0].pageY - oldY;
+
+			if (move_orient.left&&moveX<0 || move_orient.right&&moveX>0){
+				$('#imgSelected').css('left', moveX + startX + 'px');
+			}
+				
+			if (move_orient.up&&moveY<0 || move_orient.down&&moveY>0){
+				$('#imgSelected').css('top', moveY + startY + 'px');
+			}
 			
-			x = e.changedTouches[0].pageX - oldX;
-			y = e.changedTouches[0].pageY - oldY;
-			$('#imgSelected').css('top', y + startY + 'px');
-			$('#imgSelected').css('left', x + startX + 'px');
 		}
 
 	$(function(){
 		$("#imgSelected").attr("src", localStorage.photoSelected);
-		initWidth = $("#imgSelected").width();
-		initHeight = $("#imgSelected").height();
-		var clientHeight = $(".photoGallery").height();
-		//$("#imgHeight").css("width", clientWidth+px);
-		gapHeight = (clientHeight - initHeight)/2;	
-		$("#imgSelected").css("top", gapHeight+"px");
-	document.getElementById("imgSelected").addEventListener('touchstart', img_mousedown, false);
-	document.getElementById("imgSelected").addEventListener('touchend', img_mouseup, false);
-	document.getElementById("imgSelected").addEventListener('touchmove', img_mousemove, false);
-	})
+		$("#imgSelected").load(function(){
+			initWidth = $("#imgSelected").width();
+			initHeight = $("#imgSelected").height();
+			clientHeight = $(".photoGallery").height();
+			clientWidth = $(".photoGallery").width();
+
+			console.log(clientHeight+" "+initHeight);
+			//$("#imgHeight").css("width", clientWidth+px);
+			gapHeight = (clientHeight - initHeight)/2;	
+			$("#imgSelected").css("top", gapHeight+"px");
+
+			document.getElementById("imgSelected").addEventListener('touchstart', img_mousedown, false);
+			document.getElementById("imgSelected").addEventListener('touchend', img_mouseup, false);
+			document.getElementById("imgSelected").addEventListener('touchmove', img_mousemove, false);
+		})
+	});
 
 	</script>
 
@@ -118,7 +152,7 @@
     	<span class="text-left" onclick="ctrl.move('photos.html', false)"><img src="images/back.png" width="12%"></span>		
 	</nav>
 
-  	<div class="photoGallery" style="height:89%;width:100%;overflow:scroll;background-color:#fff;position:absolute;overflow:hidden">
+  	<div class="photoGallery" style="height:89%;width:100%;overflow:scroll;background-color:#000;position:absolute;overflow:hidden">
   		<img id="imgSelected" src="" height="auto" width="100%" style="position:relative">
   	</div>
 </div>
