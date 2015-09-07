@@ -59,7 +59,7 @@
 					data:data,
 					success: 
 						function(result){
-							if (result) window.location.href="personal.html";
+							if (result) ctrl.move("personal.html", true);
 							else {
 									alert_flash("添加失败");
 									//console.log(result);

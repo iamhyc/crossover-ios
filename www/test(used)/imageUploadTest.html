@@ -1,0 +1,23 @@
+<script type="text/javascript" src="cordova.js"></script>
+<div class="bodyDIV">
+   <span id="list" onclick="getImageData();" >选择图片</span>
+   <div class="list"></div>
+</div>
+<input id="storagelogo" style="display:none"/><input id="storageshopad" style="display:none"/>
+function getImageData()
+{
+    cordova.exec(success,error,'ImageUploadPlugin','selectImage',['2']);
+}
+
+        
+function success(result){
+
+     var src = 'data:image/png;base64,'+result;
+     var Str=document.getElementById("list");
+     Str.innerHTML="<img src='"+src+"' id='addLogoid'>"; //预览图片的位置
+     document.getElementById("addLogoid").style.width="120px";
+     document.getElementById("addLogoid").style.height="120px";
+     document.getElementById("storagelogo").value="true";
+            
+     <p class="p1"><span class="s1">     cordova.exec(uploadSuccess,uploadError,</span><span class="s2">'ImageUploadPlugin'</span><span class="s1">,</span><span class="s2">'uploadImage'</span><span class="s1">,[</span><span class="s2">'http://192.168.0.127:8080/mobile/index.php?act=upl     oad&op=save_file'</span><span class="s1">]);</span></p>   
+}

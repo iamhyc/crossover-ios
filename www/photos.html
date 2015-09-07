@@ -37,30 +37,36 @@
 
 				if (userType == "1"){
 					longFocus($(".photo"), function(id){
-					if (confirm("删除该图片？")){
-						$.get(apiAddress+"gallery/delete/"+id, function(result){
-							//console.log(result);
-							if (result) {
-								alert_flash("删除成功");
-								ctrl.reload();
+						if (note){
+            				note.confirm("删除该图片？", function(index){
+              					if(index == 2){
+                					$.get(apiAddress+"gallery/delete/"+id, function(result){
+										//console.log(result);
+										if (result) {
+											alert_flash("删除成功");
+											ctrl.reload();
+										}
+										else alert_flash("删除失败");
+									}); 
+              					}
+            				},"删除图片",["取消", "确定"]);
+          				}
+          				else{
+          					if (confirm("删除该图片？")){
+								$.get(apiAddress+"gallery/delete/"+id, function(result){
+									//console.log(result);
+									if (result) {
+										alert_flash("删除成功");
+										ctrl.reload();
+									}
+									else alert_flash("删除失败");
+								})
 							}
-							else alert_flash("删除失败");
-						})
-					}
-					/*confirm_modal("删除该图片？", function(){
-						$.get(apiAddress+"gallery/delete/"+id, function(result){
-							//console.log(result);
-							if (result) {
-								alert_flash("删除成功");
-								window.location.reload(true);
-							}
-							else alert_flash("删除失败");
-						})
-					})*/
-					})
+          				}
+					});
 				}
-			})
-		})
+			});
+		});
 
 		function init () {
 			imgWidth = document.body.clientWidth/3;

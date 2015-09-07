@@ -107,7 +107,14 @@ function fightVS () {
       if (result.success) alert_flash("约战成功");
       else {
         //alert_modal(result.message);
-        alert(result.message);
+        if(note){
+          note.alert(result.message, function(){
+            
+          }, "消息", "确定");
+        }
+        else{
+          alert(result.message);
+        }
       }
   })
 }

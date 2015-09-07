@@ -9,9 +9,15 @@ function sendMsg (id, sign) {
 
     $.get(apiAddress+"arrange/receive/"+id+"/"+tmp, function(result){
         if (result&&sign == 1) {
-            alert_modal("已应战，双方自行安排比赛", function(){
-                ctrl.reload();
-            })
+            if(note){
+                note.alert("已应战，双方自行安排比赛", function(){
+
+                }, "消息", "确定");
+            }
+            else{
+                alert("已应战，双方自行安排比赛");
+            }
+            ctrl.reload();
         }
         else if (sign == 0){
             ctrl.reload();

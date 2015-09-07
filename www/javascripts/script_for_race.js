@@ -30,7 +30,17 @@ function process(obj) {
         }
       case 4:
           var msg = myTodo[order].TeamName+"战队输入管理员密码";
-          var pwd = prompt(msg);
+          var pwd;
+          if (note){
+            note.prompt(msg, function(obj){
+              if (obj.buttonIndex == 2){
+                pwd = obj.input1;
+              }
+            }, "输入密码", ["取消", "确定"]);
+          }
+          else{
+            pwd = prompt(msg);
+          }
           if (!pwd) {
                 alert_flash("请输入密码");
                 stateMap[order]--;

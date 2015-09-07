@@ -1,18 +1,6 @@
-@font-face{
-  font-family: 'Hiragino';
-  src: url('../fonts/Hiragino-Sans-GB-W3.otf') format('truetype');
-}
-@font-face{
-  font-family: 'GillSans-UltraBold';
-  src: url('../fonts/GillSans-UltraBold.otf') format('truetype');
-}
-@font-face{
-  font-family: 'GillSans';
-  src: url('../fonts/GillSans-BoldItalic.ttf') format('truetype');
-}
-@font-face{
-  font-family: 'GillSans-BoldItalic';
-  src: url('../fonts/Gill-Sans-MT-Bold-Italic.ttf') format('truetype');
+
+*{
+
 }
 
 body {
@@ -29,8 +17,7 @@ body {
  -moz-user-select:none;
  -ms-user-select:none;
  user-select:none;
- 
- font-family: 'Hiragino';
+
 }
 
 .scroll-container{
@@ -172,8 +159,8 @@ body {
 
 .delete_icon{
     position: absolute;
-    right: 20%;
-    top: -82%;
+    right: 22%;
+    top: -84%;
     color: #fff;
     font-size: 25px;
 

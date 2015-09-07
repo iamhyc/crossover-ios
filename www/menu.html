@@ -62,7 +62,10 @@
 		$(".load-body").ready(function(){
 			localStorage.lastView ="menu.html"
 			//Start: Initial part
-			$("#menu").off().on("webkitAnimationEnd", function(){	
+			$("#slider, #menu").on("touchmove", function(e){
+				e.preventDefault();
+			})
+			$("#menu").on("webkitAnimationEnd", function(e){	
 				$("#menu").removeClass();
 				if(!menu_ejected){
 					$("#slider").removeClass();

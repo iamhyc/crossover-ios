@@ -50,11 +50,23 @@
 
                 $(".accepted, .done, .refaused").on("click", function(){
                     var that = this;
-                    if (confirm("是否删除此信息")){
-                        $.get(apiAddress+"arrange/delete/"+that.id, function(data){
+                    if (note){
+                        note.confirm("是否删除此信息", function(index){
+                            if(index == 2){
+                               $.get(apiAddress+"arrange/delete/"+that.id, function(data){
+                                alert_flash("删除成功！");
+                                ctrl.reload();
+                               }); 
+                            }
+                        },"删除消息",["取消", "确定"]);
+                    }
+                    else{
+                        if (confirm("是否删除此信息")){
+                          $.get(apiAddress+"arrange/delete/"+that.id, function(data){
                             alert_flash("删除成功！");
                             ctrl.reload();
-                        });
+                          });
+                        }
                     }
                     /*var that = this;
                     confirm_modal("是否删除此信息", function(){

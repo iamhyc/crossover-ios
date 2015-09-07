@@ -14,7 +14,7 @@
 
     $(".upper-side").scroll(function(){
       if (this.scrollTop > 0){
-        $(".navbar").css("opacity", this.scrollTop/100);
+        $(".navbar").css("opacity", (this.scrollTop/250 < 0.99)?(this.scrollTop/250):0.99);
         $(".navbar").css("background", "inherit");
       }
       else{
@@ -59,7 +59,7 @@
 
         //ADD PLAYER
         for (var i = 0; i < myPlayer.length; i++){
-          var img='<div class="col-xs-4" style="padding-top:5%"><img src="'+imgAddress+'Teammate/'+myPlayer[i].HeadIcon+'" id='+i+' class="img-circle isMem" width="60px" height="60px"><p style="margin:0;width:60px; text-align:center"><span style="text-align:center;color:rgb(2, 65, 126);font-size:13px">'+myPlayer[i].PlayerName+'</span></p><div add_id='+i+' class="hidden delete" style="border-radius:50%;background:red;width:15px;height:15px;text-align:center;position:absolute;left:35px;bottom:35px"><span class="delete_icon">-</span></div></div>';
+          var img='<div class="col-xs-4" style="padding-top:5%"><img src="'+imgAddress+'Teammate/'+myPlayer[i].HeadIcon+'" id='+i+' class="img-circle isMem" width="60px" height="60px"><p style="margin:0;width:60px; text-align:center"><span style="text-align:center;color:rgb(2, 65, 126);font-size:13px">'+myPlayer[i].PlayerName+'</span></p><div add_id='+i+' class="hidden delete" style="border-radius:50%;background:red;width:15px;height:15px;text-align:center;position:absolute;left:64px;bottom:64px"><span class="delete_icon">-</span></div></div>';
           $(".portrait").append(img);
         }
         var img='<div class="col-xs-3 col-sm-3 col-md-3" style="padding-top:5%"><img src="images/white-plus.png" id="addMem" class="img-circle" width="60px" height="60px"></div>';
@@ -84,12 +84,24 @@
         $(".isMem").on('click', function(){
           showMsg(this.id, myPlayer);
         });
-        $(".delete").click(function () {
-          if (confirm("删除该队员?")){
+        $(".delete").on("click", function () {
+          if (note){
+            note.confirm("删除该队员？", function(index){
+              if(index == 2){
+                $.get(apiAddress+"player/delete/"+myPlayer[$(this).attr("add_id")].PlayerID, function(result){
+                  if (result) alert_flash("删除成功");
+                  ctrl.reload();
+                }) 
+              }
+            },"删除队员",["取消", "确定"]);
+          }
+          else{
+            if (confirm("删除该队员?")){
               $.get(apiAddress+"player/delete/"+myPlayer[$(this).attr("add_id")].PlayerID, function(result){
                 if (result) alert_flash("删除成功");
                 ctrl.reload();
               })
+            }
           }
         })
         $("#addMem").on('click', function(){

@@ -12,11 +12,11 @@ function longFocus (qObj, callback) {
 	call = callback;
 
 	qObj.on({
-		mousedown:function(){
+		touchstart:function(){
 			qid = $(this).attr("id");
 			timer = setTimeout('call(qid)', 500)
 		},
-		mouseup:function(){
+		touchend:function(){
 			clearTimeout( timer );
 		}
 	})
@@ -97,10 +97,12 @@ var ajaxLoad = function(){
 	var main = "#body1", back = "#body2";
 	//var val = "100%";
 
-	$("#body").on("webkitAnimationEnd",function(){
+	$("#body1").on("webkitAnimationEnd",function(e){
 		//console.log(main+" "+back);
-		$(back).removeClass();	$(main).removeClass();
-		$(main).css("display", "none").html("");
+		if(e.target == this){
+			$(back).removeClass();	$(main).removeClass();
+			$(main).css("display", "none").html("");
+		}
 	});
 
 	this.judgement = function(){
