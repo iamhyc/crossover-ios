@@ -7,11 +7,42 @@
 
   		$(document).ready(function(){
   			$("#teamHead").attr("src", imgAddress + "TeamLogo/" +myObj.TeamLogo);
-  			$("#upload").click(function(){
-  				$("#imgFile").click();
-  			})
-  			document.getElementById("imgFile").addEventListener( 'change',preview,false );
-  		})
+
+  			if(camr){
+  				$("#upload").click(function(){
+  					uploadImg();
+  				});
+  			}
+  			else{
+  				document.getElementById("imgFile").addEventListener('change', preview, false);
+  				$("#upload").click(function(){
+  					$("#imgFile").click();
+  				});
+  			}
+  		});
+
+  		function uploadImg(){
+			camr.getPicture(onSuccess, onFail, {
+				quality : 75,
+  				destinationType : Camera.DestinationType.DATA_URL,
+  				sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+  				mediaType : Camera.MediaType.PICTURE,
+  				allowEdit : true,
+  				encodingType: Camera.EncodingType.JPEG,
+  				targetWidth: 300,
+  				targetHeight: 300,
+  				popoverOptions: CameraPopoverOptions,
+  				saveToPhotoAlbum: false 
+			});
+
+			function onSuccess(imgdata){
+				localStorage.reg_PhotoBase64 = imgdata;
+				$("#upload").attr(src, "data:image/jpeg;base64," + imageData);
+			}
+			function onFail(message){
+				alert_flash(message);
+			}
+		}
 
   		function preview(){
 			//var patn = /\.jpg$|\.jpeg$|\.png$|\.gif$/i;
@@ -22,7 +53,6 @@
 			reader.onloadend = function(e) {
 				$('#upload').attr('src', this.result);
 				//upload process?
-				//this.result.slice(this.result.indexOf(',')+1)
 				}
 		}
 

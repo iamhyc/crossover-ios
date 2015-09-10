@@ -7,7 +7,7 @@
   		var myObj = JSON.parse(localStorage.current_user);
 
 		$(function(){
-			document.getElementById("teamLogo").addEventListener('change',uploadCheck,false );
+			
 			//INITIALIZATION ON
 			$('.de-panel #team_name').val(myObj.TeamName);
 			$('.de-panel #team_intro').val(myObj.Intro);
@@ -15,10 +15,71 @@
 			$('.de-panel #myHead').attr("src", imgAddress+"TeamLogo/"+myObj.TeamLogo);
 			//INITIALIZATION DOWN
 
-			$("#changeLogo").click(function(){
-				$("#teamLogo").click();
-			})
-		})
+			if(camr){
+				$("#changeLogo").click(function(){
+					uploadImageByPlugin();
+				});
+			}
+			else{
+				document.getElementById("teamLogo").addEventListener('change', uploadCheck, false);
+				$("#changeLogo").click(function(){
+					$("#teamLogo").click();
+				});
+			}
+			
+		});
+
+		function ajaxImageUpload(imgdata){
+			var data = JSON.stringify({
+						'TeamID': myObj.TeamID,
+						'PhotoBase64': imgdata
+					});
+			
+			$.ajax({
+				type:'post',
+				url: apiAddress+"team/photo/logo",
+				contentType: 'application/json',
+				dataType:'json',
+				data:data,
+				success: 
+					function(result){
+						if(!result) {
+							alert_flash("上传失败");
+							console.log("fail");
+						}
+						else {
+							$('.de-panel #myHead').attr('src', this.result);
+							myObj.TeamLogo = result.FileName;
+							localStorage.current_user = JSON.stringify(myObj);
+							alert_flash("头像上传成功");
+							ctrl.reload();
+						}
+					}
+			});
+		}
+
+		function uploadImageByPlugin(){
+			camr.getPicture(onSuccess, onFail, {
+				quality : 75,
+  				destinationType : Camera.DestinationType.DATA_URL,
+  				sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+  				mediaType : Camera.MediaType.PICTURE,
+  				allowEdit : true,
+  				encodingType: Camera.EncodingType.JPEG,
+  				targetWidth: 300,
+  				targetHeight: 300,
+  				popoverOptions: CameraPopoverOptions,
+  				saveToPhotoAlbum: false 
+			});
+
+			function onSuccess(imgdata){
+				ajaxImageUpload(imgdata);
+			}
+			function onFail(message){
+				alert_flash(message);
+			}
+		}
+
 
 		function uploadCheck () {
 			var file = this.files[0]; 
@@ -26,32 +87,8 @@
 				reader.readAsDataURL(file);
 				/* */ 
 				reader.onloadend = function(e) {
-					var data = JSON.stringify({
-							'TeamID': myObj.TeamID,
-							'PhotoBase64': this.result.slice(this.result.indexOf(',')+1)
-					});
-					$.ajax({
-						type:'post',
-						url: apiAddress+"team/photo/logo",
-						contentType: 'application/json',
-						dataType:'json',
-						data:data,
-						success: 
-							function(result){
-								if(!result) {
-									alert_flash("上传失败");
-									console.log("fail");
-								}
-								else {
-									$('.de-panel #myHead').attr('src', this.result);
-									myObj.TeamLogo = result.FileName;
-									localStorage.current_user = JSON.stringify(myObj);
-									alert_flash("头像上传成功");
-									ctrl.reload();
-								}
-							}
-					})
-				}		
+					ajaxImageUpload(this.result.slice(this.result.indexOf(',')+1));
+				}
 		}
 
 		function saveCheck(){

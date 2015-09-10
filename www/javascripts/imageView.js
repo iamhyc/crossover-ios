@@ -1,6 +1,5 @@
 
 var imgView = function(config){
-	console.log(1);
 	this.imgBox = "#" + config.imgBox;
 	this.imgContain = "." + config.imgContain;
 	this.on();
@@ -25,7 +24,7 @@ imgView.prototype = {
 
 			console.log(clientHeight+" "+initHeight);
 			//$("#imgHeight").css("width", clientWidth+px);
-			gapHeight = (clientHeight - initHeight)/2;	
+			gapHeight = (clientHeight - initHeight)/2;
 			$(that.imgBox).css("top", gapHeight+"px");
 
 			var target = that.imgBox.slice(1);
@@ -40,7 +39,6 @@ imgView.prototype = {
 
 
 		function img_mousedown(e){
-			console.log(e)
 			if (e.touches.length == 1){
 				var nowTime = Math.round(new Date().getTime());
 				x = $(that.imgBox).position().left;

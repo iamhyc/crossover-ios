@@ -4,8 +4,7 @@
 */
 
 function deal_spc (content) {
-    content=content.replace(/\r\n/g,"<BR>")  
-    content=content.replace(/\n/g,"<BR>");  
+    content=content.replace(/\r\n/g,"<BR>"); 
     return content;
 }
 
@@ -26,12 +25,12 @@ function showMsg(usr ,players){
     $('#intro').html("简介："+deal_spc(players[usr].Detail));
     //console.log(players[usr].Detail);
     $('#memHead').attr("src", imgAddress+"Teammate/"+players[usr].HeadIcon);
-  $('.show-block').removeClass("hidden").fadeIn(400);
+  $('.show-block').removeClass("hidden").fadeIn(300);
   //$('body').append(block);
 }
 
 function deMsg(){
-  $('.show-block').fadeOut(400,function(){
+  $('.show-block').fadeOut(300,function(){
    $(this).addClass("hidden");
    $('#black-bg').css('display', 'none');
   });
@@ -147,6 +146,57 @@ function addMem(){
     ctrl.reload();
   }
 
+  function ajaxImageLoad(imgdata){
+      var data = JSON.stringify({
+            "TeamID":myObj.TeamID,
+            "PhotoBase64": imgdata
+          });
+        
+        $.ajax({
+          type:'post',
+          url: apiAddress+"team/photo/home",
+          contentType: 'application/json',
+          dataType:'json',
+          data:data,
+          success: 
+              function(result){
+                if (!result){
+                  alert_flash("上传失败")
+                }
+              else{
+                myObj.TeamHomePhoto = result.FileName;
+                localStorage.current_user = JSON.stringify(myObj);
+                ctrl.reload();
+                //$('#back').attr('src', this.result).css("left", "0").css("top", "0");
+              }
+            }
+        });
+  }
+
+
+   function uploadImageByPlugin(){
+    camr.getPicture(onSuccess, onFail, {
+      quality : 75,
+      destinationType : Camera.DestinationType.DATA_URL,
+      sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+      mediaType : Camera.MediaType.PICTURE,
+      allowEdit : true,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 300,
+      targetHeight: 300,
+      popoverOptions: CameraPopoverOptions,
+      saveToPhotoAlbum: false 
+    });
+
+    function onSuccess(imgdata){
+      ajaxImageUpload(imgdata);
+    }
+    function onFail(message){
+      alert_flash(message);
+    }
+  }
+
+
   function preview(){
       //var patn = /\.jpg$|\.jpeg$|\.png$|\.gif$/i;
         var file = this.files[0]; 
@@ -154,30 +204,7 @@ function addMem(){
         reader.readAsDataURL(file);
         /* */ 
         reader.onloadend = function(e) {
-          var data = JSON.stringify({
-                  "TeamID":myObj.TeamID,
-                  "PhotoBase64": this.result.slice(this.result.indexOf(',')+1)
-          });
-          $.ajax({
-            type:'post',
-            url: apiAddress+"team/photo/home",
-            contentType: 'application/json',
-            dataType:'json',
-            data:data,
-            success: 
-              function(result){
-                if (!result){
-                  alert_flash("上传失败")
-                }
-                else{
-                  myObj.TeamHomePhoto = result.FileName;
-                  localStorage.current_user = JSON.stringify(myObj);
-                  ctrl.reload();
-                  //$('#back').attr('src', this.result).css("left", "0").css("top", "0");
-                }
-              }
-          })
-          //$('#back').attr('src', this.result).css("left", "0").css("top", "0");
+          ajaxImageLoad(this.result.slice(this.result.indexOf(',')+1));
         }
   }
 

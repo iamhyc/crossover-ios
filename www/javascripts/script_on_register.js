@@ -39,7 +39,7 @@ function veriCheck(){
 
 
 //register2.html
-var readingFlag = true;
+//var readingFlag = true;
 function preview(){
 	var file = this.files[0]; 
 	var reader = new FileReader(); 
@@ -51,7 +51,7 @@ function preview(){
 		//console.log(this.result);
 	}
 	reader.onloadend = function() {
-		readingFlag = false;
+		//readingFlag = false;
 	}
 }
 
@@ -60,7 +60,7 @@ function imgCheck () {
 		teamName = $('#teamName').val();
 	if (!teamName) alert_flash('请输入战队名称')
 	else if (!cityName) alert_flash('请输入城市')//to 加特技
-	else if (!document.getElementById('imgFile').value) alert_flash("请上传战队队标")
+	else if ($("#upload").attr(src)) alert_flash("请上传战队队标")
 	else {
 		localStorage.reg_cityName = cityName;
 		localStorage.reg_teamName = teamName;
@@ -125,4 +125,28 @@ function pwdCheck () {
 				}
 			})
 		}
+}
+
+
+function uploadImg(){
+	camr.getPicture(onSuccess, onFail, {
+		quality : 75,
+  		destinationType : Camera.DestinationType.DATA_URL,
+  		sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+  		mediaType : Camera.MediaType.PICTURE,
+  		allowEdit : true,
+  		encodingType: Camera.EncodingType.JPEG,
+  		targetWidth: 300,
+  		targetHeight: 300,
+  		popoverOptions: CameraPopoverOptions,
+  		saveToPhotoAlbum: false 
+	});
+
+	function onSuccess(imgdata){
+		localStorage.reg_PhotoBase64 = imgdata;
+		$("#upload").attr(src, "data:image/jpeg;base64," + imageData);
+	}
+	function onFail(message){
+		alert_flash(message);
+	}
 }

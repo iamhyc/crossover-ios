@@ -6,8 +6,6 @@
 		var userID, userType; 
 		var recData;
 		var imgWidth;
-		var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
-    	var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
 
     	$(function(){
     		$(".spinner").css("display", "block");
@@ -36,6 +34,7 @@
 				$(".spinner").css("display", "none");
 
 				if (userType == "1"){
+
 					longFocus($(".photo"), function(id){
 						if (note){
             				note.confirm("删除该图片？", function(index){
@@ -64,6 +63,7 @@
 							}
           				}
 					});
+
 				}
 			});
 		});
@@ -74,7 +74,6 @@
 			var tmp = localStorage.galleryShow.split('_');
 			userID = tmp[1];	userType = tmp[0];
 
-			document.getElementById("photoImg").addEventListener('change',preview,false);
 		}
 
 		function addUpload(){
@@ -89,36 +88,67 @@
 			ctrl.move("photoView.html", true);
 		}
 
+		function ajaxImageUpload(imgdata){
+			var data = JSON.stringify({
+                "TeamID":userID,
+                "PhotoBase64": imgdata
+          	});
+          	$.ajax({
+            	type:'post',
+            	url: apiAddress+"gallery/create",
+           		contentType: 'application/json',
+           		dataType:'json',
+           		data:data,
+           		success: 
+            		function(result){
+               			if (!result){
+                  			alert_flash("上传失败")
+               			}
+               			else{
+               				ctrl.reload();
+               			}
+             		}
+       		});
+		}
+
+		function uploadImageByPlugin(){
+			camr.getPicture(onSuccess, onFail, {
+				quality : 75,
+  				destinationType : Camera.DestinationType.DATA_URL,
+  				sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+  				mediaType : Camera.MediaType.PICTURE,
+  				allowEdit : true,
+  				encodingType: Camera.EncodingType.JPEG,
+  				targetWidth: 300,
+  				targetHeight: 300,
+  				popoverOptions: CameraPopoverOptions,
+  				saveToPhotoAlbum: false 
+			});
+
+			function onSuccess(imgdata){
+				ajaxImageUpload(imgdata);
+			}
+			function onFail(message){
+				alert_flash(message);
+			}
+		}
+
 		function uploadImage () {
-			$('#photoImg').click();
+			if(camr){
+				uploadImageByPlugin();
+			}
+			else{
+				document.getElementById("photoImg").addEventListener('change',preview,false);
+				$('#photoImg').click();
+			}
 		}
 		function preview(){
         	var file = this.files[0]; 
         	var reader = new FileReader(); 
         	reader.readAsDataURL(file);
 
-        	reader.onloadend = function(e) {
-          		var data = JSON.stringify({
-                  "TeamID":userID,
-                  "PhotoBase64": this.result.slice(this.result.indexOf(',')+1)
-          		});
-          		$.ajax({
-            		type:'post',
-            		url: apiAddress+"gallery/create",
-            		contentType: 'application/json',
-            		dataType:'json',
-            		data:data,
-            		success: 
-              			function(result){
-                			if (!result){
-                  				alert_flash("上传失败")
-                			}
-                			else{
-                					ctrl.reload();
-                				}
-              			}
-          			})
-          
+        	reader.onloadend = function(e){
+        		ajaxImageUpload(this.result.slice(this.result.indexOf(',')+1));
         	}
   		}
 
@@ -127,6 +157,7 @@
 				ctrl.move("personal.html", false);
 			else ctrl.move("detail_page.html", false);
 		}
+
 	</script>
 
 <div class="load-body">

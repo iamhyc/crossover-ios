@@ -34,10 +34,16 @@
       $('.personal #myHead').attr("src", imgAddress + "TeamLogo/" +myObj.TeamLogo);
       $('.personal #myName').text(myObj.TeamName);
       $('#grade').text(myObj.lntegral);
+
       $('.back').click(function(){
-        $('#imgHome').click();
+        if(camr){
+          uploadImageByPlugin();
+        }
+        else{
+          document.getElementById("imgHome").addEventListener('change', preview, false);
+          $('#imgHome').click();
+        }
       });
-      document.getElementById("imgHome").addEventListener( 'change',preview,false );
 
       if (myObj.TeamHomePhoto == ""){
         $('#back').attr("src", "images/white.png").css("position", "relative").css("left", "40%").css("top", "15%");
@@ -203,7 +209,7 @@
 
 
 
-  <div class="hidden show-block" style="z-index:1092;top:40%;left:3%;width:94%;background:#003D79;border-radius:1em;color:#FFFFFF;position:absolute;">
+  <div class="hidden show-block" style="z-index:1093;top:40%;left:3%;width:94%;background:#003D79;border-radius:1em;color:#FFFFFF;position:absolute;">
     <div class="row" style="margin:0 0 0 0" >
       <div class="col-xs-4" style="padding:3% 0%  0% 3%">
         <img id="memHead" src="abc.jpg" class="img-circle" width="64px" height="64px">
