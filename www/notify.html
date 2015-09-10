@@ -1,4 +1,4 @@
-<div class="load-body">
+<div class="nt-panel load-body">
     <title>Notification</title>
     <div id="black-bg"></div>
 
@@ -26,7 +26,7 @@
 
 
         $(function(){
-            $(".spinner").css("display", "block");
+            $(".nt-panel .spinner").css("display", "block");
         });
     </script>
 
@@ -46,7 +46,7 @@
                     else if (list[i].Status == "done") addDone(list[i]);
                     else if (list[i].Status == "refaused") addReject(list[i]);
                 }
-                $(".spinner").css("display", "none");
+                $(".nt-panel.spinner").css("display", "none");
 
                 $(".accepted, .done, .refaused").on("click", function(){
                     var that = this;

@@ -8,7 +8,7 @@
 		var imgWidth;
 
     	$(function(){
-    		$(".spinner").css("display", "block");
+    		$(".pt-panel .spinner").css("display", "block");
     	})
 
 		$(".load-body").ready(function(){
@@ -31,7 +31,7 @@
 						$(".spinner").css("display", "none");
 					})
 				}
-				$(".spinner").css("display", "none");
+				$(".pt-panel .spinner").css("display", "none");
 
 				if (userType == "1"){
 
@@ -160,7 +160,7 @@
 
 	</script>
 
-<div class="load-body">
+<div class="load-body pt-panel">
 	<div id="block-bg"></div><div id="black-bg"></div>
 	<input type="file" accept="image/*" class="hidden" name="photoImg" id="photoImg"  />
 

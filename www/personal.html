@@ -10,7 +10,7 @@
   var ejected = false;
 
   $(function(){
-    $(".spinner").css("display", "block");
+    $(".ps-panel .spinner").css("display", "block");
 
     $(".upper-side").scroll(function(){
       if (this.scrollTop > 0){
@@ -117,7 +117,7 @@
 
         //BEGINNING FOR READY LIST PART
         generateReadyList();
-        $(".spinner").css("display", "none")
+        $(".ps-panel .spinner").css("display", "none")
         //END FOR READYLIST PART
         
         //BEGGING FOR FINISHED LIST
@@ -136,7 +136,7 @@
 </script>
 
 
-<div class="load-body">
+<div class="ps-panel load-body">
   <title>Personal</title>
   <div id="block-bg"></div><div id="black-bg"></div>
 
