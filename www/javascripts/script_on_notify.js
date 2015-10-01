@@ -25,12 +25,42 @@ function sendMsg (id, sign) {
         else {
             alert_flash("回复失败！")
         }
-    })
+    });
+}
+
+function ajaxFight (id, status) {
+    status = JSON.parse(status.split("@").join("\""));
+    if(status.method == "open"){
+        confirmIt("双方确定开打后，记分牌将在双方个人首页显示", "提示", function(){
+            $.get(apiAddress + "arrange/match/open/" + userID +"/"+ id +"/"+ status.type, function(result){
+                if(result.success){
+                    status.method = "cancel";
+                    $("#" +id+ " .fightButton .btn").attr("status", JSON.stringify(status).split("\"").join("@"));
+                    $("#" +id+ " .fightButton span").text("取消开打");
+                    alert_flash("已开打！");
+                }
+                else{
+                    alertIt(result.message, "消息");
+                }
+            });
+        });
+    }
+    else{
+        confirmIt("取消开打后，双方需重新确认开打", "提示", function(){
+            $.get(apiAddress + "arrange/match/cancel/" + id, function(result){
+                status.method = "open";
+                $("#" +id+ " .fightButton .btn").attr("status", JSON.stringify(status).split("\"").join("@"));
+                $("#" +id+ " .fightButton span").text("开打");
+            })
+        })
+    }
 }
 
 function addBlue (item, img, msg) {
-    var content = '<div class="'+item.Status+'" id="'+item.ArrangeID+'" style="background:#FFFFFF;width:100%;margin-left:0;padding:1.5% 3% 1.5% 3%"><div class = "blue_up" style="background:rgb(23, 142, 211);width:100%;margin-left:0;padding:3% 3% 3% 3%"><table style="100%;"><tr><th style="width:60px"><img class="img-circle circle" src="'+ img +'" style="width:57px;height:57px"></img></th><th style="width:55%;padding-left:3%;padding-right:3%"><span style="color:#F6F6F7;font-weight:normal">'+ msg +'</span></th><th><button class="btn btn-primary" type="button" style="width:90px; border-color:rgb(220, 221, 221);  padding: 3px 12px; color: #286090; background-color: rgb(220, 221, 221);" onclick="toggle('+item.ArrangeID+');stopBubble(event)"><span>查看</span></button></th></tr></table></div><div class = "blue_down hidden" style="background:rgb(23, 142, 211);;width:100%;margin-left:0; padding:3% 3% 3% 3%"><table ><tr><th style="width:60px"><img class="img-circle circle" src="'+ img +'" style="width:57px;height:57px"></img></th><th style="width:100%;padding-left:3%;padding-right:3%"><p style="  margin: 0 0 5px;"><span style="color:#F6F6F7;font-weight:normal">'+msg+'</span></p><p style="margin: 0 0 0px;"><button class="btn btn-primary" type="button" style="width:110px; padding:0px 0px; border-color:rgb(220, 221, 221);height:30px;  color: #286090; background-color: rgb(220, 221, 221);"><span>'+item.Phone+'</span></button></p></th><th style="width:10%"></th></tr></table><table><tr><th style="width:27%"></th><th style="width:60%"></th><th><button class="btn btn-primary" type="button" style="width:90px;border-color:rgb(220, 221, 221);  padding: 3px 12px;color: #286090; background-color: rgb(220, 221, 221);" onclick="toggle('+item.ArrangeID+');stopBubble(event)"><span style="font-weight:font-weight:normal">收起</span></button></th></tr></table></div></div>';
-    $(".message").append(content);
+    var content_up = '<div class="'+item.Status+'" id="'+item.ArrangeID+'" style="background:#FFFFFF;width:100%;margin-left:0;padding:1.5% 3% 1.5% 3%"><div class = "blue_up" style="background:rgb(23, 142, 211);width:100%;margin-left:0;padding:3% 3% 3% 3%"><table style="100%;"><tr><th style="width:60px"><img class="img-circle circle" src="'+ img +'" style="width:57px;height:57px"></img></th><th style="width:55%;padding-left:3%;padding-right:3%"><span style="color:#F6F6F7;font-weight:normal">'+ msg +'</span></th><th><button class="btn btn-primary" type="button" style="width:90px; border-color:rgb(220, 221, 221);padding: 3px 12px;color:#286090;background-color:rgb(220, 221, 221);" onclick="toggle('+item.ArrangeID+');stopBubble(event)"><span>查看</span></button></th></tr></table></div>',
+        content_down = '<div class = "blue_down hidden" style="background:rgb(23, 142, 211);width:100%;margin-left:0;padding:3% 3% 3% 3%"><table class="teamInfo"><tr><th style="width:60px"><img class="img-circle circle" src="'+ img +'" style="width:57px;height:57px"></img></th><th style="width:100%;padding-left:3%;padding-right:3%"><p style="margin:0 0 5px"><span style="color:#F6F6F7;font-weight:normal">'+msg+'</span></p><p style="margin: 0 0 0px;"><button class="btn btn-primary" type="button" style="width:110px; padding:0px 0px; border-color:rgb(220, 221, 221);height:30px;color:#286090;background-color:rgb(220, 221, 221)"><span>'+item.Phone+'</span></button></p></th><th style="width:10%"></th></tr></table><table><tr><th style="width:27%"></th><th style="width:60%"></th><th><button class="btn btn-primary" type="button" style="width:90px;border-color:rgb(220, 221, 221);padding:3px 12px;color:#286090; background-color: rgb(220, 221, 221);" onclick="toggle('+item.ArrangeID+');stopBubble(event)"><span style="font-weight:font-weight:normal">收起</span></button></th></tr></table></div></div>';
+
+    $(".message").append(content_up + content_down);
 }
 
 
@@ -52,11 +82,33 @@ function addPend (item) {
 function addAccepted (item) {
     var img = imgAddress+ 'TeamLogo/'+ item.TeamLogo;
     var msg;
-    if (item.ActiveID == userID)
-        msg = item.TeamName + " 接受你的约战";
-    else msg = "已接受 "+ item.TeamName +" 的约战";
+    var status={
+        type:"",
+        method:"open"
+    };
+    var fight='开打';
 
-    addBlue(item, img, msg)
+    if (item.ActiveID == userID){
+        msg = item.TeamName + " 接受你的约战";
+        status.type = "active";
+        if(item.ActiveOpened == 1)  {
+            fight = "取消开打";
+            status.method = "cancel";
+        }
+    }
+    else {
+        msg = "已接受 "+ item.TeamName +" 的约战";
+        status.type = "receive";
+        if(item.ReceiveOpened == 1)  {
+            fight = "取消开打";
+            status.method = "cancel";
+        }
+    }
+    addBlue(item, img, msg);
+    status = JSON.stringify(status).split("\"").join("@");
+    var fightButton = '<table class="fightButton" style="width:100%;margin:10px 0 10px 0"><tr><th style="width:10%"></th><th style="width:80%"><button class="btn btn-primary" type="button" onclick="stopBubble(event);ajaxFight('+item.ArrangeID+',$(this).attr(\'status\'))" status="'+status+'" style="width:100%;padding:0px 0px;border-color:rgb(220, 221, 221);height:30px;color:#286090;background-color:rgb(220,221,221)"><span>'+fight+'</span></button></th><th style="width:10%"></th></tr></table>';
+    $(".fightButton").off();
+    $("#"+item.ArrangeID+" .teamInfo").after(fightButton);
 }
 
 function addDone (item) {

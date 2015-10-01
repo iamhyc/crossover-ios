@@ -9,13 +9,13 @@
   			$("#teamHead").attr("src", imgAddress + "TeamLogo/" +myObj.TeamLogo);
 
   			if(camr){
-  				$("#upload").click(function(){
+  				$(".md-panel #upload").click(function(){
   					uploadImg();
   				});
   			}
   			else{
   				document.getElementById("imgFile").addEventListener('change', preview, false);
-  				$("#upload").click(function(){
+  				$(".md-panel #upload").click(function(){
   					$("#imgFile").click();
   				});
   			}
@@ -37,7 +37,7 @@
 
 			function onSuccess(imgdata){
 				localStorage.reg_PhotoBase64 = imgdata;
-				$("#upload").attr(src, "data:image/jpeg;base64," + imageData);
+				$(".md-panel #upload").attr(src, "data:image/jpeg;base64," + imageData);
 			}
 			function onFail(message){
 				alert_flash(message);
@@ -51,7 +51,7 @@
 			reader.readAsDataURL(file);
 			/* */ 
 			reader.onloadend = function(e) {
-				$('#upload').attr('src', this.result);
+				$('.mdpanel #upload').attr('src', this.result);
 				//upload process?
 				}
 		}
@@ -69,7 +69,7 @@
 				alert_flash("请选择一张头像");
 			}
 			else {
-				var photoData = $('#upload').attr('src');
+				var photoData = $('.md-panel #upload').attr('src');
 				//console.log(photoData);
 				var data = JSON.stringify({
 						"TeamID":myObj.TeamID,
@@ -100,7 +100,7 @@
 		}
 	</script>
 
-<div class="load-body">
+<div class="load-body md-panel">
 	<div class="container" style="height:100%;padding:0">
 		<nav class="navbar navbar-fixed-top text-left" style="margin:0 auto;padding-top:3%">
     		<span onclick="ctrl.move('personal.html', false)"><img src="images/back.png" width="12%"></span>
@@ -123,7 +123,13 @@
 
   				<div class="row" style="height:46px;font-size:16px;width:100%;margin:0 auto">
   					<input type="text" id="mem_name" class="col-xs-5 net-control"  placeholder="队员名称" style="height:100%;width:46%">
-  					<input type="text" id="mem_site" class="col-xs-5 net-control mem-info" placeholder="所打位置" style="height:100%;width:46%;margin-left:8%">
+  					<select id="mem_site" name="mem-site" class="col-xs-5 net-control mem-info" style="height:100%;width:46%;margin-left:8%">
+  						<option value="得分后卫">得分后卫</option>
+  						<option value="控球后卫">控球后卫</option>
+  						<option value="大前">大前</option>
+  						<option value="小前">小前</option>
+  						<option value="中锋">中锋</option>
+					</select>
   				</div>
   				<div style = "height:10px"></div>
   				<div class="row" style="height:46px;font-size:16px;width:100%;margin:0 auto">

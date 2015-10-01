@@ -59,8 +59,8 @@ function imgCheck () {
 	var cityName = $('#cityName').val(),
 		teamName = $('#teamName').val();
 	if (!teamName) alert_flash('请输入战队名称')
-	else if (!cityName) alert_flash('请输入城市')//to 加特技
-	else if ($("#upload").attr(src)) alert_flash("请上传战队队标")
+	else if (!cityName&&(cityName == "城市")) alert_flash('请输入城市')
+	else if ($("#upload").attr('src')) alert_flash("请上传战队队标")
 	else {
 		localStorage.reg_cityName = cityName;
 		localStorage.reg_teamName = teamName;

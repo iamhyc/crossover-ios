@@ -19,13 +19,10 @@
     <script type="text/javascript" src="javascripts/script_on_notify.js"></script>
     <script type="text/javascript">
         localStorage.lastView = "notify.html";
-        var apiAddress = "http://120.24.223.82:8080/Crossover/Api/";
-        var imgAddress = "http://120.24.223.82:8080/Crossover/images/";
         var myObj = JSON.parse(localStorage.current_user);
         var userID = myObj.TeamID;
 
-
-        $(function(){
+        $(".load-body").load(function(){
             $(".nt-panel .spinner").css("display", "block");
         });
     </script>
@@ -75,7 +72,7 @@
                             window.location.reload(true);
                         });
                     })*/
-                })
+                });
 
                 $(".pending").on("click", function(){
                     if($(this).attr("fid")){

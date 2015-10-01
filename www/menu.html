@@ -73,12 +73,6 @@
 				}
 			})
 
-			$('.home #myHead').attr('src', imgAddress + "TeamLogo/" +myObj.TeamLogo);
-			$('.home #myName').text(myObj.TeamName);
-			loadPage(pageNow);		
-			$(".block-bg").css("display" ,"none");
-			//End: Initial part
-			addScrollListener();
 			//Start: Menu-slide part
 			$(".menu-open").click(function(){
 				$("#block-bg").css("display" ,"block");
@@ -93,6 +87,13 @@
     			$("#menu").addClass("slide-reverse-out");
     		});
 			//End: Menu-slide part
+
+			$('.home #myHead').attr('src', imgAddress + "TeamLogo/" +myObj.TeamLogo);
+			$('.home #myName').text(myObj.TeamName);
+			loadPage(pageNow);		
+			$(".block-bg").css("display" ,"none");
+			//End: Initial part
+			addScrollListener();
 		})
 	</script>   
 	

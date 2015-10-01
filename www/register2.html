@@ -9,7 +9,10 @@
 			<div class="form-group input-group-lg" style="">
 				<input type="text" id="teamName"class="form-control" autofocus placeholder="球队名称">
 				<br />
-				<input type="text" id="cityName" class="form-control" autofocus placeholder="城市">
+
+					<select id="cityName" name="cityList" class="form-control" style="padding:0 16px 0 16px">
+					</select>
+
 				<h4>上传战队队标</h4>
 			</div>
 
@@ -24,7 +27,11 @@
 
 	<script type="text/javascript" src="javascripts/script_on_register.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function(){
+		var city = ["城市", "北京", "上海", "广州", "深圳", "武汉", "重庆", "成都", "杭州", "长沙", "沈阳"];
+		$("load-body").ready(function(){
+			for (name in city){
+				$("#cityName").append("<option value="+city[name]+">"+city[name]+"</option>");
+			}
 			if(camr){
 				$('#upload').click(function(){
 					uploadImg();

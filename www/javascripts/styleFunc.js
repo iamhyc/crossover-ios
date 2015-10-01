@@ -1,5 +1,6 @@
 //阻止冒泡
 function stopBubble (e) {
+	console.log("NoMoreBubbles!");
 	if (e && e.stopPropagation)
         e.stopPropagation()
     else
@@ -33,6 +34,15 @@ function alert_flash(message, callback){
 		setTimeout("$('#alert_flash').fadeOut(500, function(){this.remove()})", 2500);
 		}
 	if (callback) return callback();
+}
+
+function alertIt (msg, title, callback) {
+	if(note){
+        note.alert(msg, callback, title, "确定");
+    }
+    else{
+        alert(msg);
+    }
 }
 
 function alert_modal (message, callback) {
@@ -70,6 +80,18 @@ function confirm_modal (message, callback) {
 		$("#black-bg").css("display", "block");
 		$("body").append(confirm_modal);
 	}
+}
+
+function confirmIt (msg, title, callback) {
+	if (note){
+        note.confirm(msg, function(index){
+            if(index == 2)	callback();
+        }, title, ["取消", "确定"]);
+    }
+    else{
+        if (confirm(msg))
+        	callback();
+    }
 }
 
 
