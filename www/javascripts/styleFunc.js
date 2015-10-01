@@ -1,6 +1,6 @@
 //阻止冒泡
 function stopBubble (e) {
-	console.log("NoMoreBubbles!");
+	//console.log("NoMoreBubbles!");
 	if (e && e.stopPropagation)
         e.stopPropagation()
     else
