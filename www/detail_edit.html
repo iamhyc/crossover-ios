@@ -29,7 +29,7 @@
 			
 		});
 
-		function ajaxImageUpload(imgdata){
+		function ajaxTeamLogoUpload(imgdata){
 			var data = JSON.stringify({
 						'TeamID': myObj.TeamID,
 						'PhotoBase64': imgdata
@@ -73,7 +73,7 @@
 			});
 
 			function onSuccess(imgdata){
-				ajaxImageUpload(imgdata);
+				ajaxTeamLogoUpload(imgdata);
 			}
 			function onFail(message){
 				alert_flash(message);
@@ -87,7 +87,7 @@
 				reader.readAsDataURL(file);
 				/* */ 
 				reader.onloadend = function(e) {
-					ajaxImageUpload(this.result.slice(this.result.indexOf(',')+1));
+					ajaxTeamLogoUpload(this.result.slice(this.result.indexOf(',')+1));
 				}
 		}
 
@@ -134,7 +134,7 @@
 <div class="load-body">
 	<div class="container" style="height:100%;color:#ffffff">
 		<nav class="navbar navbar-fixed-top text-left" style="padding-top:3%">
-    		<span onclick="ctrl.move('personal.html', false)"><img src="images/back.png" width="12%"></span>		
+    		<span ontouchend="ctrl.move('personal.html', false)"><img src="images/back.png" width="12%"></span>		
 	    </nav>
 		
 		<div class="container-fluid de-panel" style="height:30%">
@@ -161,7 +161,7 @@
       		<input type="text" class="net-control" id="team_city" placeholder="城市" style="width:90%;margin-top:3%;font-size:1.3em;height:46px;padding:5px 5px 5px 5px">
 
 			<div class="inline-btn text-center" style="margin:4% 0 0 28%;display:inline-block;width:35%">
-				<button class="btn btn-lg btn-block" onclick="saveCheck()">保存</button>
+				<button class="btn btn-lg btn-block" ontouchend="saveCheck()">保存</button>
 			</div>
 
 		</div>

@@ -1,7 +1,7 @@
 #menu {
     background: #202024 url('') repeat right top;
     /*左侧弹出窗口的长宽、背景颜色*/
-    margin: 0 auto;
+    margin:0 0 0 50%;
     height: 100%;
     width: 50%;
     background-color: #FFFFFF;
@@ -15,6 +15,7 @@
 #menu, #slider {
   position: absolute;
   top:0;  right:0%;
+  left:0;
   -webkit-animation-timing-function: ease-out;
   -webkit-animation-duration: 225ms;
   -webkit-animation-fill-mode: both;

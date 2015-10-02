@@ -24,7 +24,7 @@
 
 				if (result){
 					for (var i = 0;i < result.length;i++){
-						var imgBox = '<div class="col-xs-4" style="height:'+imgWidth+'px;padding:1px 1px 1px 1px;display:table;overflow:hidden"><div style="display:table-cell;vertical-align:middle;position:absolute"><img class="photo" id="'+i+'" src="'+imgAddress+'Gallery/'+result[i].PhotoName+'" width="100%" onclick="magnify(this.id)"/></div></div>';
+						var imgBox = '<div class="col-xs-4" style="height:'+imgWidth+'px;padding:1px 1px 1px 1px;display:table;overflow:hidden"><div style="display:table-cell;vertical-align:middle;position:absolute"><img class="photo" id="'+i+'" src="'+imgAddress+'Gallery/'+result[i].PhotoName+'" width="100%" ontouchend="magnify(this.id)"/></div></div>';
 						$(".gallery").append(imgBox);
 					};
 					$("#0").load(function(){
@@ -77,7 +77,7 @@
 		}
 
 		function addUpload(){
-			var editIcon = '<span style="margin:0 0 0 74%" onclick="uploadImage()"><img src="images/white.png" height="45%" width="auto"></span>';
+			var editIcon = '<span style="margin:0 0 0 74%" ontouchend="uploadImage()"><img src="images/white.png" height="45%" width="auto"></span>';
 			$("nav").append(editIcon);
 
 		}
@@ -166,7 +166,7 @@
 
 
 	<nav class="navbar navbar-static-top text-left" style="padding-top:3%;height:11%;margin:0">
-    	<span class="text-left" onclick="backLocate()"><img src="images/back.png" width="12%"></span>		
+    	<span class="text-left" ontouchend="backLocate()"><img src="images/back.png" width="12%"></span>		
 	</nav>
 
   	<div class="photoGallery scroll-container" style="height:89%;width:100%;overflow:scroll;background-color:#fff">

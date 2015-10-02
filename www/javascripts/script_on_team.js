@@ -146,7 +146,7 @@ function addMem(){
     ctrl.reload();
   }
 
-  function ajaxImageLoad(imgdata){
+  function ajaxHomeLogoUpload(imgdata){
       var data = JSON.stringify({
             "TeamID":myObj.TeamID,
             "PhotoBase64": imgdata
@@ -189,7 +189,7 @@ function addMem(){
     });
 
     function onSuccess(imgdata){
-      ajaxImageUpload(imgdata);
+      ajaxHomeLogoUpload(imgdata);
     }
     function onFail(message){
       alert_flash(message);
@@ -204,7 +204,7 @@ function addMem(){
         reader.readAsDataURL(file);
         /* */ 
         reader.onloadend = function(e) {
-          ajaxImageLoad(this.result.slice(this.result.indexOf(',')+1));
+          ajaxHomeLogoUpload(this.result.slice(this.result.indexOf(',')+1));
         }
   }
 
@@ -234,11 +234,11 @@ function addMem(){
       $(".score-bar").css("-webkit-transform", "translate(0%, 0px) translateZ(0px)");
       pageShow = 0;
     }
-    else if((endX - startX < clientWidth/2.5)&&(endX - startX > 0)){
+    else if((endX - startX < clientWidth/2.5)&&(endX - startX > 0)&&(pageShow == 1)){
       $(".score-bar").css("-webkit-transform", "translate(-100%, 0px) translateZ(0px)");
       pageShow = 1;
     }
-    else if((endX - startX > -clientWidth/2.5)&&(endX - startX < 0)){
+    else if((endX - startX > -clientWidth/2.5)&&(endX - startX < 0)&&(pageShow == 0)){
       $(".score-bar").css("-webkit-transform", "translate(0%, 0px) translateZ(0px)");
       pageShow = 0;
     }

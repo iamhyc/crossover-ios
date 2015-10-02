@@ -3,7 +3,7 @@
 	<div class="text-center" style="height:100%">
 	
 		<nav class="navbar navbar-fixed-top text-left" style="padding-top:3%">
-    		<span onclick="location.href='index.html'"><img src="images/back.png" width="12%"></span>		
+    		<span ontouchend="location.href='index.html'"><img src="images/back.png" width="12%"></span>		
 		</nav>
 
 		<div style="height:80%;color:#ffffff">
@@ -20,12 +20,12 @@
   						<input class="form-control" id="ver" style="IME-MODE:disabled" onkeypress="return event.keyCode >= 48 && event.keyCode <= 57"  onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="4" type="text" placeholder="验证码"/>
   					</div>
   					<div class="col-xs-6">
-  						<button id="verBtn" class="btn btn-lg" onclick="veriCheck()">获取验证码</button>
+  						<button id="verBtn" class="btn btn-lg" ontouchend="veriCheck()">获取验证码</button>
   					</div>
 				</div>
 				<br />
       			<div style="height:20%;width:100%">
-					<button class="btn btn-lg btn-block" style="width:50%;margin:0 auto" onclick="userCheck()">下一步</button>
+					<button class="btn btn-lg btn-block" style="width:50%;margin:0 auto" ontouchend="userCheck()">下一步</button>
 				</div>
 			</div>
 		</div>

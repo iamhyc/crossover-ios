@@ -1,6 +1,7 @@
 
 *{
-
+  -webkit-user-callout:none;
+  -webkit-user-select:none;
 }
 
 body {
@@ -12,12 +13,6 @@ body {
 
  -webkit-background-size: 100% 100%;
  background-size: 100% 100%;
-
- -webkit-user-select:none;
- -moz-user-select:none;
- -ms-user-select:none;
- user-select:none;
-
 }
 
 .scroll-container{

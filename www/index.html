@@ -4,6 +4,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+	<meta content="telephone=yes,email=no" name="format-detection" />
 	<title>CrossOver</title>
 
 	<link rel="stylesheet" href="stylesheets/font-style.css">
@@ -22,18 +23,19 @@
 		window.onload = function(){
 			ctrl = new ajaxLoad();
 			note = navigator.notification;
-			camr = navigator.camera;console.log(camr)
+			camr = navigator.camera;console.log(camr);
+			
 			if (localStorage.lastView&&localStorage.current_user){
 				ctrl.reload(localStorage.lastView);
 			}
 
-			var supportsOrientationChange = "onorientationchange" in window,
+			/*var supportsOrientationChange = "onorientationchange" in window,
     			orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
 			window.addEventListener(orientationEvent, function() {
     			if (screen.width > screen.height){
     				alert("CrossOver不支持横屏");
     			}
-			}, false);
+			}, false);*/
 		}
 	</script>
 
@@ -53,10 +55,10 @@
 		<div style="height:20%;padding:0 10px 0 10px">
 			<div class="h-div" style="height:35%"></div>
 			<div class="inline-btn" style="display:inline-block;width:40%;padding-right:5%">
-				<button class="btn spc-btn btn-block" onclick="ctrl.move('login.html', true)">登陆</button>
+				<button class="btn spc-btn btn-block" ontouchend="ctrl.move('login.html', true)">登陆</button>
 			</div>	
 			<div class="inline-btn" style="display:inline-block;width:40%;padding-left:5%">
-				<button class="btn spc-btn btn-block" onclick="ctrl.move('register.html', true)">注册</button>
+				<button class="btn spc-btn btn-block" ontouchend="ctrl.move('register.html', true)">注册</button>
 			</div>	
 		</div>
 	</div>
