@@ -88,30 +88,17 @@
         });
 
         $(".delete").on("touchstart", function () {
+          that = this;
           if (note){
             note.confirm("删除该队员？", function(index){
               if(index == 2){
-                $.get(apiAddress+"player/delete/"+myPlayer[$(this).attr("add_id")].PlayerID, function(result){
-                  if (result) alert_flash("删除成功");
-                  ctrl.reload();
-                })
-                  .fail(function(){
-                    alert_flash("删除失败");
-                    ctrl.reload();
-                  });
+                delMem(that);
               }
             },"删除队员",["取消", "确定"]);
           }
           else{
             if (confirm("删除该队员?")){
-              $.get(apiAddress+"player/delete/"+myPlayer[$(this).attr("add_id")].PlayerID, function(result){
-                if (result) alert_flash("删除成功");
-                ctrl.reload();
-              })
-                .fail(function(){
-                    alert_flash("删除失败");
-                    ctrl.reload();
-                  });
+              delMem(that);
             }
           }
         })
@@ -136,6 +123,17 @@
   function turnToPhotos () {
     localStorage.galleryShow = "1_"+myObj.TeamID;
     ctrl.move('photos.html', true);
+  }
+
+  function delMem (that) {
+    $.get(apiAddress+"player/delete/"+myPlayer[$(that).attr("add_id")].PlayerID, function(result){
+      if (result) alert_flash("删除成功");
+        ctrl.reload();
+      })
+        .fail(function(){
+          alert_flash("删除失败");
+          ctrl.reload();
+        });
   }
 
 </script>

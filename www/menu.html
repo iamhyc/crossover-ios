@@ -9,7 +9,7 @@
     				<img src="images/cs.png" width="72%">
     			</div>
     			<div class="col-sm-2 col-xs-2"></div>
-    			<div class="col-sm-4 col-xs-4 text-right" style="padding:3% 6% 0 0">
+    			<div class="col-sm-4 col-xs-4 text-right" style="padding:3% 7% 0 0">
   					<span class="menu-open glyphicon glyphicon-menu-hamburger" style="font-size:20px;color:#ffffff"></span>
 				</div>
 			</div>	
@@ -35,8 +35,8 @@
 		<div class="home" style="height:85%;width:100%">
 			<img id="myHead" class="img-circle circle" style="margin: 5% 0% 0% 0%;height:66px;width:66px">
 			<p id="myName" style="font-weight:bold;color:rgb(2, 65, 126);font-size:16px;margin:10px 0 10px;">HEHE~</p>
-			<button type="button" style="width: 60%;margin: 0% 0% 20px;font-size:13px;height:29px;background-color:rgb(220, 221, 221);color:rgb(2, 65, 126)" class="btn btn-default" ontouchstart="ctrl.move('personal.html',true)">战队主页</button>
-			<button type="button" style="width:60%;background-color:rgb(220, 221, 221);height:29px;font-size:11px" class="btn btn-default" ontouchstart="ctrl.move('notify.html',true)">
+			<button type="button" style="width: 60%;margin: 0% 0% 20px;font-size:13px;height:29px;background-color:rgb(220, 221, 221);color:rgb(2, 65, 126)" class="btn btn-default" onclick="ctrl.move('personal.html',true)">战队主页</button>
+			<button type="button" style="width:60%;background-color:rgb(220, 221, 221);height:29px;font-size:11px" class="btn btn-default" onclick="ctrl.move('notify.html',true)">
  		  		<img src="images/menu-icon.png" height="20px">
 			</button>
 		</div>
@@ -74,13 +74,13 @@
 			})
 
 			//Start: Menu-slide part
-			$(".menu-open").click(function(){
+			$(".menu-open").on("click" ,function(){
 				$("#block-bg").css("display" ,"block");
 				$("#menu").css("display", "block");
  	 			$("#menu").addClass("slide-in-half");	$("#slider").addClass("slide-out-half");
  	 			menu_ejected = true;
     		});
-			$("#block-bg").click(function(){
+			$("#block-bg").on("click" ,function(){
 				menu_ejected = false;
 				$("#block-bg").css("display" ,"none");
     			$("#slider").removeClass().addClass("slide-reverse-in-half");

@@ -60,7 +60,7 @@ function imgCheck () {
 		teamName = $('#teamName').val();
 	if (!teamName) alert_flash('请输入战队名称')
 	else if (!cityName&&(cityName == "城市")) alert_flash('请输入城市')
-	else if ($("#upload").attr('src')) alert_flash("请上传战队队标")
+	else if (!$("#upload").attr('src')) alert_flash("请上传战队队标")
 	else {
 		localStorage.reg_cityName = cityName;
 		localStorage.reg_teamName = teamName;
@@ -144,7 +144,8 @@ function uploadImg(){
 
 	function onSuccess(imgdata){
 		localStorage.reg_PhotoBase64 = imgdata;
-		$("#upload").attr(src, "data:image/jpeg;base64," + imageData);
+		$("#upload").attr(src, "data:image;base64,"+imageData);
+		alert($("#upload").attr(src).slice(0,30));
 	}
 	function onFail(message){
 		alert_flash(message);
