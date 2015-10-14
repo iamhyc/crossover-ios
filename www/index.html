@@ -4,6 +4,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+	<meta name="format-detection" content="telephone=yes">
 	<title>CrossOver</title>
 
 	<link rel="stylesheet" href="stylesheets/font-style.css">
@@ -23,7 +24,9 @@
 			ctrl = new ajaxLoad();
 			note = navigator.notification;
 			camr = navigator.camera;
-			
+
+			document.getElementById('plugin-status').innerHTML = (note&&camr)+" "+(note||camr);
+
 			if (localStorage.lastView&&localStorage.current_user){
 				ctrl.reload(localStorage.lastView);
 			}
@@ -52,13 +55,14 @@
 			<p style="font-size:1em">这里有你身边最厉害的篮球战队。</p>
 		</div>
 		<div style="height:20%;padding:0 10px 0 10px">
+			<span>插件状态:</span><span id="plugin-status"></span>
 			<div class="h-div" style="height:35%"></div>
 			<div class="inline-btn" style="display:inline-block;width:40%;padding-right:5%">
 				<button class="btn spc-btn btn-block" onclick="ctrl.move('login.html', true)">登陆</button>
 			</div>	
 			<div class="inline-btn" style="display:inline-block;width:40%;padding-left:5%">
 				<button class="btn spc-btn btn-block" onclick="ctrl.move('register.html', true)">注册</button>
-			</div>	
+			</div>
 		</div>
 	</div>
   </div>

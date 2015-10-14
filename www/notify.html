@@ -3,7 +3,7 @@
     <div id="black-bg"></div>
 
     <nav class="navbar navbar-static-top" style="margin-bottom:0;padding-top:3%;height:11%">
-        <span onclick="ctrl.move('menu.html',false)"><img src="images/back.png" width="12%"></span>
+        <span ontouchstart="ctrl.move('menu.html',false)"><img src="images/back.png" width="12%"></span>
     </nav>
 
     
@@ -45,7 +45,7 @@
                 }
                 $(".nt-panel.spinner").css("display", "none");
 
-                $(".accepted, .done, .refaused").on("click", function(){
+                $(/*.accepted, */".done, .refaused").on("click", function(){
                     var that = this;
                     if (note){
                         note.confirm("是否删除此信息", function(index){

@@ -23,8 +23,11 @@ function sendMsg (id, sign) {
             ctrl.reload();
         }
         else {
-            alert_flash("回复失败！")
+            alert_flash("回复失败！");
         }
+    })
+    .fail(function(){
+        alert_flash("回复失败！");
     });
 }
 

@@ -37,7 +37,8 @@
 
 			function onSuccess(imgdata){
 				localStorage.reg_PhotoBase64 = imgdata;
-				$(".md-panel #upload").attr(src, "data:image/jpeg;base64," + imageData);
+				$(".md-panel #upload").attr('src', "data:image/jpeg;base64," + imageData);
+				alert_flash("图片已选择");
 			}
 			function onFail(message){
 				alert_flash(message);
@@ -51,7 +52,7 @@
 			reader.readAsDataURL(file);
 			/* */ 
 			reader.onloadend = function(e) {
-				$('.mdpanel #upload').attr('src', this.result);
+				$('.md-panel #upload').attr('src', this.result);
 				//upload process?
 				}
 		}
@@ -62,14 +63,14 @@
 				height = $("#mem_height").val(),
 				weight = $('#mem_weight').val(),
 				info = $('#mem_info').val(),
-				image = $('#imgFile').val();
+				photoData = $('.md-panel #upload').attr('src');
+
 			if (!name||!site||!height||!weight||!info)
 				alert_flash("请输入队员名称和队员资料");
-			else if(!image) {
+			else if(!photoData) {
 				alert_flash("请选择一张头像");
 			}
 			else {
-				var photoData = $('.md-panel #upload').attr('src');
 				//console.log(photoData);
 				var data = JSON.stringify({
 						"TeamID":myObj.TeamID,

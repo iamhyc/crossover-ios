@@ -1,5 +1,12 @@
 
-
+<style type="text/css">
+  .ps-panel {
+    -webkit-overflow-scrolling: none;
+  }
+  .upper-side{
+    -webkit-overflow-scrolling: touch;
+  }
+</style>
 <script type="text/javascript" src="javascripts/script_on_team.js"></script>
 <script type="text/javascript" src="javascripts/script_for_race.js"></script>
 <script type="text/javascript">
@@ -35,7 +42,7 @@
       $('.personal #myName').text(myObj.TeamName);
       $('#grade').text(myObj.lntegral);
 
-      $('.back').click(function(){
+      $('.ps-panel .back').click(function(){
         alert_flash("更改主页封面");
         if(camr){
           uploadImageByPlugin();
@@ -73,32 +80,25 @@
         $(".portrait").append(img);
 
         longFocus($(".isMem"), function (id){
-            //console.log(id)
             $("div[add_id="+id+"]").removeClass("hidden");
-            /*if (confirm("删除该队员?")){
-              $.get(apiAddress+"player/delete/"+myPlayer[id].PlayerID, function(result){
-                if (result) alert_flash("删除成功");
-                window.location.reload(true);
-              })
-            }*/
-            /*confirm_modal("删除该队员?", function (){
-              $.get(apiAddress+"player/delete/"+myPlayer[id].PlayerID, function(result){
-                if (result) alert_flash("删除成功");
-                window.location.reload(true);
-              })
-            })*/
         });
+
         $(".isMem").on('click', function(){
           showMsg(this.id, myPlayer);
         });
-        $(".delete").on("click", function () {
+
+        $(".delete").on("touchstart", function () {
           if (note){
             note.confirm("删除该队员？", function(index){
               if(index == 2){
                 $.get(apiAddress+"player/delete/"+myPlayer[$(this).attr("add_id")].PlayerID, function(result){
                   if (result) alert_flash("删除成功");
                   ctrl.reload();
-                }) 
+                })
+                  .fail(function(){
+                    alert_flash("删除失败");
+                    ctrl.reload();
+                  });
               }
             },"删除队员",["取消", "确定"]);
           }
@@ -108,6 +108,10 @@
                 if (result) alert_flash("删除成功");
                 ctrl.reload();
               })
+                .fail(function(){
+                    alert_flash("删除失败");
+                    ctrl.reload();
+                  });
             }
           }
         })
@@ -142,8 +146,8 @@
   <div id="block-bg"></div><div id="black-bg"></div>
 
   <nav class="navbar navbar-fixed-top" style="padding-top:3%">
-      <span class="text-left" onclick="ctrl.move('menu.html',false)"><img src="images/back.png" width="12%"></span>
-      <span style="margin:0 0 0 71%" onclick="ctrl.move('detail_edit.html',true)"><img src="images/edit.png" width="12%"></span>
+      <span class="text-left" ontouchstart="ctrl.move('menu.html',false)"><img src="images/back.png" width="12%"></span>
+      <span style="margin:0 0 0 71%" ontouchstart="ctrl.move('detail_edit.html',true)"><img src="images/edit.png" width="12%"></span>
   </nav>
 
   <div class="upper-side personal">

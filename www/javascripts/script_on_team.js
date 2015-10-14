@@ -31,7 +31,7 @@ function showMsg(usr ,players){
 
 function deMsg(){
   $('.show-block').fadeOut(300,function(){
-   $(this).addClass("hidden");
+   //$(this).addClass("hidden");
    $('#black-bg').css('display', 'none');
   });
 }
@@ -103,13 +103,14 @@ function fightVS () {
     alert_flash("怎么可以和自己约战呢");return;
   }
   $.get(apiAddress+"arrange/send/"+myObj.TeamID+"/"+userShow.TeamID, function(result){
+      //console.log(result);
       if (result.success) alert_flash("约战成功");
       else {
         //alert_modal(result.message);
         if(note){
           note.alert(result.message, function(){
             
-          }, "消息", "确定");
+          }, '消息', '确定');
         }
         else{
           alert(result.message);
