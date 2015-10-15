@@ -261,8 +261,6 @@ body {
   position: absolute;
   top:0; left:0%;
 
-  -webkit-overflow-scrolling: touch;
-
   -webkit-animation-timing-function: ease-out;
   -webkit-animation-duration: 225ms;
 

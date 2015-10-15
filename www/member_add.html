@@ -38,11 +38,12 @@
 			function onSuccess(imgdata){
 				localStorage.reg_PhotoBase64 = imgdata;
 				$(".md-panel #upload").attr('src', "data:image;base64,"+imageData);
-				alert($(".md-panel #upload").attr('src').slice(0, 30));
+				$("#mem_info").text($(".md-panel #upload").attr('src').slice(0, 30));
 				alert_flash("图片已选择");
 			}
 			function onFail(message){
 				alert_flash(message);
+				$("#mem_info").text(message);
 			}
 		}
 

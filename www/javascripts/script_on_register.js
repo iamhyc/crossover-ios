@@ -145,7 +145,6 @@ function uploadImg(){
 	function onSuccess(imgdata){
 		localStorage.reg_PhotoBase64 = imgdata;
 		$("#upload").attr(src, "data:image;base64,"+imageData);
-		alert($("#upload").attr(src).slice(0,30));
 	}
 	function onFail(message){
 		alert_flash(message);
