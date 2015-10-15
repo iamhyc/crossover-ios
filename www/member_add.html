@@ -8,12 +8,12 @@
   		$(document).ready(function(){
   			$("#teamHead").attr("src", imgAddress + "TeamLogo/" +myObj.TeamLogo);
 
-  			if(false){
-  				$(".md-panel #upload").click(function(){
-  					uploadMemberImage();
-  				});
-  			}
-  			else{
+ 			if(camr){
+         		$(".md-panel #upload").click(function(){
+                 uploadMemberImage();
+         		});
+ 			}
+ 			else{
   				document.getElementById("imgFile").addEventListener('change', preview, false);
   				$(".md-panel #upload").click(function(){
   					$("#imgFile").click();
@@ -36,15 +36,21 @@
 			});
 
 			function onSuccess(imgdata){
-				localStorage.reg_PhotoBase64 = imgdata;
-				$(".md-panel #upload").attr('src', "data:image;base64,"+imageData);
-				$("#mem_info").text($(".md-panel #upload").attr('src').slice(0, 30));
-				alert_flash("图片已选择");
+				onImgUploadSuccess(imgdata);
 			}
 			function onFail(message){
 				alert_flash(message);
-				$("#mem_info").text(message);
 			}
+		}
+
+		function onImgUploadSuccess(imgdata){
+			localStorage.reg_PhotoBase64 = imgdata;
+			$(".md-panel #upload").attr('src', "data:image;base64,"+imageData);
+			
+			setTimeout(function() {
+    			alert($(".md-panel #upload").attr('src').slice(0, 30));
+    			alert_flash("图片已选择");
+			}, 0);
 		}
 
   		function preview(){

@@ -143,10 +143,13 @@ function uploadImg(){
 	});
 
 	function onSuccess(imgdata){
-		localStorage.reg_PhotoBase64 = imgdata;
-		$("#upload").attr(src, "data:image;base64,"+imageData);
+		uploadImgSuccess(imgdata);
 	}
 	function onFail(message){
 		alert_flash(message);
 	}
+}
+function uploadImgSuccess(imgdata){
+	localStorage.reg_PhotoBase64 = imgdata;
+	$("#upload").attr(src, "data:image;base64,"+imageData);
 }

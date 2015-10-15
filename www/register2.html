@@ -32,12 +32,12 @@
 			for (name in city){
 				$("#cityName").append("<option value="+city[name]+">"+city[name]+"</option>");
 			}
-			if(false){
-				$('#upload').click(function(){
-					uploadImg();
-				});
-			}
-			else{
+			if(camr){
+         		$('#upload').click(function(){
+         			uploadImg();
+         		});
+ 			}
+ 			else{
 				document.getElementById("imgFile").addEventListener('change',preview, false);
 				$('#upload').click(function(){
 					$('#imgFile').click();
