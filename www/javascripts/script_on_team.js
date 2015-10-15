@@ -183,8 +183,8 @@ function addMem(){
       mediaType : Camera.MediaType.PICTURE,
       allowEdit : true,
       encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 300,
-      targetHeight: 300,
+      targetWidth: iPhoneWidth,
+      targetHeight: iPhoneWidth,
       popoverOptions: CameraPopoverOptions,
       saveToPhotoAlbum: false 
     });

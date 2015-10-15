@@ -29,8 +29,8 @@
   				mediaType : Camera.MediaType.PICTURE,
   				allowEdit : true,
   				encodingType: Camera.EncodingType.JPEG,
-  				targetWidth: 300,
-  				targetHeight: 300,
+  				targetWidth: iPhoneWidth,
+  				targetHeight: iPhoneWidth,
   				popoverOptions: CameraPopoverOptions,
   				saveToPhotoAlbum: false 
 			});
@@ -44,13 +44,8 @@
 		}
 
 		function onImgUploadSuccess(imgdata){
-			localStorage.reg_PhotoBase64 = imgdata;
-			$(".md-panel #upload").attr('src', "data:image;base64,"+imageData);
-			
-			setTimeout(function() {
-    			alert($(".md-panel #upload").attr('src').slice(0, 30));
-    			alert_flash("图片已选择");
-			}, 0);
+			$(".md-panel #upload").attr('src', "data:image;base64," + imgdata);
+			alert_flash("图片已选择");
 		}
 
   		function preview(){

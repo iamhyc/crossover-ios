@@ -20,7 +20,7 @@
 				<img src="images/blue-plus.png" class="img-circle" id="upload" style="width:144px;height:144px">
 				<input type="file" accept="image/*" class="hidden" name="imgFile" id="imgFile"  />
 				<div class="text-center" style="padding:5%;width:100%;margin:0 auto">
-					<button class="btn btn-lg" style="width:40%" ontouchstart="imgCheck()">下一步</button>
+					<button class="btn btn-lg" style="width:40%" onclick="imgCheck()">下一步</button>
 				</div>
 			</div>
 		</div>
@@ -32,6 +32,7 @@
 			for (name in city){
 				$("#cityName").append("<option value="+city[name]+">"+city[name]+"</option>");
 			}
+
 			if(camr){
          		$('#upload').click(function(){
          			uploadImg();

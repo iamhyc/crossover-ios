@@ -136,8 +136,8 @@ function uploadImg(){
   		mediaType : Camera.MediaType.PICTURE,
   		allowEdit : true,
   		encodingType: Camera.EncodingType.JPEG,
-  		targetWidth: 300,
-  		targetHeight: 300,
+  		targetWidth: iPhoneWidth,
+  		targetHeight: iPhoneWidth,
   		popoverOptions: CameraPopoverOptions,
   		saveToPhotoAlbum: false 
 	});
@@ -151,5 +151,5 @@ function uploadImg(){
 }
 function uploadImgSuccess(imgdata){
 	localStorage.reg_PhotoBase64 = imgdata;
-	$("#upload").attr(src, "data:image;base64,"+imageData);
+	$("#upload").attr('src', "data:image;base64," + imgdata);
 }

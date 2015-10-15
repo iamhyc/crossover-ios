@@ -24,6 +24,7 @@
 			ctrl = new ajaxLoad();
 			note = navigator.notification;
 			camr = navigator.camera;
+			iPhoneWidth = document.body.clientWidth;
 
 			if (localStorage.lastView&&localStorage.current_user){
 				ctrl.reload(localStorage.lastView);
