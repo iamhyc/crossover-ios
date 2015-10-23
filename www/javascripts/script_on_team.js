@@ -18,13 +18,13 @@ function zeroFill (str) {
 function showMsg(usr ,players){
   //console.log(usr);
   $('#black-bg').css("display", 'block');
-    $('#name').text(players[usr].playersName);
-    $('#height').text("身高："+players[usr].tall);
-    $('#weight').text("体重："+players[usr].weight);
-    $('#site').text("所打位置："+players[usr].position);
-    $('#intro').html("简介："+deal_spc(players[usr].Detail));
+    $('.show-block #name').text(players[usr].playersName);
+    $('.show-block #height').text("身高："+players[usr].tall);
+    $('.show-block #weight').text("体重："+players[usr].weight);
+    $('.show-block #site').text("所打位置："+players[usr].position);
+    $('.show-block #intro').html("简介："+deal_spc(players[usr].Detail));
     //console.log(players[usr].Detail);
-    $('#memHead').attr("src", imgAddress+"Teammate/"+players[usr].HeadIcon);
+    $('.show-block #memHead').attr("src", imgAddress+"Teammate/"+players[usr].HeadIcon);
   $('.show-block').removeClass("hidden").fadeIn(300);
   //$('body').append(block);
 }
